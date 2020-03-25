@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>以用户为中心的性能优化指标有哪些？ | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="以用户为中心的性能优化指标有哪些？ | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以用户为中心的性能优化指标有哪些？">
+<meta property="og:url" content="http://littlehorsexie.github.io/性能优化/what/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059504-10524400-50aa-11e9-9029-f2a9e179c005.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059515-1b0cd900-50aa-11e9-9de6-33f4588e79c6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059545-28c25e80-50aa-11e9-82e9-e9b1a740923b%20%281%29.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059552-2e1fa900-50aa-11e9-8fbd-b425554d772f.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/RAIL.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059667-7e970680-50aa-11e9-8e10-632da04577b6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059677-848ce780-50aa-11e9-9bbc-5291cc5516a8.png">
+<meta property="og:updated_time" content="2019-11-27T02:42:33.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以用户为中心的性能优化指标有哪些？">
+<meta name="twitter:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(22)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="异步">异步<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="22">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/develop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="异步发展史">异步发展史</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/new/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="new">new</span>
+            <span class="post-date" title="2019-03-25 16:00:00">2019/03/25</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2019-03-25 14:29:00">2019/03/25</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-性能优化/what" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">以用户为中心的性能优化指标有哪些？</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="性能优化">性能优化</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2019-11-27 10:42:33'>2019-11-27 10:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-两个谬见"><span class="toc-text">1. 两个谬见</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-性能指标"><span class="toc-text">2. 性能指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-首次绘制与首次内容绘制-FP-FCP"><span class="toc-text">2.1 首次绘制与首次内容绘制 - FP/FCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-首次有效绘制和主角元素计时-FMP"><span class="toc-text">2.2 首次有效绘制和主角元素计时 - FMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-耗时较长的任务"><span class="toc-text">2.3 耗时较长的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-可交互时间-TTI"><span class="toc-text">2.4 可交互时间 - TTI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-将指标对应到用户体验"><span class="toc-text">2.5 将指标对应到用户体验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-RAIL-指导原则"><span class="toc-text">3. RAIL 指导原则</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：</p>
+<ol>
+<li>性能关乎用户的去留</li>
+<li>性能关乎转化率的提升</li>
+<li>性能关乎用户体验</li>
+<li>性能关乎用户：性能低的网站和应用还会导致用户产生实际成本</li>
+</ol>
+<p>但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？</p>
+<h2 id="1-两个谬见"><a href="#1-两个谬见" class="headerlink" title="1. 两个谬见"></a>1. 两个谬见</h2><p>首先我们看一下两个常见的性能谬见：</p>
+<blockquote>
+<p>我已经测试我的应用，加载时间为 X.XX 秒。<br>性能只是加载时间的问题</p>
+</blockquote>
+<p>这两个观点都非常片面，</p>
+<p>对于<strong>第一个观点</strong>，因为加载时间会因为用户不同而有很大的变化，具体取决于用户的设备功能以及网络状况。 以单个数字的形式呈现加载时间忽略了遭遇过长加载时间的用户。</p>
+<p>实际上，应用的加载时间是每个用户所有加载时间的汇总，而全面表示加载时间的唯一方法是使用以下直方图所示的分布方法：</p>
+<p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png" alt></p>
+<p>X 轴上的数字显示加载时间，而 Y 轴上条的高度显示体验到特定时间段中加载时间的用户相对数量。 正如此图表所示，虽然最大的用户群体验到的加载时间不到 1 或 2 秒，但仍有很多用户体验到相当长的加载时间。</p>
+<p>此外，加载并非单一的时刻，在加载过程中，有多个时刻都会影响到用户对速度的感知，如果只关注其中某个时刻，就可能会遗漏其余时间内用户感受到的不良体验。</p>
+<p>例如，假定某应用针对快速初始渲染进行优化，以便立刻将内容传递给用户。 然后，如果该应用加载一个需要花费数秒来解析和执行的大型 JavaScript 软件包，那么只有在 JavaScript 运行之后，页面上的内容才可供交互。</p>
+<p>如果用户可以看到页面上的链接但无法点击，或者可以看到文本框但无法在其中输入内容，他们可能就不会关心页面渲染的速度有多快。</p>
+<p>因此，我们不应该只使用一个指标来衡量加载，而应该衡量整个体验过程中可能影响用户对加载的感知的每个时刻。</p>
+<p>对于<strong>第二个观点</strong>，事实是，随时都有可能发生性能不佳的情况，不只限于加载期间。 应用无法迅速响应点按或点击操作，以及无法平滑滚动或产生动画效果的问题与加载缓慢一样，都会导致糟糕的用户体验。 用户关心的是总体体验，我们开发者也应如此。</p>
+<p>要想提升性能，首先得衡量性能，但是我们应该衡量什么呢？因此我们必须弄清楚下面的问题：</p>
+<ol>
+<li>哪些指标能够最准确地衡量人所感受到的性能？</li>
+<li>如何针对实际用户来衡量这些指标？</li>
+<li>如何解读衡量结果以确定应用是否“速度快”？</li>
+<li>了解应用的实际用户性能之后，如何避免性能下降并在未来提高性能？</li>
+</ol>
+<h2 id="2-性能指标"><a href="#2-性能指标" class="headerlink" title="2. 性能指标"></a>2. 性能指标</h2><p>当用户导航到网页时，通常会寻找视觉反馈，以确信一切符合预期</p>
+<p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059504-10524400-50aa-11e9-9029-f2a9e179c005.png" alt></p>
+<p>为了解页面何时为用户提供这样的反馈，我们定义了多个新指标：</p>
+<blockquote>
+<p>FP (First Paint)：首次绘制<br>FCP (First Contentful Paint)：首次内容绘制<br>FMP (First Meaningful Paint)：首次有效绘制<br>TTI (Time To Interaction)：可交互时</p>
+</blockquote>
+<h3 id="2-1-首次绘制与首次内容绘制-FP-FCP"><a href="#2-1-首次绘制与首次内容绘制-FP-FCP" class="headerlink" title="2.1 首次绘制与首次内容绘制 - FP/FCP"></a>2.1 首次绘制与首次内容绘制 - FP/FCP</h3><p>FP和FCP回答了“ 是否发生？”这一问题，<br>FP 标记浏览器渲染任何在视觉上不同于导航前屏幕内容之内容的时间点<br>FCP 标记的是浏览器渲染来自 DOM 第一位内容的时间点</p>
+<h3 id="2-2-首次有效绘制和主角元素计时-FMP"><a href="#2-2-首次有效绘制和主角元素计时-FMP" class="headerlink" title="2.2 首次有效绘制和主角元素计时 - FMP"></a>2.2 首次有效绘制和主角元素计时 - FMP</h3><p>FMP 指标能够回答“是否有用？”这一问题。 虽然“有用”这一概念很难以通用于所有网页的方式规范化（因此尚不存在任何规范），但是网页开发者自己很清楚其页面的哪些部分对用户最为有用。</p>
+<p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059515-1b0cd900-50aa-11e9-9de6-33f4588e79c6.png" alt></p>
+<p>网页的这些“最重要部分”通常称为主角元素。 例如，在 YouTube 观看页面上，主视频就是主角元素。 在 Twitter 上，主角元素可能是通知标志和第一篇推文。 在天气应用上，主角元素是指定地点的天气预测。 在新闻网站上，主角元素可能是重大新闻和置顶大图。</p>
+<h3 id="2-3-耗时较长的任务"><a href="#2-3-耗时较长的任务" class="headerlink" title="2.3 耗时较长的任务"></a>2.3 耗时较长的任务</h3><p>浏览器通过将任务添加到主线程上的队列等待逐个执行来响应用户输入。 浏览器执行应用的 JavaScript 时也会这样做，因此从这个角度看，浏览器为单线程。</p>
+<p>在某些情况下，运行这些任务可能要花费较长时间，如果确实如此，主线程就会遭到阻止，而队列中的所有其他任务都必须等待。</p>
+<p>对于用户而言，任务耗时较长表现为滞后或卡顿，而这也是目前网页不良体验的主要根源</p>
+<h3 id="2-4-可交互时间-TTI"><a href="#2-4-可交互时间-TTI" class="headerlink" title="2.4 可交互时间 - TTI"></a>2.4 可交互时间 - TTI</h3><p>TTI 指标用于标记应用已进行视觉渲染并能可靠响应用户输入的时间点。 应用可能会因为多种原因而无法响应用户输入：</p>
+<ul>
+<li>页面组件运行所需的 JavaScript 尚未加载。</li>
+<li>耗时较长的任务阻塞主线程</li>
+</ul>
+<p>TTI 指标可识别页面初始 JavaScript 已加载且主线程处于空闲状态（没有耗时较长的任务）的时间点。</p>
+<h3 id="2-5-将指标对应到用户体验"><a href="#2-5-将指标对应到用户体验" class="headerlink" title="2.5 将指标对应到用户体验"></a>2.5 将指标对应到用户体验</h3><p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059545-28c25e80-50aa-11e9-82e9-e9b1a740923b%20%281%29.png" alt></p>
+<p>下列加载时间线屏幕截图有助于您更直观地了解加载指标对应的加载体验：</p>
+<p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059552-2e1fa900-50aa-11e9-8fbd-b425554d772f.png" alt></p>
+<h2 id="3-RAIL-指导原则"><a href="#3-RAIL-指导原则" class="headerlink" title="3. RAIL 指导原则"></a>3. RAIL 指导原则</h2><p>RAIL 是一种以用户为中心的性能模型。每个网络应用均具有与其生命周期有关的四个不同方面，且这些方面以不同的方式影响着性能：</p>
+<p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/RAIL.png" alt></p>
+<ul>
+<li>以用户为中心；最终目标不是让您的网站在任何特定设备上都能运行很快，而是使用户满意。</li>
+<li>立即响应用户；在 100 毫秒以内确认用户输入。对于需要超过 500 毫秒才能完成的操作，请始终提供反馈。</li>
+<li>设置动画或滚动时，在 10 毫秒以内生成帧。从纯粹的数学角度而言，每帧的预算约为 16 毫秒（1000 毫秒 / 60 帧 = 16.66 毫秒/帧）。 但因为浏览器需要花费时间将新帧绘制到屏幕上，只有 10 毫秒来执行代码。</li>
+<li>最大程度增加主线程的空闲时间。例如，尽可能减少预加载数据，以便您的应用快速加载，并利用空闲时间加载剩余数据。推迟的工作应分成每个耗时约 50 毫秒的多个块。如果用户开始交互，优先级最高的事项是响应用户。要实现小于 100 毫秒的响应，应用必须在每 50 毫秒内将控制返回给主线程，这样应用就可以执行其像素管道、对用户输入作出反应，等等。以 50 毫秒块工作既可以完成任务，又能确保即时的响应。</li>
+<li>持续吸引用户；在 1000 毫秒以内呈现交互内容。在 1 秒钟内加载您的网站。否则，用户的注意力会分散，他们处理任务的感觉会中断。</li>
+</ul>
+<p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059667-7e970680-50aa-11e9-8e10-632da04577b6.png" alt></p>
+<p>关键 RAIL 指标汇总</p>
+<p><img src="../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059677-848ce780-50aa-11e9-9bbc-5291cc5516a8.png" alt></p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 502px;
+        }
+        .nav.fullscreen {
+            margin-left: -502px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

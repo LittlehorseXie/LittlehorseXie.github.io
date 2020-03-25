@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>this | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="this | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以用户为中心的性能优化指标有哪些？">
+<meta property="og:url" content="http://littlehorsexie.github.io/性能优化/what/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059504-10524400-50aa-11e9-9029-f2a9e179c005.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059515-1b0cd900-50aa-11e9-9de6-33f4588e79c6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059545-28c25e80-50aa-11e9-82e9-e9b1a740923b%20%281%29.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059552-2e1fa900-50aa-11e9-8fbd-b425554d772f.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/RAIL.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059667-7e970680-50aa-11e9-8e10-632da04577b6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059677-848ce780-50aa-11e9-9bbc-5291cc5516a8.png">
+<meta property="og:updated_time" content="2019-11-27T02:42:33.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以用户为中心的性能优化指标有哪些？">
+<meta name="twitter:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(22)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="异步">异步<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="22">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/develop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="异步发展史">异步发展史</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/new/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="new">new</span>
+            <span class="post-date" title="2019-03-25 16:00:00">2019/03/25</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2019-03-25 14:29:00">2019/03/25</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-JS基础/this" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">this</h1>
+    
+    <div class="article-meta">
+        <!--  -->
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="JS基础">JS基础</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2020-03-25 16:27:33'>2019-03-25 14:29</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#改变-this-指向"><span class="toc-text">改变 this 指向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-箭头函数"><span class="toc-text">1. 箭头函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-在函数内部使用-this-this"><span class="toc-text">2. 在函数内部使用 _this = this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-使用apply"><span class="toc-text">3. 使用apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-使用call"><span class="toc-text">4. 使用call</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-使用bind"><span class="toc-text">5. 使用bind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#apply、call、bind-区别"><span class="toc-text">apply、call、bind 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS-中的函数调用"><span class="toc-text">JS 中的函数调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-作为一个函数调用"><span class="toc-text">1. 作为一个函数调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-函数作为方法调用"><span class="toc-text">2. 函数作为方法调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-使用构造函数调用函数"><span class="toc-text">3. 使用构造函数调用函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-作为函数方法调用函数（call、apply）"><span class="toc-text">4. 作为函数方法调用函数（call、apply）</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先，我们明确一个原则：this 永远指向最后调用它的那个对象。比如，我们看下面的几段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">"Cherry"</span>,</span><br><span class="line">  fn : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// Cherry</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">a.fn();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  <span class="comment">// name: "Cherry",</span></span><br><span class="line">  fn : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.a.fn();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">"Cherry"</span>,</span><br><span class="line">  fn : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// windowsName</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> f = a.fn;</span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">'Cherry'</span>;</span><br><span class="line">  innerFunction();</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">innerFunction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// windowsName</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们再看一段代码，想象一下浏览器会输出什么：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">"Cherry"</span>,</span><br><span class="line">  func1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)     </span><br><span class="line">  &#125;,</span><br><span class="line">  func2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.func1()</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.func2()</span><br></pre></td></tr></table></figure>
+
+<p>理想情况下，我们是希望输出 Cherry 的，但是事实上，在不使用箭头函数的情况下，是会报错的，因为最后调用 setTimeout 的对象是 window，但是在 window 中并没有 func1 函数。</p>
+<p>为了解决这个问题，我们有以下几种方法：</p>
+<h2 id="改变-this-指向"><a href="#改变-this-指向" class="headerlink" title="改变 this 指向"></a>改变 this 指向</h2><h3 id="1-箭头函数"><a href="#1-箭头函数" class="headerlink" title="1. 箭头函数"></a>1. 箭头函数</h3><p>众所周知，ES6 的箭头函数是可以避免 ES5 中使用 this 的坑的。箭头函数的 this 始终指向函数定义时的 this，而非执行时。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name : <span class="string">"Cherry"</span>,</span><br><span class="line">  func1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)     </span><br><span class="line">  &#125;,</span><br><span class="line">  func2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout( <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.func1()</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.func2()     <span class="comment">// Cherry</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-在函数内部使用-this-this"><a href="#2-在函数内部使用-this-this" class="headerlink" title="2. 在函数内部使用 _this = this"></a>2. 在函数内部使用 _this = this</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name : <span class="string">"Cherry"</span>,</span><br><span class="line">  func1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)     </span><br><span class="line">  &#125;,</span><br><span class="line">  func2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">    setTimeout( <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      _this.func1()</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.func2()       <span class="comment">// Cherry</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-使用apply"><a href="#3-使用apply" class="headerlink" title="3. 使用apply"></a>3. 使用apply</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name : <span class="string">"Cherry"</span>,</span><br><span class="line">  func1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;,</span><br><span class="line">  func2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.func1()</span><br><span class="line">    &#125;.apply(a), <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.func2()            <span class="comment">// Cherry</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-使用call"><a href="#4-使用call" class="headerlink" title="4. 使用call"></a>4. 使用call</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name : <span class="string">"Cherry"</span>,</span><br><span class="line">  func1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;,</span><br><span class="line">  func2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.func1()</span><br><span class="line">    &#125;.call(a), <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.func2()            <span class="comment">// Cherry</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-使用bind"><a href="#5-使用bind" class="headerlink" title="5. 使用bind"></a>5. 使用bind</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name : <span class="string">"Cherry"</span>,</span><br><span class="line">  func1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">  &#125;,</span><br><span class="line">  func2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.func1()</span><br><span class="line">    &#125;.bind(a)(), <span class="number">100</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.func2()            <span class="comment">// Cherry</span></span><br></pre></td></tr></table></figure>
+
+<p><code>注：后三种方法，虽然可以改变this指向，但是会立即执行，导致setTimeout失效</code></p>
+<h2 id="apply、call、bind-区别"><a href="#apply、call、bind-区别" class="headerlink" title="apply、call、bind 区别"></a>apply、call、bind 区别</h2><blockquote>
+<p>fun.apply(thisArg, [argsArray])</p>
+</blockquote>
+<ul>
+<li>thisArg：在 fun 函数运行时指定的 this 值。需要注意的是，指定的 this 值并不一定是该函数执行时真正的 this 值，如果这个函数处于非严格模式下，则指定为 null 或 undefined 时会自动指向全局对象（浏览器中就是window对象），同时值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的自动包装对象。</li>
+<li>argsArray：一个数组或者类数组对象，其中的数组元素将作为单独的参数传给 fun 函数。如果该参数的值为null 或 undefined，则表示不需要传入任何参数。从ECMAScript 5 开始可以使用类数组对象。</li>
+</ul>
+<blockquote>
+<p>fun.call(thisArg[, arg1[, arg2[, …]]])</p>
+</blockquote>
+<p>apply 和 call 的区别是 call 方法接受的是若干个参数列表，而 apply 接收的是一个包含多个参数的数组。</p>
+<blockquote>
+<p>bind()方法创建一个新的函数, 当被调用时，将其this关键字设置为提供的值，在调用新函数时，在任何提供之前提供一个给定的参数序列。</p>
+</blockquote>
+<p>bind 是创建一个新的函数，我们必须要手动去调用</p>
+<h2 id="JS-中的函数调用"><a href="#JS-中的函数调用" class="headerlink" title="JS 中的函数调用"></a>JS 中的函数调用</h2><h3 id="1-作为一个函数调用"><a href="#1-作为一个函数调用" class="headerlink" title="1. 作为一个函数调用"></a>1. 作为一个函数调用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">"Cherry"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);          <span class="comment">// windowsName</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"inner:"</span> + <span class="keyword">this</span>);    <span class="comment">// inner: Window</span></span><br><span class="line">&#125;</span><br><span class="line">a();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"outer:"</span> + <span class="keyword">this</span>)         <span class="comment">// outer: Window</span></span><br></pre></td></tr></table></figure>
+
+<p>这样一个最简单的函数，不属于任何一个对象，就是一个函数，这样的情况在 JavaScript 的在浏览器中的非严格模式默认是属于全局对象 window 的，在严格模式，就是 undefined。<br>但这是一个全局的函数，很容易产生命名冲突，所以不建议这样使用。</p>
+<h3 id="2-函数作为方法调用"><a href="#2-函数作为方法调用" class="headerlink" title="2. 函数作为方法调用"></a>2. 函数作为方法调用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  name: <span class="string">"Cherry"</span>,</span><br><span class="line">  fn : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// Cherry</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">a.fn();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-使用构造函数调用函数"><a href="#3-使用构造函数调用函数" class="headerlink" title="3. 使用构造函数调用函数"></a>3. 使用构造函数调用函数</h3><blockquote>
+<p>如果函数调用前使用了 new 关键字, 则是调用了构造函数。<br>这看起来就像创建了新的函数，但实际上 JavaScript 函数是重新创建的对象：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数:</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = arg1;</span><br><span class="line">  <span class="keyword">this</span>.lastName  = arg2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This    creates a new object</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> myFunction(<span class="string">"Li"</span>,<span class="string">"Cherry"</span>);</span><br><span class="line">a.lastName;                             <span class="comment">// 返回 "Cherry"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-作为函数方法调用函数（call、apply）"><a href="#4-作为函数方法调用函数（call、apply）" class="headerlink" title="4. 作为函数方法调用函数（call、apply）"></a>4. 作为函数方法调用函数（call、apply）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"windowsName"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">'Cherry'</span>;</span><br><span class="line">  innerFunction();</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">innerFunction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);      <span class="comment">// windowsName</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>这里的 innerFunction() 的调用是不是属于第一种调用方式：作为一个函数调用（它就是作为一个函数调用的，没有挂载在任何对象上，所以对于没有挂载在任何对象上的函数，在非严格模式下 this 就是指向 window 的）</p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 502px;
+        }
+        .nav.fullscreen {
+            margin-left: -502px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>优化之回流和重绘篇 | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="优化之回流和重绘篇 | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以用户为中心的性能优化指标有哪些？">
+<meta property="og:url" content="http://littlehorsexie.github.io/性能优化/what/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059504-10524400-50aa-11e9-9029-f2a9e179c005.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059515-1b0cd900-50aa-11e9-9de6-33f4588e79c6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059545-28c25e80-50aa-11e9-82e9-e9b1a740923b%20%281%29.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059552-2e1fa900-50aa-11e9-8fbd-b425554d772f.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/RAIL.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059667-7e970680-50aa-11e9-8e10-632da04577b6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059677-848ce780-50aa-11e9-9bbc-5291cc5516a8.png">
+<meta property="og:updated_time" content="2019-11-27T02:42:33.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以用户为中心的性能优化指标有哪些？">
+<meta name="twitter:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(22)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="异步">异步<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="22">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/develop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="异步发展史">异步发展史</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/new/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="new">new</span>
+            <span class="post-date" title="2019-03-25 16:00:00">2019/03/25</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2019-03-25 14:29:00">2019/03/25</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-性能优化/how/repaint" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">优化之回流和重绘篇</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="性能优化">性能优化</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2019-11-27 10:42:33'>2019-11-27 10:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先回顾一下回流和重绘"><span class="toc-text">先回顾一下回流和重绘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些建议"><span class="toc-text">一些建议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM篇"><span class="toc-text">DOM篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS篇"><span class="toc-text">JS篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS篇"><span class="toc-text">CSS篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="先回顾一下回流和重绘"><a href="#先回顾一下回流和重绘" class="headerlink" title="先回顾一下回流和重绘"></a>先回顾一下回流和重绘</h2><p><strong>Repaint（重绘）</strong>：如果某些操作影响了 DOM 元素的可见性，但又没有影响布局，那么就会发生浏览器的重绘，比如 <code>opacity</code>，<code>background-color</code>,<code>visibility</code> 和 <code>outline</code> 属性。由于浏览器必须检查 DOM 中所有节点的可见性——某些图层或许会置于重绘元素的图层下面，所以重绘是一个非常繁重的逻辑。著作权归作者所有。</p>
+<p><strong>Reflow（回流）</strong>：回流是一个更具破坏性的操作，它会让浏览器重新计算所有元素的坐标位置和尺寸大小。往往由于一个元素的变化，继而引起其子元素、父元素以及相邻元素的变化。著作权归作者所有。</p>
+<p>下面是触发回流事件的几种情境：</p>
+<ul>
+<li>添加、删除和修改可见的 DOM 元素</li>
+<li>添加、删除和修改部分 CSS 样式，比如修改元素的宽度，会影响其相邻元素的布局位置</li>
+<li>CSS3 动画和过渡效果</li>
+<li>使用 <code>offsetWidth</code> 和 <code>offsetHeight</code>。这种情境很诡异，读取一个元素的 <code>offsetWidth</code> 和 <code>offsetHeight</code> 属性会触发回流</li>
+<li>用户行为，比如鼠标悬停、输入文本、调整窗口大小、修改字体样式等等</li>
+</ul>
+<h2 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h2><h3 id="DOM篇"><a href="#DOM篇" class="headerlink" title="DOM篇"></a>DOM篇</h3><ul>
+<li><p>精简DOM层级</p>
+</li>
+<li><p>细颗粒度操作DOM树</p>
+</li>
+<li><p>从文档流中移除复杂的动画效果：保使用动画的元素脱离了文档流，使用 <code>position: absolute</code> 和 <code>position: fixed</code> 属性脱离文档流的元素会被浏览器创建一个新层来存放，这些图层上的修改不会影响其他图层上的元素</p>
+</li>
+<li><p>约束元素变化的影响：这里的约束是指，尽量避免某个元素的变化引起大范围的变化。假设我们有一个 tab 选项卡的组件，选项卡内部的内容长短不一，这就导致了每个选项卡的高度不唯一。这一设计带来的问题就是每次切换选项卡时，周围的元素都要重新布局。我们可以通过一个固定高度来避免这一情况</p>
+</li>
+<li><h3 id="JS篇"><a href="#JS篇" class="headerlink" title="JS篇"></a>JS篇</h3></li>
+<li><p>批量更新元素：可以通过添加类名的方式来更新</p>
+</li>
+</ul>
+<h3 id="CSS篇"><a href="#CSS篇" class="headerlink" title="CSS篇"></a>CSS篇</h3><ul>
+<li>精简CSS样式：样式越少，回流越快，剔除无用样式</li>
+<li>巧用隐藏方式：使用<code>display: none;</code> 隐藏的元素不会触发页面的重绘和回流事件，所以可以在这些元素隐藏期间配置样式，配置完成后再转换为可见状态</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>权衡流畅度和性能：一次移动一像素的位置看起来虽然很流畅，但对于某些低性能终端会是很大的压力。一次移动四像素降低帧速虽然看起来稍有些迟钝，但性能压力降低了。这就是需要我们权衡的地方：流畅度和性能</li>
+</ul>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 502px;
+        }
+        .nav.fullscreen {
+            margin-left: -502px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

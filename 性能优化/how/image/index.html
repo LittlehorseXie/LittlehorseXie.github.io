@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>优化之图像篇 | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="优化之图像篇 | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以用户为中心的性能优化指标有哪些？">
+<meta property="og:url" content="http://littlehorsexie.github.io/性能优化/what/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059504-10524400-50aa-11e9-9029-f2a9e179c005.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059515-1b0cd900-50aa-11e9-9de6-33f4588e79c6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059545-28c25e80-50aa-11e9-82e9-e9b1a740923b%20%281%29.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059552-2e1fa900-50aa-11e9-8fbd-b425554d772f.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/RAIL.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059667-7e970680-50aa-11e9-8e10-632da04577b6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059677-848ce780-50aa-11e9-9bbc-5291cc5516a8.png">
+<meta property="og:updated_time" content="2019-11-27T02:42:33.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以用户为中心的性能优化指标有哪些？">
+<meta name="twitter:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(22)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="异步">异步<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="22">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/develop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="异步发展史">异步发展史</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/new/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="new">new</span>
+            <span class="post-date" title="2019-03-25 16:00:00">2019/03/25</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2019-03-25 14:29:00">2019/03/25</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-性能优化/how/image" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">优化之图像篇</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="性能优化">性能优化</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2019-11-27 10:42:33'>2019-11-27 10:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-WebP"><span class="toc-text">1 WebP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-优势"><span class="toc-text">1.1 优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-示例"><span class="toc-text">1.2 示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-劣势"><span class="toc-text">1.3 劣势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-兼容性处理"><span class="toc-text">1.4 兼容性处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-懒加载"><span class="toc-text">2 懒加载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-什么是延迟加载？"><span class="toc-text">2.1 什么是延迟加载？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-如何延迟加载内联图像？"><span class="toc-text">2.2 如何延迟加载内联图像？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用-Intersection-Observer"><span class="toc-text">使用 Intersection Observer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-如何延迟加载CSS中的图像？"><span class="toc-text">2.3 如何延迟加载CSS中的图像？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-懒加载库"><span class="toc-text">2.4 懒加载库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-流程总结"><span class="toc-text">3 流程总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-PageSpeed自动转换模块"><span class="toc-text">4 PageSpeed自动转换模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-延迟加载视频"><span class="toc-text">5 延迟加载视频</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-视频不自动播放"><span class="toc-text">5.1 视频不自动播放</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-懒加载需要注意的地方"><span class="toc-text">6 懒加载需要注意的地方</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-注意首屏"><span class="toc-text">6.1 注意首屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-布局移位与占位符"><span class="toc-text">6.2 布局移位与占位符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-图像解码延迟"><span class="toc-text">6.3 图像解码延迟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-内容不加载"><span class="toc-text">6.4 内容不加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-JavaScript-可用性"><span class="toc-text">6.5 JavaScript 可用性</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>让图片加载这件事儿变得更美好</p>
+<p><img src="../../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/loading.png" alt></p>
+<h2 id="1-WebP"><a href="#1-WebP" class="headerlink" title="1 WebP"></a>1 WebP</h2><p>评价网站性能好坏的一个主要指标就是页面响应时间，也就是说用户打开完整页面的时间。基于JPEG还有PNG图片格式的网页，其图片资源加载往往都占据了页面耗时的主要部分，那么如何保证图片质量的前提下缩小图片体积，成为了一件有价值的事情。</p>
+<p>而如今，对JPEG、PNG以及GIF这些格式的图片已经没有太大的优化空间。但是，Google推出的WebP图片格式给图片优化提供了另一种可能。</p>
+<p>WebP是一种支持有损压缩和无损压缩的图片文件格式。可能是性价比最高的一种优化方式了。</p>
+<h3 id="1-1-优势"><a href="#1-1-优势" class="headerlink" title="1.1 优势"></a>1.1 优势</h3><blockquote>
+<p>科技博客 Gig‍‍‍aOM 曾报道：YouTube 的视频略缩图采用 WebP 格式后，网页加载速度提升了 10%；谷歌的 Chrome 网上应用商店采用 WebP 格式图片后，每天可以节省几 TB 的带宽，页面平均加载时间大约减少 1/3；Google+ 移动应用采用 WebP 图片格式后，每天节省了 50TB 数据存储空间。</p>
+</blockquote>
+<p>同样的质量下，更小的体积，更快的加载速度。</p>
+<h3 id="1-2-示例"><a href="#1-2-示例" class="headerlink" title="1.2 示例"></a>1.2 示例</h3><p>下面我们以一张图片为例，分别用不同质量进行压缩。</p>
+<p><img src="../../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/image%20%283%29.png" alt></p>
+<p>可以看出， WebP 图片体积更小。</p>
+<p>下面我们再看下 <a href="http://labs.qiang.it/wen/webp/test.html" target="_blank" rel="noopener">60张jpg和webp加载比较</a> 。</p>
+<p>可以看出初次加载时 WebP 速度明显提升，但如果我们再次刷新（在开启页面缓存的情况下），会发现 WebP  的加载时间反而更长，下一小节再做解释。</p>
+<h3 id="1-3-劣势"><a href="#1-3-劣势" class="headerlink" title="1.3 劣势"></a>1.3 劣势</h3><p>既然Webp图片能明显提升页面的加载速度，为什么还有很多浏览器仍然在使用jpg图片呢？</p>
+<p>首先，我们看一下WebP的兼容性，来源：<a href="https://caniuse.com/#search=webp" target="_blank" rel="noopener">Can I Use WebP</a></p>
+<p><img src="../../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/webp.png" alt></p>
+<p>由上图可以看出，目前Chrome兼容性最好（毕竟是自家产品），Safari兼容最差。总体来说，WebP的兼容性不太乐观。</p>
+<p>其次，根据Google的测试，目前WebP与JPG相比较，编码速度慢10倍，解码速度慢1.5倍（因此在有浏览器缓存的情况下 WebP 加载时间会更长）。（但是，WebP虽然会增加额外的解码时间，但由于减少了文件体积，缩短了加载的时间，总体上仍会加快页面的渲染速度。缩短的加载时间远远大于解码所需要的时间。）</p>
+<h3 id="1-4-兼容性处理"><a href="#1-4-兼容性处理" class="headerlink" title="1.4 兼容性处理"></a>1.4 兼容性处理</h3><p>思路：如果浏览器支持 WebP，把图片的链接改成 WebP 格式的</p>
+<p>下面是Google官方提供的检测代码 可以检测 浏览器对 webp lossy 有损 lossless无损 alpha透明 animation动图的支持：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_webp_feature</span>(<span class="params">feature, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> kTestImages = &#123;</span><br><span class="line">        lossy: <span class="string">"UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA"</span>,</span><br><span class="line">        lossless: <span class="string">"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA=="</span>,</span><br><span class="line">        alpha: <span class="string">"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="</span>,</span><br><span class="line">        animation: <span class="string">"UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> result = (img.width &gt; <span class="number">0</span>) &amp;&amp; (img.height &gt; <span class="number">0</span>);</span><br><span class="line">        callback(feature, result);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.onerror = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback(feature, <span class="literal">false</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = <span class="string">"data:image/webp;base64,"</span> + kTestImages[feature];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-懒加载"><a href="#2-懒加载" class="headerlink" title="2 懒加载"></a>2 懒加载</h2><p>图片是网页中流量占比最多的部分， 不在可视区域的图片是没必要发起请求的。</p>
+<p>直接加载可能会加载用户永远不会查看的内容， 进而导致一些问题：</p>
+<ul>
+<li>浪费数据流量/带宽。 </li>
+<li>浪费处理时间、电池电量和其他系统资源。 下载媒体资源后，浏览器必须将其解码，并在视口中渲染其内容。</li>
+</ul>
+<p>延迟加载解决方案可以减少初始页面负载、加载时间以及系统资源使用量，但不会删减任何内容。</p>
+<h3 id="2-1-什么是延迟加载？"><a href="#2-1-什么是延迟加载？" class="headerlink" title="2.1 什么是延迟加载？"></a>2.1 什么是延迟加载？</h3><p>延迟加载是一种在加载页面时，延迟加载非关键资源的方法， 而这些非关键资源则在需要时才进行加载。 就图像而言，“非关键”通常是指“屏幕外”。</p>
+<p>您可能已经见过延迟加载的实际应用，其过程大致如下：</p>
+<ul>
+<li>您访问一个页面，并开始滚动阅读内容。</li>
+<li>在某个时刻，您将占位符图像滚动到视口中。</li>
+<li>该占位符图像瞬间替换为最终图像。</li>
+</ul>
+<h3 id="2-2-如何延迟加载内联图像？"><a href="#2-2-如何延迟加载内联图像？" class="headerlink" title="2.2 如何延迟加载内联图像？"></a>2.2 如何延迟加载内联图像？</h3><p>从理论上来看，图像延迟加载机制十分简单，但实际上却有很多需要注意的细节。 此外，有多个不同的用例均受益于延迟加载。 首先，我们来了解一下在 HTML 中延迟加载内联图像。</p>
+<p><code>&lt;img&gt;</code> 元素中使用的图像是最常见的延迟加载对象。 延迟加载 <code>&lt;img&gt;</code> 元素时，我们使用 JavaScript 来检查其是否在视口中。 如果元素在视口中，则其 <code>src</code>（有时是 <code>srcset</code>）属性中就会填充所需图像内容的网址。</p>
+<h4 id="使用-Intersection-Observer"><a href="#使用-Intersection-Observer" class="headerlink" title="使用 Intersection Observer"></a><strong>使用 Intersection Observer</strong></h4><p>现代浏览器支持通过 <a href="https://developers.google.com/web/updates/2016/04/intersectionobserver" target="_blank" rel="noopener">Intersection Observer 官方 API</a> 或 <a href="http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html" target="_blank" rel="noopener">阮一峰大佬的教程</a> 来检查元素的可见性，这种方式的性能和效率很好，只是兼容性不太好。</p>
+<p>接下来我们看看是如何使用的，假设image元素采用下面的标记模式：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img <span class="class"><span class="keyword">class</span></span>=<span class="string">"lazy"</span> src=<span class="string">"placeholder-image.png"</span> data-src=<span class="string">"image-to-lazy-load-1x.png"</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>属性主要包含三个部分：</p>
+<ol>
+<li><code>class</code> 属性</li>
+<li><code>src</code> 属性，引用页面最初加载时显示的占位符图像。</li>
+<li><code>data-src</code> 属性，包含元素进入视口后要加载的图像的网址。</li>
+</ol>
+<p>下面我们看看如何在 javascript 中使用 intersection observer：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="comment">// 把 NodeList 转换为 Array</span></span><br><span class="line">    <span class="keyword">var</span> lazyImages = [].slice.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'img.lazy'</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.IntersectionObserver) &#123;</span><br><span class="line">        <span class="keyword">let</span> LazyImageObserver = <span class="keyword">new</span> IntersectionObserver(<span class="function">(<span class="params">entries, observer</span>) =&gt;</span> &#123;</span><br><span class="line">            entries.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">entry</span>) </span>&#123;</span><br><span class="line">                <span class="comment">// 如果 image 在可视区</span></span><br><span class="line">                <span class="keyword">if</span> (entry.isIntersecting) &#123;</span><br><span class="line">                  <span class="keyword">let</span> lazyImage = entry.target;</span><br><span class="line">                  <span class="comment">// 更换图片地址、移除类名、取消监听</span></span><br><span class="line">                  lazyImage.src = lazyImage.dataset.src;</span><br><span class="line">                  lazyImage.classList.remove(<span class="string">"lazy"</span>);</span><br><span class="line">                  lazyImageObserver.unobserve(lazyImage);</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">        lazyImages.forEach(<span class="function"><span class="params">lazyImage</span> =&gt;</span> &#123;</span><br><span class="line">            LazyImageObserver.observe(lazyImage)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：此代码使用名为 <code>isIntersecting</code> 的 Intersection Observer 方法，该方法在 Edge 15 的 Intersection Observer 实现中不可用。 因此，以上延迟加载代码（以及其他类似的代码片段）将会失败。 请查阅<a href="https://github.com/w3c/IntersectionObserver/issues/211" target="_blank" rel="noopener">此 GitHub 问题</a>，以获取有关更完整的功能检测条件的指导。</p>
+</blockquote>
+<p>Intersection Observer 的缺点是<a href="https://caniuse.com/#feat=intersectionobserver" target="_blank" rel="noopener">浏览器的兼容性</a>。 对于不支持 Intersection Observer 的浏览器，<a href="https://github.com/w3c/IntersectionObserver/tree/master/polyfill" target="_blank" rel="noopener">您可以使用 polyfill</a>，或者如以上代码所述，检测 Intersection Observer 是否可用，并在其不可用时回退到兼容性更好的旧方法。</p>
+<p><strong>使用事件处理程序（兼容性最好的方法）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> lazyImages = [].slice.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'img.lazy'</span>))</span><br><span class="line">    <span class="keyword">let</span> active = <span class="literal">false</span> <span class="comment">// 锁</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> lazyLoad = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!active) &#123;</span><br><span class="line">            active = <span class="literal">true</span></span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                lazyImages.forEach(<span class="function"><span class="params">lazyImage</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span>((lazyImage.getBoundingClientRect().top &lt;= <span class="built_in">window</span>.innerHeight &amp;&amp; lazyImage.getBoundingClientRect().bottom &gt;= <span class="number">0</span>) &amp;&amp; getComputedStyle(lazyImage).display !== <span class="string">"none"</span>) &#123;</span><br><span class="line">                        lazyImage.src = lazyImage.dataset.src</span><br><span class="line">                        lazyImage.classList.remove(<span class="string">"lazy"</span>)</span><br><span class="line">                        lazyImages = lazyImages.filter(<span class="function"><span class="params">image</span> =&gt;</span> &#123;</span><br><span class="line">                            <span class="keyword">return</span> image !== lazyImage</span><br><span class="line">                        &#125;)</span><br><span class="line">                        <span class="keyword">if</span> (lazyImages.length === <span class="number">0</span>) &#123;</span><br><span class="line">                            <span class="built_in">document</span>.removeEventListener(<span class="string">"scroll"</span>, lazyLoad);</span><br><span class="line">                            <span class="built_in">window</span>.removeEventListener(<span class="string">"resize"</span>, lazyLoad);</span><br><span class="line">                            <span class="built_in">window</span>.removeEventListener(<span class="string">"orientationchange"</span>, lazyLoad);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                active = <span class="literal">false</span></span><br><span class="line">            &#125;, <span class="number">200</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">"scroll"</span>, lazyLoad);</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">"resize"</span>, lazyLoad);</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">"orientationchange"</span>, lazyLoad);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>虽然此代码几乎可在任何浏览器中正常运行，但却存在潜在的性能问题，即重复的 <code>setTimeout</code> 调用可能纯属浪费，即使其中的代码受限制，它们仍会运行。 在此示例中，当文档滚动或窗口调整大小时，不管视口中是否有图像，每 200 毫秒都会运行一次检查。 此外，跟踪尚未延迟加载的元素数量，以及取消绑定滚动事件处理程序的繁琐工作将由开发者来完成。</p>
+<p>简而言之：请尽可能使用 Intersection Observer，如果应用有严格的兼容性要求，则回退到事件处理程序。</p>
+<h3 id="2-3-如何延迟加载CSS中的图像？"><a href="#2-3-如何延迟加载CSS中的图像？" class="headerlink" title="2.3 如何延迟加载CSS中的图像？"></a>2.3 如何延迟加载CSS中的图像？</h3><p>虽然 <code>&lt;img&gt;</code> 标记是在网页上使用图像的最常见方式，但也可以通过 CSS <code>background-image</code> 属性（以及其他属性）来调用图像。</p>
+<p>假定一个元素中包含大型主角背景图片：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"lazy-background"</span>&gt;</span><br><span class="line">  &lt;h1&gt;Here<span class="string">'s a hero heading to get your attention!&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;p&gt;Here'</span>s hero copy to convince you to buy a thing!&lt;/p&gt;</span><br><span class="line">  &lt;a href=<span class="string">"/buy-a-thing"</span>&gt;Buy a thing!&lt;/a&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>div.lazy-background</code> 元素通常包含由某些 CSS 调用的大型主角背景图片。 但是，在此延迟加载示例中，我们可以通过 <code>visible</code> 类来隔离 <code>div.lazy-background</code> 元素的 <code>background-image</code> 属性，而且我们会在元素进入视口时对其添加这个类：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.lazy-background</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"hero-placeholder.jpg"</span>); <span class="comment">/* Placeholder image */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.lazy-background</span><span class="selector-class">.visible</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"hero.jpg"</span>); <span class="comment">/* The final image */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们将从这里使用 JavaScript 来检查该元素是否在视口内（通过 Intersection Observer 进行检查！），如果在视口内，则对 <code>div.lazy-background</code> 元素添加 <code>visible</code> 类以加载该图像：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"DOMContentLoaded"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> lazyBackgrounds = [].slice.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">".lazy-background"</span>));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="string">"IntersectionObserver"</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> lazyBackgroundObserver = <span class="keyword">new</span> IntersectionObserver(<span class="function"><span class="keyword">function</span>(<span class="params">entries, observer</span>) </span>&#123;</span><br><span class="line">      entries.forEach(<span class="function"><span class="params">entry</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (entry.isIntersecting) &#123;</span><br><span class="line">          entry.target.classList.add(<span class="string">"visible"</span>);</span><br><span class="line">          lazyBackgroundObserver.unobserve(entry.target);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    lazyBackgrounds.forEach(<span class="function"><span class="params">lazyBackground</span> =&gt;</span> &#123;</span><br><span class="line">      lazyBackgroundObserver.observe(lazyBackground);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-懒加载库"><a href="#2-4-懒加载库" class="headerlink" title="2.4 懒加载库"></a>2.4 懒加载库</h3><ul>
+<li><a href="https://github.com/aFarkas/lazysizes" target="_blank" rel="noopener">lazysizes</a> 是功能全面的延迟加载库，可以延迟加载图像和 iframe。 其使用的模式与本文所示的代码示例非常相似，会自动与 <code>&lt;img&gt;</code> 元素上的 <code>lazyload</code> 类绑定，并要求您在 <code>data-src</code> 和/或 <code>data-srcset</code> 属性中指定图像网址，这两个属性的内容将分别交换到 <code>src</code> 和/或 <code>srcset</code> 属性中。 该库使用 Intersection Observer（您可以使用 polyfill），并可以通过<a href="https://github.com/aFarkas/lazysizes#available-plugins-in-this-repo" target="_blank" rel="noopener">许多插件</a>进行扩展，以执行延迟加载视频等操作。</li>
+<li><a href="https://github.com/ApoorvSaxena/lozad.js" target="_blank" rel="noopener">lozad.js</a> 是超轻量级且只使用 Intersection Observer 的库。 因此，它的性能极佳，但如果要在旧浏览器上使用，则需要 polyfill。</li>
+<li><a href="https://github.com/dinbror/blazy" target="_blank" rel="noopener">blazy</a> 是另一个轻量级的延迟加载器（大小为 1.4 KB）。 与 lazysizes 相同，blazy 不需要任何第三方实用程序即可进行加载，并且适用于 IE7+。 但其缺点是不使用 Intersection Observer。</li>
+<li><a href="https://github.com/malchata/yall.js" target="_blank" rel="noopener">yall.js</a> 是<a href="https://developers.google.com/web/resources/contributors/jeremywagner" target="_blank" rel="noopener">Jeremy Wagner</a>编写的库，该库使用 Intersection Observer，可回退到事件处理程序， 而且与 IE11 和主流浏览器兼容。</li>
+<li>如果您正在寻找 React 特定的延迟加载库，您可考虑使用 <a href="https://github.com/jasonslyvia/react-lazyload" target="_blank" rel="noopener">react-lazyload</a>。 虽然该库不使用 Intersection Observer，但_的确_为习惯于使用 React 开发应用的开发者提供熟悉的图像延迟加载方法。</li>
+</ul>
+<h2 id="3-流程总结"><a href="#3-流程总结" class="headerlink" title="3 流程总结"></a>3 流程总结</h2><p><img src="../../../assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/image%20%281%29.png" alt></p>
+<h2 id="4-PageSpeed自动转换模块"><a href="#4-PageSpeed自动转换模块" class="headerlink" title="4 PageSpeed自动转换模块"></a>4 <strong>PageSpeed自动转换模块</strong></h2><p>Google开发的PageSpeed模块有一个功能，会自动将图像转换成WebP格式或者是浏览器所支持的其它格式。</p>
+<p>以nginx为例，它的设置很简单。</p>
+<p>首先在http模块开启pagespeed属性。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pagespeed on;</span><br><span class="line">pagespeed FileCachePath <span class="string">"/var/cache/ngx_pagespeed/"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后在你的主机配置添加如下一行代码，就能启用这个特性。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pagespeed EnableFilters convert_png_to_jpeg,convert_jpeg_to_webp;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看下经过转换后的代码：</p>
+<p>页面原始代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;pagespeed&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;img src=&quot;./574ceeb8N73b24dc2.jpg&quot; /&gt;</span><br><span class="line">    &lt;img src=&quot;./6597241290470949609.png&quot; /&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Chrome打开后源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;pagespeed&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;img src=&quot;x574ceeb8N73b24dc2.jpg.pagespeed.ic.YcCPjxQL4t.webp&quot;/&gt;</span><br><span class="line">    &lt;img src=&quot;x6597241290470949609.png.pagespeed.ic.6c5y5LYYUu.webp&quot;/&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Safari打开如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;pagespeed&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;img src=&quot;x574ceeb8N73b24dc2.jpg.pagespeed.ic.3TXX_PUg99.jpg&quot;/&gt;</span><br><span class="line">    &lt;img src=&quot;x6597241290470949609.png.pagespeed.ic.rrgw7vPMd6.png&quot;/&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-延迟加载视频"><a href="#5-延迟加载视频" class="headerlink" title="5 延迟加载视频"></a>5 延迟加载视频</h2><p>与图像元素一样，视频也可以延迟加载。</p>
+<h3 id="5-1-视频不自动播放"><a href="#5-1-视频不自动播放" class="headerlink" title="5.1 视频不自动播放"></a>5.1 视频不自动播放</h3><p>对于需要由用户启动播放的视频（即不自动播放的视频），最好指定 <code>&lt;video&gt;</code> 元素的 <code>preload</code> 属性：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls preload=<span class="string">"none"</span> poster=<span class="string">"one-does-not-simply-placeholder.jpg"</span>&gt;</span><br><span class="line">  &lt;source src=<span class="string">"one-does-not-simply.webm"</span> type=<span class="string">"video/webm"</span>&gt;</span><br><span class="line">  &lt;source src=<span class="string">"one-does-not-simply.mp4"</span> type=<span class="string">"video/mp4"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/video&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里，我们使用值为 <code>none</code> 的 <code>preload</code> 属性来阻止浏览器预加载_任何_视频数据。 为占用空间，我们使用 <code>poster</code> 属性为 <code>&lt;video&gt;</code> 元素提供占位符。 这是因为默认的视频加载行为可能会因浏览器不同而有所不同：</p>
+<ul>
+<li>在 Chrome 中，之前的 <code>preload</code> 默认值为 <code>auto</code>，但从 Chrome 64 开始，默认值变为 <code>metadata</code>。 虽然如此，在 Chrome 桌面版中，可能会使用 <code>Content-Range</code> 标头预加载视频的部分内容。 Firefox、Edge 和 Internet Explorer 11 的行为与此相似。</li>
+<li>与 Chrome 桌面版相同，Safari 11.0 桌面版会预加载视频的部分内容， 而 11.2 版（目前为 Safari 的 Tech Preview 版）仅预加载视频元数据。 <a href="https://developer.apple.com/library/content/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html#//apple_ref/doc/uid/TP40009523-CH2-SW9" target="_blank" rel="noopener">iOS 版 Safari 不会 预加载视频</a>。</li>
+<li>启用<a href="https://support.google.com/chrome/answer/2392284" target="_blank" rel="noopener">流量节省程序模式</a>后，<code>preload</code> 默认为 <code>none</code>。</li>
+</ul>
+<p>由于浏览器在 <code>preload</code> 方面的默认行为并非一成不变，因此您最好明确指定该行为。 在由用户启动播放的情况下，使用 <code>preload=&quot;none&quot;</code> 是在所有平台上延迟加载视频的最简单方法。 但 <code>preload</code> 属性并非延迟加载视频内容的唯一方法。<a href="https://developers.google.com/web/fundamentals/media/fast-playback-with-video-preload" target="_blank" rel="noopener"><em>利用视频 预加载快速播放</em></a>或许能提供一些想法和见解，助您了解如何通过 JavaScript 播放视频。</p>
+<p>虽然动画 GIF 应用广泛，但其在很多方面的表现均不如视频，尤其是在输出文件大小方面。 动画 GIF 的数据大小可达数兆字节， 而视觉效果相当的视频往往小得多。</p>
+<p>使用 <code>&lt;video&gt;</code> 元素代替动画 GIF 并不像使用 <code>&lt;img&gt;</code> 元素那么简单。 动画 GIF 具有以下三种固有行为：</p>
+<ol>
+<li>加载时自动播放。</li>
+<li>连续循环播放（<a href="https://davidwalsh.name/prevent-gif-loop" target="_blank" rel="noopener">但并非始终如此</a>)。</li>
+<li>没有音轨。</li>
+</ol>
+<p>使用 <code>&lt;video&gt;</code> 元素进行替代类似于：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video autoplay muted loop playsinline&gt;</span><br><span class="line">  &lt;source src=<span class="string">"one-does-not-simply.webm"</span> type=<span class="string">"video/webm"</span>&gt;</span><br><span class="line">  &lt;source src=<span class="string">"one-does-not-simply.mp4"</span> type=<span class="string">"video/mp4"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/video&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>autoplay</code>、<code>muted</code> 和 <code>loop</code> 属性的含义不言而喻，而 <a href="https://webkit.org/blog/6784/new-video-policies-for-ios/" target="_blank" rel="noopener"><code>playsinline</code> 是在 iOS 中进行自动播放所必需</a>。 现在，我们有了可以跨平台使用的“视频即 GIF”替代方式。 但是，如何进行延迟加载？<a href="https://www.google.com/url?q=https://developers.google.com/web/updates/2017/03/chrome-58-media-updates%23offscreen&sa=D&ust=1521096956530000&usg=AFQjCNHPv7wM_yxmkOWKA0sZ-MXYKUdUXg" target="_blank" rel="noopener">Chrome 会自动延迟加载视频</a>，但并不是所有浏览器都会提供这种优化行为。 根据您的受众和应用要求，您可能需要自己手动完成这项操作。 首先，请相应地修改 <code>&lt;video&gt;</code> 标记：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video autoplay muted loop playsinline width=<span class="string">"610"</span> height=<span class="string">"254"</span> poster=<span class="string">"one-does-not-simply.jpg"</span>&gt;</span><br><span class="line">  &lt;source data-src=<span class="string">"one-does-not-simply.webm"</span> type=<span class="string">"video/webm"</span>&gt;</span><br><span class="line">  &lt;source data-src=<span class="string">"one-does-not-simply.mp4"</span> type=<span class="string">"video/mp4"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/video&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>您会发现添加了 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attr-poster" target="_blank" rel="noopener"><code>poster</code> 属性</a>，您可以使用该属性指定占位符以占用 <code>&lt;video&gt;</code> 元素的空间，直到延迟加载视频为止。 与上文中的 <code>&lt;img&gt;</code> 延迟加载示例一样，我们将视频网址存放在每个 <code>&lt;source&gt;</code> 元素的 <code>data-src</code> 属性中。 然后，我们将使用与上文基于 Intersection Observer 的图像延迟加载示例类似的 JavaScript：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"DOMContentLoaded"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> lazyVideos = [].slice.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">"video.lazy"</span>));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="string">"IntersectionObserver"</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> lazyVideoObserver = <span class="keyword">new</span> IntersectionObserver(<span class="function"><span class="keyword">function</span>(<span class="params">entries, observer</span>) </span>&#123;</span><br><span class="line">      entries.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">video</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (video.isIntersecting) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> source <span class="keyword">in</span> video.target.children) &#123;</span><br><span class="line">            <span class="keyword">var</span> videoSource = video.target.children[source];</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> videoSource.tagName === <span class="string">"string"</span> &amp;&amp; videoSource.tagName === <span class="string">"SOURCE"</span>) &#123;</span><br><span class="line">              videoSource.src = videoSource.dataset.src;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          video.target.load();</span><br><span class="line">          video.target.classList.remove(<span class="string">"lazy"</span>);</span><br><span class="line">          lazyVideoObserver.unobserve(video.target);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    lazyVideos.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">lazyVideo</span>) </span>&#123;</span><br><span class="line">      lazyVideoObserver.observe(lazyVideo);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>延迟加载 <code>&lt;video&gt;</code> 元素时，我们需要对所有的 <code>&lt;source&gt;</code> 子元素进行迭代，并将其 <code>data-src</code> 属性更改为 <code>src</code> 属性。 完成该操作后，必须通过调用该元素的 <code>load</code> 方法触发视频加载，然后该媒体就会根据 <code>autoplay</code> 属性开始自动播放。</p>
+<p>利用这种方法，我们即可提供模拟动画 GIF 行为的视频解决方案。这种方案的流量消耗量低于动画 GIF，而且能延迟加载内容。</p>
+<h2 id="6-懒加载需要注意的地方"><a href="#6-懒加载需要注意的地方" class="headerlink" title="6 懒加载需要注意的地方"></a>6 懒加载需要注意的地方</h2><p>虽然延迟加载图像和视频会对性能产生重要的积极影响，但这项任务并不轻松。 如果出错，可能会产生意想不到的后果。 因此，务必要牢记以下几点：</p>
+<h3 id="6-1-注意首屏"><a href="#6-1-注意首屏" class="headerlink" title="6.1 注意首屏"></a>6.1 注意首屏</h3><p>使用 JavaScript 对页面上的所有媒体资源进行延迟加载很诱人，但您必须抵挡住这种诱惑。 首屏上的任何内容皆不可进行延迟加载， 而应将此类资源视为关键资产，进行正常加载。对于首屏线以下的图像，可以采用延迟加载。</p>
+<p>例如，Intersection Observer API 允许您在创建新的 <code>IntersectionObserver</code> 实例时，在 options 对象中指定 <code>rootMargin</code> 属性。 如此即可为元素提供缓冲区，以便在元素进入视口之前触发延迟加载行为：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> lazyImageObserver = <span class="keyword">new</span> IntersectionObserver(<span class="function"><span class="keyword">function</span>(<span class="params">entries, observer</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Lazy loading image code goes here</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  rootMargin:<span class="string">"0px 0px 256px 0px"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>要使用滚动事件处理代码实现这种效果，只需调整 <code>getBoundingClientRect</code> 检查以包括缓冲区。</p>
+<h3 id="6-2-布局移位与占位符"><a href="#6-2-布局移位与占位符" class="headerlink" title="6.2 布局移位与占位符"></a>6.2 布局移位与占位符</h3><p>若不使用占位符，延迟加载媒体可能会导致布局移位。 这种变化不仅会让用户产生疑惑，还会触发成本高昂的 DOM 布局操作，进而耗用系统资源，造成卡顿。</p>
+<p>对于 <code>&lt;img&gt;</code> 标记，<code>src</code> 最初应指向一个占位符，直到该属性更新为最终图像的网址为止。 请使用 <code>&lt;video&gt;</code> 元素中的 <code>poster</code> 属性来指向占位符图像。 此外，请在 <code>&lt;img&gt;</code> 和 <code>&lt;video&gt;</code> 标记上使用 <code>width</code> 和 <code>height</code> 属性。 如此可以确保从占位符转换为最终图像时，不会在媒体加载期间改变该元素的渲染大小。</p>
+<h3 id="6-3-图像解码延迟"><a href="#6-3-图像解码延迟" class="headerlink" title="6.3 图像解码延迟"></a>6.3 图像解码延迟</h3><p>在 JavaScript 中加载大型图像并将其放入 DOM 可能会占用主线程，进而导致解码期间用户界面出现短时间无响应的情况。 您可以先<a href="https://medium.com/dailyjs/image-loading-with-image-decode-b03652e7d2d2" target="_blank" rel="noopener">使用 <code>decode</code> 方法异步解码图像</a>，再将其插入到 DOM 中，以减少此类卡顿现象，但请注意： 这种方法尚不能通用，而且会增加延迟加载逻辑的复杂性。 如果要采用这种方法，请务必进行检查。 </p>
+<h3 id="6-4-内容不加载"><a href="#6-4-内容不加载" class="headerlink" title="6.4 内容不加载"></a>6.4 内容不加载</h3><p>有时，媒体资源会因为某种原因而加载失败，进而导致发生错误。 何时会发生这种情况？何时发生视情况而定，以下是一种假设情况： 您有一个短时间（例如，5 分钟）的 HTML 缓存策略，而用户访问网站，_或_保持打开旧选项卡并长时间离开（例如，数个小时），然后返回继续阅读内容。 在此过程中的某个时刻，发生重新部署。 在此部署期间，图像资源的名称因为基于哈希的版本控制而更改，或者完全移除。 当用户延迟加载图像时，该资源已不可用，因此导致加载失败。</p>
+<p>虽然出现这种情况的机会比较小，但您也有必要制定后备计划，以防延迟加载失败。对于图像，可采取如下解决方案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newImage = <span class="keyword">new</span> Image();</span><br><span class="line">newImage.src = <span class="string">"my-awesome-image.jpg"</span>;</span><br><span class="line"></span><br><span class="line">newImage.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// Decide what to do on error</span></span><br><span class="line">&#125;;</span><br><span class="line">newImage.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// Load the image</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发生错误时采取何种措施取决于应用。 例如，可以将图像占位符区域替换为按钮，以允许用户尝试重新加载该图像，或者直接在图像占位符区域显示错误消息。</p>
+<p>此外，也可能会发生其他情况。 无论采取何种方法，在发生错误时通知用户，并提供可能的解决方案总不是坏事。</p>
+<h3 id="6-5-JavaScript-可用性"><a href="#6-5-JavaScript-可用性" class="headerlink" title="6.5 JavaScript 可用性"></a>6.5 JavaScript 可用性</h3><p>不应假定 JavaScript 始终可用。 如果要延迟加载图像，请考虑提供 <code>&lt;noscript&gt;</code> 标记，以便在 JavaScript 不可用时显示图像。 例如，最简单的回退方法是使用 <code>&lt;noscript&gt;</code> 元素在 JavaScript 处于关闭状态时提供图像：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- An image that eventually gets lazy loaded by JavaScript --&gt;</span><br><span class="line">&lt;img <span class="class"><span class="keyword">class</span></span>=<span class="string">"lazy"</span> src=<span class="string">"placeholder-image.jpg"</span> data-src=<span class="string">"image-to-lazy-load.jpg"</span> alt=<span class="string">"I'm an image!"</span>&gt;</span><br><span class="line">&lt;!-- An image that is shown <span class="keyword">if</span> JavaScript is turned off --&gt;</span><br><span class="line">&lt;noscript&gt;</span><br><span class="line">  &lt;img src=<span class="string">"image-to-lazy-load.jpg"</span> alt=<span class="string">"I'm an image!"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/noscript&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果 JavaScript 已关闭，用户会_同时_看到占位符图像以及 <code>&lt;noscript&gt;</code> 元素中包含的图像。 要解决此问题，我们可以在 <code>&lt;html&gt;</code> 标记上放置 <code>no-js</code> 类，如下所示：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html <span class="class"><span class="keyword">class</span></span>=<span class="string">"no-js"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后，在通过 <code>&lt;link&gt;</code> 标记请求任何样式表之前，于 <code>&lt;head&gt;</code> 中放置一行内联脚本，用于在 JavaScript 处于打开状态时从 <code>&lt;html&gt;</code> 元素中移除 <code>no-js</code> 类：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="built_in">document</span>.documentElement.classList.remove(<span class="string">"no-js"</span>);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最后，我们可以使用一些 CSS，在 JavaScript 不可用时隐藏类为 lazy 的元素，如下所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.no-js</span> <span class="selector-class">.lazy</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这并不会阻止占位符图像加载，但是结果却更令人满意。 关闭 JavaScript 的用户不只是能看到占位符图像，这要比只能看到占位符和没有意义的图像内容更好。</p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 502px;
+        }
+        .nav.fullscreen {
+            margin-left: -502px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

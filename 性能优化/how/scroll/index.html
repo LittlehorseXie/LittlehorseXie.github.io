@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>优化之滚动篇 | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="优化之滚动篇 | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以用户为中心的性能优化指标有哪些？">
+<meta property="og:url" content="http://littlehorsexie.github.io/性能优化/what/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059504-10524400-50aa-11e9-9029-f2a9e179c005.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059515-1b0cd900-50aa-11e9-9de6-33f4588e79c6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059545-28c25e80-50aa-11e9-82e9-e9b1a740923b%20%281%29.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059552-2e1fa900-50aa-11e9-8fbd-b425554d772f.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/RAIL.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059667-7e970680-50aa-11e9-8e10-632da04577b6.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059677-848ce780-50aa-11e9-9bbc-5291cc5516a8.png">
+<meta property="og:updated_time" content="2019-11-27T02:42:33.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以用户为中心的性能优化指标有哪些？">
+<meta name="twitter:description" content="您可能已无数次听人提及性能的重要性，以及网页应用的运行速度十分关键。因为：  性能关乎用户的去留 性能关乎转化率的提升 性能关乎用户体验 性能关乎用户：性能低的网站和应用还会导致用户产生实际成本  但是，当您尝试回答“我的应用有多快？”这个问题时，您就会意识到，“快”是一个很模糊的概念。 我们所谓的“快”究竟是指什么？其情境为何？ 为谁提供高速度？提高到什么程度？ 1. 两个谬见首先我们看一下两个">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/55059453-fa448380-50a9-11e9-8bd3-ce4114082a02.png">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(22)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="异步">异步<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="22">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/develop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="异步发展史">异步发展史</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="异步 "
+           href="/异步/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/new/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="new">new</span>
+            <span class="post-date" title="2019-03-25 16:00:00">2019/03/25</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2019-03-25 14:29:00">2019/03/25</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-性能优化/how/scroll" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">优化之滚动篇</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="性能优化">性能优化</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2019-11-27 10:42:33'>2019-11-27 10:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要进行滚动优化？"><span class="toc-text">为什么要进行滚动优化？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防抖（debouncing）"><span class="toc-text">防抖（debouncing）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节流（throttle）"><span class="toc-text">节流（throttle）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-rAF（requestAnimationFrame）触发滚动事件"><span class="toc-text">使用 rAF（requestAnimationFrame）触发滚动事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简化-scroll-内的操作"><span class="toc-text">简化 scroll 内的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#避免在scroll-事件中修改样式属性-将样式操作从-scroll-事件中剥离。"><span class="toc-text">避免在scroll 事件中修改样式属性 / 将样式操作从 scroll 事件中剥离。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滑动过程中尝试使用-pointer-events-none-禁止鼠标事件"><span class="toc-text">滑动过程中尝试使用 pointer-events: none 禁止鼠标事件</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="为什么要进行滚动优化？"><a href="#为什么要进行滚动优化？" class="headerlink" title="为什么要进行滚动优化？"></a>为什么要进行滚动优化？</h3><p>用户的 scroll 和 resize 行为会导致浏览器不断的重新渲染。</p>
+<p>scroll 事件本身会触发页面的重新渲染，同时 scroll 事件的 handler 又会被高频度的触发, 因此事件的 handler 内部不应该有复杂操作，例如 DOM 操作就不应该放在事件处理中。</p>
+<p>针对此类高频度触发事件问题（例如页面 scroll ，屏幕 resize，监听用户输入等），下面介绍两种常用的解决方法，防抖和节流。</p>
+<h3 id="防抖（debouncing）"><a href="#防抖（debouncing）" class="headerlink" title="防抖（debouncing）"></a>防抖（debouncing）</h3><p><strong>任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timeout = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        clearTimeout(timeout);</span><br><span class="line">        timeout = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">        &#125;, time);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayDebounce</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    <span class="title">console</span>.<span class="title">log</span>(<span class="params"><span class="string">'防抖'</span></span>);</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">// 事件监听</span></span><br><span class="line"><span class="function"><span class="title">window</span>.<span class="title">addEventListener</span>(<span class="params"><span class="string">'scroll'</span>, debounce(sayDebounce, <span class="number">500</span></span>));</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="节流（throttle）"><a href="#节流（throttle）" class="headerlink" title="节流（throttle）"></a>节流（throttle）</h3><p><strong>指定时间间隔内只会执行一次任务。</strong></p>
+<p>防抖函数确实不错，但是也存在问题，譬如图片的懒加载，我希望在下滑过程中图片不断的被加载出来，而不是只有当我停止下滑时候，图片才被加载出来。</p>
+<p>这个时候，我们希望即使页面在不断被滚动，但是滚动 handler 也可以以一定的频率被触发（譬如 250ms 触发一次），这类场景，就要用到另一种技巧，称为节流函数（throttling）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, time</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timeout,</span><br><span class="line">        startTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        clearTimeout(timeout);</span><br><span class="line">        <span class="keyword">let</span> curTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        <span class="keyword">if</span> (curTime - startTime &gt;= time) &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">            startTime = curTime;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timeout = setTimeout(fn, time);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayThrottle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'节流'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 事件监听</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'scroll'</span>, throttle(sayThrottle, <span class="number">500</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-rAF（requestAnimationFrame）触发滚动事件"><a href="#使用-rAF（requestAnimationFrame）触发滚动事件" class="headerlink" title="使用 rAF（requestAnimationFrame）触发滚动事件"></a><strong>使用 rAF（requestAnimationFrame）触发滚动事件</strong></h3><p>window.requestAnimationFrame() 这个方法是用来在页面重绘之前，通知浏览器调用一个指定的函数。这个方法接受一个函数为参，该函数会在重绘前调用。</p>
+<p>rAF 常用于 web 动画的制作，用于准确控制页面的帧刷新渲染，让动画效果更加流畅，当然它的作用不仅仅局限于动画制作，我们可以利用它的特性将它视为一个定时器。（当然它不是定时器）</p>
+<p>通常来说，rAF 被调用的频率是每秒 60 次，也就是 1000/60 ，触发频率大概是 16.7ms 。（当执行复杂操作时，当它发现无法维持 60fps 的频率时，它会把频率降低到 30fps 来保持帧数的稳定。）</p>
+<p>简单而言，使用 requestAnimationFrame 来触发滚动事件，相当于上面的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">throttle(func, <span class="number">1000</span>/<span class="number">60</span>) <span class="comment">//xx 代表 xx ms内不会重复触发事件 handler</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 requestAnimationFrame 优缺点并存，首先我们不得不考虑它的兼容问题，其次因为它只能实现以 16.7ms 的频率来触发，代表它的可调节性十分差。但是相比 throttle(func, xx, 16.7) ，用于更复杂的场景时，rAF 可能效果更佳，性能更好。</p>
+<h3 id="简化-scroll-内的操作"><a href="#简化-scroll-内的操作" class="headerlink" title="简化 scroll 内的操作"></a><strong>简化 scroll 内的操作</strong></h3><p>上面介绍的方法都是如何去优化 scroll 事件的触发，避免 scroll 事件过度消耗资源的。</p>
+<p>但是从本质上而言，我们应该尽量去精简 scroll 事件的 handler ，将一些变量的初始化、不依赖于滚动位置变化的计算等都应当在 scroll 事件外提前就绪。</p>
+<h4 id="避免在scroll-事件中修改样式属性-将样式操作从-scroll-事件中剥离。"><a href="#避免在scroll-事件中修改样式属性-将样式操作从-scroll-事件中剥离。" class="headerlink" title="避免在scroll 事件中修改样式属性 / 将样式操作从 scroll 事件中剥离。"></a><strong>避免在scroll 事件</strong>中修改样式属性 / <strong>将样式操作从 scroll 事件中剥离。</strong></h4><h3 id="滑动过程中尝试使用-pointer-events-none-禁止鼠标事件"><a href="#滑动过程中尝试使用-pointer-events-none-禁止鼠标事件" class="headerlink" title="滑动过程中尝试使用 pointer-events: none 禁止鼠标事件"></a><strong>滑动过程中尝试使用 pointer-events: none 禁止鼠标事件</strong></h3><p>pointer-events: none ****会禁止鼠标行为，应用了该属性后，譬如鼠标点击，hover 等功能都将失效，即是元素不会成为鼠标事件的 target。</p>
+<p>那么它对滚动有什么用呢？</p>
+<p>pointer-events: none 可用来提高滚动时的帧频。的确，当滚动时，鼠标悬停在某些元素上，则触发其上的 hover 效果，然而这些影响通常不被用户注意，并多半导致滚动出现问题。对 body 元素应用 pointer-events: none ，禁用了包括 hover 在内的鼠标事件，从而提高滚动性能。</p>
+<p>上面说 pointer-events: none 可用来提高滚动时的帧频 的这段话摘自 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/pointer-events" target="_blank" rel="noopener">pointer-events-MDN</a> ，还专门有文章讲解过这个技术：</p>
+<p><a href="https://www.thecssninja.com/javascript/pointer-events-60fps" target="_blank" rel="noopener">使用pointer-events:none实现60fps滚动</a> 。</p>
+<p>这就完了吗？没有，张鑫旭有一篇专门的文章，用来探讨 pointer-events: none 是否真的能够加速滚动性能，并提出了自己的质疑：</p>
+<p><a href="http://www.zhangxinxu.com/wordpress/2014/01/pointer-events-none-avoiding-unnecessary-paints/" target="_blank" rel="noopener">pointer-events:none提高页面滚动时候的绘制性能？</a></p>
+<p>结论见仁见智，使用 pointer-events: none 的场合要依据业务本身来定夺，拒绝拿来主义，多去源头看看，动手实践一番再做定夺。</p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 502px;
+        }
+        .nav.fullscreen {
+            margin-left: -502px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
