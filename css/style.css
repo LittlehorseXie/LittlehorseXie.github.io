@@ -946,13 +946,15 @@ div.ac > ul > li:before,
 }
 .nav-right .title-list nav a:before,
 .nav-right .title-list #local-search-result a:before {
-  content: "\e901";
+  content: "";
   position: absolute;
   top: 8px;
   left: 14px;
+  height: 16px;
+  border-left: 2px;
   z-index: 1;
   font-size: 14px;
-  color: #ed6f6d;
+  border-left: 3px solid #ed6f6d;
 }
 .nav-right .title-list nav a#top:before,
 .nav-right .title-list #local-search-result a#top:before {
