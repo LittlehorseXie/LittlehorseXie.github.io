@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>闭包 | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="闭包 | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包">
+<meta property="og:url" content="http://littlehorsexie.github.io/JS基础/closure/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context2.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context3.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context4.png">
+<meta property="og:updated_time" content="2020-09-01T13:44:34.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闭包">
+<meta name="twitter:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Redux">Redux<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(17)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="31">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="JS基础 "
+           href="/JS基础/scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
+            <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Redux相关的一些中间件和工具">Redux相关的一些中间件和工具</span>
+            <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文">执行上下文</span>
+            <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context-scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
+            <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/closure/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="闭包">闭包</span>
+            <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/codeRedux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Redux/React-redux/redux中间件设计实现剖析">Redux/React-redux/redux中间件设计实现剖析</span>
+            <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/target/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="在实际用户的设备上衡量这些指标">在实际用户的设备上衡量这些指标</span>
+            <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Reselect">Reselect</span>
+            <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/immutable/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Immutable">Immutable</span>
+            <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Redux/test/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2020-08-26 17:08:03">2020/08/26</span>
+        </a>
+        
+        <a  class=""
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2020-08-17 21:40:16">2020/08/17</span>
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-JS基础/closure" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">闭包</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="JS基础">JS基础</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2020-09-01 21:44:34'>2020-09-02 10:40</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、闭包的定义"><span class="toc-text">一、闭包的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、为什么要使用闭包"><span class="toc-text">二、为什么要使用闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、闭包的表现形式"><span class="toc-text">三、闭包的表现形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、闭包和执行上下文"><span class="toc-text">四、闭包和执行上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、闭包形成的原因"><span class="toc-text">五、闭包形成的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、闭包的应用"><span class="toc-text">六、闭包的应用</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、闭包的定义"><a href="#一、闭包的定义" class="headerlink" title="一、闭包的定义"></a>一、闭包的定义</h2><blockquote>
+<p>官方定义：</p>
+</blockquote>
+<blockquote>
+<p>闭包就是能够读取其他函数内部变量的函数。<br>例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。<br>在本质上，闭包是将函数内部和函数外部连接起来的桥梁。</p>
+</blockquote>
+<blockquote>
+<p>闭包是JS语言的一种特性，闭包通常是一个<code>函数</code><br>函数是一个独立的作用域，独利的作用域外部环境无法访问，就是<code>闭</code><br>封闭自己的词法作用域，函数有许多特殊形式的函数，这就成就了<code>包</code></p>
+</blockquote>
+<h2 id="二、为什么要使用闭包"><a href="#二、为什么要使用闭包" class="headerlink" title="二、为什么要使用闭包"></a>二、为什么要使用闭包</h2><blockquote>
+<p><strong>先介绍一下全局变量和局部变量的优缺点</strong><br><strong>全局变量：</strong> 可以重用、但是会造成全局污染而且容易被篡改。<br><strong>局部变量：</strong> 仅函数内使用不会造成全局污染也不会被篡改、不可以重用。<br>所以，全局变量和局部变量的优缺点刚好相对。闭包的出现正好结合了全局变量和局部变量的优点。</p>
+</blockquote>
+<p>总之，希望重用一个对象，但是又保护对象不被污染篡改时，就需要使用闭包了。</p>
+<h2 id="三、闭包的表现形式"><a href="#三、闭包的表现形式" class="headerlink" title="三、闭包的表现形式"></a>三、闭包的表现形式</h2><p>一般有两种情况</p>
+<ul>
+<li>函数作为返回值</li>
+<li>函数作为参数传递</li>
+</ul>
+<p><strong>1. 函数作为返回值</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> max = <span class="number">10</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; max) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(x)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f1 = fn()</span><br><span class="line">f1(<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 函数作为参数传值</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> max = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (x &gt; max) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">f</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> max = <span class="number">100</span></span><br><span class="line">  f(<span class="number">15</span>)</span><br><span class="line">&#125;)(bar)</span><br></pre></td></tr></table></figure>
+
+<p>自由变量跨作用域取值时，曾经强调过：要去创建这个函数的作用域取值，而不是“父作用域”。理解了这一点，以上两端代码中，自由变量如何取值应该比较简单。</p>
+<h2 id="四、闭包和执行上下文"><a href="#四、闭包和执行上下文" class="headerlink" title="四、闭包和执行上下文"></a>四、闭包和执行上下文</h2><p><strong>1. 代码执行前生成全局上下文环境，并在执行时对其中的变量进行赋值。此时全局上下文环境是活动状态。</strong><br><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context1.png" alt></p>
+<p><strong>2. 执行第17行代码时，调用fn()，产生fn()执行上下文环境，压栈，并设置为活动状态，执行fn，给max赋值</strong><br><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context2.png" alt></p>
+<p><strong>3. 执行完第17行，fn()调用完成。按理说应该销毁掉fn()的执行上下文环境，但是这里不能这么做。注意，重点来了：因为执行fn()时，<code>返回的是一个函数。函数的特别之处在于可以创建一个独立的作用域</code>。而正巧合的是，返回的这个函数体中，还有一个自由变量max要引用fn作用域下的fn()上下文环境中的max。因此，这个max不能被销毁</strong></p>
+<p>因此，这里的fn()上下文环境不能被销毁，还依然存在与执行上下文栈中。</p>
+<p><strong>4. 执行到第18行，全局上下文环境将变为活动状态，但是fn()上下文环境依然会在执行上下文栈中</strong></p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context3.png" alt></p>
+<p><strong>5. 执行到第20行，执行f1(15)，即执行bar(15)，创建bar(15)上下文环境，并将其设置为活动状态</strong></p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context4.png" alt></p>
+<p>这里的重点就在于，创建bar函数是在执行fn()时创建的。fn()早就执行结束了，但是fn()执行上下文环境还存在与栈中，因此bar(15)时，max可以查找到。如果fn()上下文环境销毁了，那么max就找不到了。</p>
+<p><code>使用闭包会增加内容开销</code>，现在很明显了吧！</p>
+<h2 id="五、闭包形成的原因"><a href="#五、闭包形成的原因" class="headerlink" title="五、闭包形成的原因"></a>五、闭包形成的原因</h2><h2 id="六、闭包的应用"><a href="#六、闭包的应用" class="headerlink" title="六、闭包的应用"></a>六、闭包的应用</h2>
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 502px;
+        }
+        .nav.fullscreen {
+            margin-left: -502px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -6,19 +6,22 @@
   <meta name="keywords" content>
   <meta name="description" content="浏览器如何向服务器请求数据的？ | 小马的后花园">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="在谈及 Immutable 数据之前，我们先来聊聊 React 组件是怎么渲染更新的。 React 组件的更新方式state的直接改变React 组件的更新是由状组件态改变引起，这里的状态一般指组件内的 state 对象，当某个组件的 state 发生改变时，组件在更新的时候将会经历如下过程：  shouldComponentUpdate componentWillUpdate render()">
+<meta name="description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Immutable">
-<meta property="og:url" content="http://littlehorsexie.github.io/Redux/immutable/index.html">
+<meta property="og:title" content="闭包">
+<meta property="og:url" content="http://littlehorsexie.github.io/JS基础/closure/index.html">
 <meta property="og:site_name" content="小马的后花园">
-<meta property="og:description" content="在谈及 Immutable 数据之前，我们先来聊聊 React 组件是怎么渲染更新的。 React 组件的更新方式state的直接改变React 组件的更新是由状组件态改变引起，这里的状态一般指组件内的 state 对象，当某个组件的 state 发生改变时，组件在更新的时候将会经历如下过程：  shouldComponentUpdate componentWillUpdate render()">
+<meta property="og:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/Redux/immutable.gif">
-<meta property="og:updated_time" content="2020-08-17T13:08:20.093Z">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context2.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context3.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context4.png">
+<meta property="og:updated_time" content="2020-09-01T13:44:34.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Immutable">
-<meta name="twitter:description" content="在谈及 Immutable 数据之前，我们先来聊聊 React 组件是怎么渲染更新的。 React 组件的更新方式state的直接改变React 组件的更新是由状组件态改变引起，这里的状态一般指组件内的 state 对象，当某个组件的 state 发生改变时，组件在更新的时候将会经历如下过程：  shouldComponentUpdate componentWillUpdate render()">
-<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/Redux/immutable.gif">
+<meta name="twitter:title" content="闭包">
+<meta name="twitter:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
 
 
 <link rel="icon" href="/img/logo.png">
@@ -79,11 +82,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(25)</small></div></li>
+    <li><div class="all active">全部文章<small>(31)</small></div></li>
     
         
             
-            <li><div data-rel="JS基础">JS基础<small>(1)</small></div>
+            <li><div data-rel="JS基础">JS基础<small>(6)</small></div>
                 
             </li>
             
@@ -91,7 +94,7 @@
     
         
             
-            <li><div data-rel="Redux">Redux<small>(3)</small></div>
+            <li><div data-rel="Redux">Redux<small>(4)</small></div>
                 
             </li>
             
@@ -100,14 +103,6 @@
         
             
             <li><div data-rel="后端">后端<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="异步">异步<small>(2)</small></div>
                 
             </li>
             
@@ -138,7 +133,7 @@
     
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
+<input type="hidden" id="yelog_site_posts_number" value="31">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -165,12 +160,28 @@
     
     <nav id="title-list-nav">
         
+        <a  class="JS基础 "
+           href="/JS基础/scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
+            <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span>
+        </a>
+        
         <a  class="Redux "
            href="/Redux/redux/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="Redux相关的一些中间件和工具">Redux相关的一些中间件和工具</span>
             <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文">执行上下文</span>
+            <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span>
         </a>
         
         <a  class="性能优化 "
@@ -181,6 +192,14 @@
             <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
         </a>
         
+        <a  class="JS基础 "
+           href="/JS基础/context-scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
+            <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span>
+        </a>
+        
         <a  class="性能优化 "
            href="/性能优化/reference/"
            data-tag=""
@@ -189,12 +208,28 @@
             <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
         </a>
         
+        <a  class="JS基础 "
+           href="/JS基础/closure/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="闭包">闭包</span>
+            <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span>
+        </a>
+        
         <a  class="性能优化 "
            href="/性能优化/before/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
             <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span>
         </a>
         
         <a  class="性能优化 "
@@ -270,6 +305,14 @@
         </a>
         
         <a  class="Redux "
+           href="/Redux/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Reselect">Reselect</span>
+            <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span>
+        </a>
+        
+        <a  class="Redux "
            href="/Redux/immutable/"
            data-tag=""
            data-author="" >
@@ -325,12 +368,20 @@
             <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
         </a>
         
-        <a  class="JS基础 "
-           href="/JS基础/this/"
+        <a  class=""
+           href="/Redux/test/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="this">this</span>
-            <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span>
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2020-08-26 17:08:03">2020/08/26</span>
+        </a>
+        
+        <a  class=""
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2020-08-17 21:40:16">2020/08/17</span>
         </a>
         
         <a  class="后端 "
@@ -341,16 +392,8 @@
             <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
         </a>
         
-        <a  class="异步 "
-           href="/异步/develop/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="异步发展史">异步发展史</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
-        </a>
-        
-        <a  class="异步 "
-           href="/异步/eventloop/"
+        <a  class="JS基础 "
+           href="/JS基础/eventloop/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>

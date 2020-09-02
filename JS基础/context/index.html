@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>执行上下文 | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="执行上下文 | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包">
+<meta property="og:url" content="http://littlehorsexie.github.io/JS基础/closure/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context2.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context3.png">
+<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context4.png">
+<meta property="og:updated_time" content="2020-09-01T13:44:34.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闭包">
+<meta name="twitter:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
+<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Redux">Redux<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(17)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="31">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="JS基础 "
+           href="/JS基础/scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
+            <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Redux相关的一些中间件和工具">Redux相关的一些中间件和工具</span>
+            <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文">执行上下文</span>
+            <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context-scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
+            <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/closure/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="闭包">闭包</span>
+            <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/codeRedux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Redux/React-redux/redux中间件设计实现剖析">Redux/React-redux/redux中间件设计实现剖析</span>
+            <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/target/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="在实际用户的设备上衡量这些指标">在实际用户的设备上衡量这些指标</span>
+            <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Reselect">Reselect</span>
+            <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span>
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/immutable/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Immutable">Immutable</span>
+            <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class=""
+           href="/Redux/test/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2020-08-26 17:08:03">2020/08/26</span>
+        </a>
+        
+        <a  class=""
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2020-08-17 21:40:16">2020/08/17</span>
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-JS基础/context" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">执行上下文</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="JS基础">JS基础</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2020-09-01 12:45:05'>2020-08-31 18:40</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、什么是执行上下文"><span class="toc-text">一、什么是执行上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、执行上下文栈"><span class="toc-text">二、执行上下文栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-🌰"><span class="toc-text">1 🌰</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-🌰"><span class="toc-text">2 🌰</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-🌰"><span class="toc-text">3 🌰</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、什么是执行上下文"><a href="#一、什么是执行上下文" class="headerlink" title="一、什么是执行上下文"></a>一、什么是执行上下文</h2><p>我们先看几段代码</p>
+<p><strong>1. 变量声明提升</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// Uncaught ReferenceError: a is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> b</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(c) <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p>第一句报错，a未定义，很正常。第二句、第三句输出都是undefined，说明浏览器在执行console.log(c)时，已经知道了c是undefined，但却不知道c是10</p>
+<p><strong>2. this获取</strong></p>
+<p>比如我们在代码的任何位置输出this，都是有值的</p>
+<p><strong>3. 函数</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(f1) <span class="comment">// function f1() &#123;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">// 函数声明</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f2) <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125; <span class="comment">// 函数表达式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f3) <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> f3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">// 函数表达式</span></span><br></pre></td></tr></table></figure>
+
+<p>看以上代码。“函数声明”时我们看到了第二种情况的影子，而“函数表达式”时我们看到了第一种情况的影子</p>
+<p>这说明，在一段js代码拿过来真正一句一句执行之前，浏览器已经做了一些<code>“准备工作”</code></p>
+<p>我们总结一下，在“准备工作”中完成了哪些工作：</p>
+<ul>
+<li>变量、函数表达式——变量声明，默认赋值为undefined；</li>
+<li>this——赋值；</li>
+<li>函数声明——赋值；</li>
+</ul>
+<p>这三种数据的准备情况我们称之为“执行上下文”或者“执行上下文环境”。</p>
+<p>javascript在执行一个代码段之前，都会进行这些“准备工作”来生成执行上下文。这个“代码段”其实分三种情况——全局代码，函数体，eval代码。</p>
+<blockquote>
+<p>这里解释一下为什么代码段分为这三种。<br>所谓“代码段”就是一段文本形式的代码。<br>首先，全局代码是一种，这个应该没有非议，本来就是手写文本到 script标签里面的。<br>其次，eval代码接收的也是一段文本形式的代码。 eval(‘alert(1)’)<br>最后，函数体是代码段是因为函数在创建时，本质上是 new Function(…) 得来的，其中需要传入一个文本形式的参数作为函数体。var fn1 = new Function(‘x’, ‘console.log(x+1)’)</p>
+</blockquote>
+<p><code>函数每被调用一次，都会产生一个新的执行上下文环境</code>。因为不同的调用可能就会有不同的参数。</p>
+<p><strong>全局代码的上下文环境数据内容为：</strong></p>
+<p>普通变量（包括函数表达式），如 var a = 10    声明（默认赋值为undefined）<br>函数声明，如： function fn() { }          赋值<br>this                                    赋值</p>
+<p><strong>如果代码段是函数体，那么在此基础上需要附加：</strong><br>参数                赋值<br>arguments          赋值<br>自由变量的取值作用域  赋值</p>
+<p>给执行上下文环境下一个通俗的定义——<code>在执行代码之前，把将要用到的所有的变量都事先拿出来，有的直接赋值了，有的先用undefined占个空</code>。</p>
+<h2 id="二、执行上下文栈"><a href="#二、执行上下文栈" class="headerlink" title="二、执行上下文栈"></a>二、执行上下文栈</h2><p>讲完了上下文环境，又来了新的问题——在执行js代码时，会有数不清的函数调用次数，会产生许多个上下文环境。这么多上下文环境该如何管理，以及如何销毁而释放内存呢？</p>
+<p>执行全局代码时，会产生一个执行上下文环境，每次调用函数都又会产生执行上下文环境。当函数调用完成时，这个上下文环境以及其中的数据都会被消除，再重新回到全局上下文环境。<code>处于活动状态的执行上下文环境只有一个</code>。</p>
+<p>其实这是一个<code>压栈出栈的过程</code>——执行上下文栈。</p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context-stack.png" alt></p>
+<h3 id="1-🌰"><a href="#1-🌰" class="headerlink" title="1 🌰"></a>1 🌰</h3><p>下面我们根据一个例子来详细介绍上下文栈的压栈、出栈过程：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>, <span class="comment">// 1. 进入全局上下文环境</span></span><br><span class="line">    fn,</span><br><span class="line">    bar = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> b = <span class="number">5</span>;</span><br><span class="line">      fn(x+b) <span class="comment">// 3. 进入fn函数上下文环境</span></span><br><span class="line">    &#125;</span><br><span class="line">fn = <span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> c = <span class="number">5</span></span><br><span class="line">  <span class="built_in">console</span>.log(y+c)</span><br><span class="line">&#125;</span><br><span class="line">bar(<span class="number">10</span>) <span class="comment">// 2. 进入bar函数上下文环境</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>1. 在执行代码之前，先创建<code>全局上下文环境</code></strong></p>
+<p>全局上下文环境<br>a undefined<br>fn undefined<br>bar undefined<br>this window </p>
+<p>全局上下文中的变量对象其实就是全局对象，我们可以通过this来访问全局对象<br>在浏览器环境中 this === window，在node环境中 this === global</p>
+<p><strong>2. 然后执行代码，在代码执行到最后一行之前，上下文环境中的变量都在<code>执行过程中被赋值</code></strong></p>
+<p>全局上下文环境<br>a 10<br>fn function<br>bar function<br>this window</p>
+<p><strong>3. 执行到最后一行时，调用bar函数，跳转到bar函数内部，执行函数语句之前，会创建一个新的执行上下文环境</strong></p>
+<p>bar函数-执行上下文环境<br>b undefined<br>x 10<br>arguments [10]<br>this window</p>
+<p>并将这个执行上下文环境压栈，设置为活动状态。</p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context-stack1.png" alt></p>
+<p><strong>4. 执行到第5行，又调用了fn函数。进入fn函数，在执行函数体语句之前，会创建fn函数的执行上下文环境，并压栈，设置为活动状态。</strong></p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context-stack2.png" alt></p>
+<p><strong>5. 待第5行执行完毕，即fn函数执行完毕后，此次调用fn所生成的上下文环境出栈，并且被销毁（已经用完了，就要及时销毁，释放内存）。</strong></p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context-stack3.png" alt></p>
+<p><strong>6. 同理，待第13行执行完毕，即bar函数执行完毕后，调用bar函数所生成的上下文环境出栈，并且被销毁（已经用完了，就要及时销毁，释放内存）。</strong></p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context-stack4.png" alt></p>
+<p>讲到这里，我不得不很遗憾的跟大家说：其实以上我们所演示的是一种比较理想的情况。有一种情况，而且是很常用的一种情况，无法做到这样干净利落的说销毁就销毁。这种情况就是伟大的——<code>闭包</code>。</p>
+<h3 id="2-🌰"><a href="#2-🌰" class="headerlink" title="2 🌰"></a>2 🌰</h3><p>再用一个例子来讲解执行上下文栈的执行过程：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">'global scope'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scope = <span class="string">'local scope'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> scope;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> f();</span><br><span class="line">&#125;</span><br><span class="line">checkscope(<span class="string">'scope'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>1. 执行代码之前，先创建全局上下文</strong></p>
+<p>全局上下文<br>scope undefined<br>checkscope function</p>
+<p><strong>2. 执行到最后一行之前，变量赋值</strong></p>
+<p>全局上下文<br>scope ‘global scope’<br>checkscope function</p>
+<p><strong>3. 执行到最后一行时，调用checkscope函数，跳转到checkscope函数内部，执行函数语句之前，会创建一个新的执行上下文环境</strong></p>
+<p>checkscope函数-上下文环境<br>s ‘scope’<br>scope undefined // <code>变量提升</code><br>f function // <code>函数提升</code><br>arguments [‘scope’]</p>
+<p><strong>4. 执行checkscope函数，变量赋值</strong></p>
+<p>checkscope函数-上下文环境<br>s ‘scope’<br>scope ‘local scope’<br>f function<br>arguments [‘scope’]</p>
+<p><strong>5. 将要执行f函数</strong><br>f函数-上下文环境<br>scope undefined</p>
+<p><strong>6. 执行f函数，向上查找scope</strong><br>输出local scope</p>
+<p><strong>7. 执行完后，逐步销毁上下文</strong></p>
+<h3 id="3-🌰"><a href="#3-🌰" class="headerlink" title="3 🌰"></a>3 🌰</h3><p>将上面的🌰改动一下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">'global scope'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> scope;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scope = <span class="string">'local scope'</span>;</span><br><span class="line">  <span class="keyword">return</span> f();</span><br><span class="line">&#125;</span><br><span class="line">checkscope(<span class="string">'scope'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>1. 执行代码之前，先创建全局上下文</strong></p>
+<p>全局上下文<br>scope undefined<br>f function<br>checkscope function</p>
+<p><strong>2. 执行到最后一行之前，变量赋值</strong></p>
+<p>全局上下文<br>scope ‘global scope’<br>f function // 这时已经有f了 当f执行的时候，就先找f函数上下文的scope，没找到，再向上找到’global scope’<br>checkscope function</p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 502px;
+        }
+        .nav.fullscreen {
+            margin-left: -502px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
