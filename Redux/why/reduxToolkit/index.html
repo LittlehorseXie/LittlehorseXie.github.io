@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>【为什么】要用Redux toolkit | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="【为什么】要用Redux toolkit | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://littlehorsexie.github.io/函数式编程/index/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-11-03T13:06:40.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数式编程">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(58)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Redux">Redux<small>(20)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="杂谈">杂谈<small>(11)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="CSS">CSS<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(17)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="58">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <!-- <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+     -->
+    <nav id="title-list-nav">
+        
+        <a  class="Redux "
+           href="/Redux/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简介">简介</span>
+            <!-- <span class="post-date" title="2020-09-16 14:29:00">2020/09/16</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="函数式编程">函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/work/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="做业务没提升没思考，不知何去何从？">做业务没提升没思考，不知何去何从？</span>
+            <!-- <span class="post-date" title="2020-09-04 11:17:00">2020/09/04</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
+            <!-- <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux">【为什么】要用Redux</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/theory/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="什么是函数式编程">什么是函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/pay/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="h5对接微信支付">h5对接微信支付</span>
+            <!-- <span class="post-date" title="2020-09-11 14:28:00">2020/09/11</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文">执行上下文</span>
+            <!-- <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux thunk">【为什么】要用Redux thunk</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/fdesign/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Future-design">Future-design</span>
+            <!-- <span class="post-date" title="2020-09-14 18:00:00">2020/09/14</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context-scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
+            <!-- <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux saga">【为什么】要用Redux saga</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/transTradition/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简体中文和繁体中文的转换">简体中文和繁体中文的转换</span>
+            <!-- <span class="post-date" title="2020-09-15 17:08:00">2020/09/15</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/closure/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="闭包">闭包</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="CSS "
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="CSS">CSS</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux toolkit">【为什么】要用Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/style/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="样式方案">样式方案</span>
+            <!-- <span class="post-date" title="2020-07-17 14:28:00">2020/07/17</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <!-- <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/http2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="http2 VS http">http2 VS http</span>
+            <!-- <span class="post-date" title="2020-10-16 16:31:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/target/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="在实际用户的设备上衡量这些指标">在实际用户的设备上衡量这些指标</span>
+            <!-- <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/typescript/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="typescript使用">typescript使用</span>
+            <!-- <span class="post-date" title="2020-10-28 00:00:00">2020/10/28</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/gitCommit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git cz">git cz</span>
+            <!-- <span class="post-date" title="2020-10-19 19:00:00">2020/10/19</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/proxy/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="切分支时自动切换rd环境">切分支时自动切换rd环境</span>
+            <!-- <span class="post-date" title="2020-10-16 15:33:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Reselect">【为什么】要用Reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 00:00:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immutable/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immutable">【为什么】要用Immutable</span>
+            <!-- <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immer">【为什么】要用Immer</span>
+            <!-- <span class="post-date" title="2020-10-27 00:00:00">2020/10/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux是如何工作的：一个计数器的栗子">【怎么用】Redux是如何工作的：一个计数器的栗子</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux thunk">【怎么用】Redux thunk</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux saga">【怎么用】Redux saga</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux toolkit">【怎么用】Redux toolkit</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】reselect">【怎么用】reselect</span>
+            <!-- <span class="post-date" title="2020-09-18 20:29:00">2020/09/18</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux设计实现剖析">【代码分析】Redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reactRedux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】React-redux设计实现剖析">【代码分析】React-redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxMiddleware/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux中间件设计实现剖析">【代码分析】Redux中间件设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux saga">【代码分析】Redux saga</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux thunk">【代码分析】Redux thunk</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux toolkit">【代码分析】Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】reselect">【代码分析】reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/sdsApi/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="sds对外api的稳定性保证">sds对外api的稳定性保证</span>
+            <!-- <span class="post-date" title="2020-09-09 14:20:29">2020/09/09</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <!-- <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span> -->
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <!-- <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span> -->
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Redux/why/reduxToolkit" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">【为什么】要用Redux toolkit</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        <!-- 
+        <span class="book">
+            
+                <a href="javascript:" data-rel="Redux">Redux</a>
+            
+        </span>
+         -->
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2020-11-03'>2020-07-30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暴露的api"><span class="toc-text">暴露的api</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#configureStore"><span class="toc-text">configureStore()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#createAction"><span class="toc-text">createAction()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#createReducer"><span class="toc-text">createReducer()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#createSlice"><span class="toc-text">createSlice()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#createAsyncThunk"><span class="toc-text">createAsyncThunk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#createEntityAdapter"><span class="toc-text">createEntityAdapter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#createSelector"><span class="toc-text">createSelector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总的来说"><span class="toc-text">总的来说</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些注意点"><span class="toc-text">一些注意点</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通常情况下，我们使用常规redux来管理数据的话，需要经过以下步骤：</p>
+<ul>
+<li>创建store</li>
+<li>Constants 声明 action type</li>
+<li>Actions 声明 action creator，需要引用 Constants</li>
+<li>Reducers 用于放拆分后的子 reducer，需要引用 Constants，各种switch来判断action type</li>
+<li>Selectors 用于取某个 redux state 的值</li>
+<li>tsx 文件需要引用Actions、Selectors</li>
+<li>此外，还有创建 Services 声明 api 调用</li>
+</ul>
+<p>光是看这些个英文单词，就觉得很繁琐了<br>redux核心库让我们来决定如何处理所有事情，比如store的启动、state里都包含什么、如何构建你的reducers<br>在某些场景，这是好的，因为它给我们提供了灵活性。但有时，我们只想用最简单的方式开始，有一些好的默认行为开箱即用。或许，你正在编写一个很大的应用程序，已经发现自己总是会写一些相似的代码，这时你想减少手写的代码量。</p>
+<p>Redux Toolkit<br>就是帮我们来简化redux代码的。它并不是一个完整的解决方案，但它会使和Redux相关的代码变得更简单</p>
+<p>rtk 是 mobx 作者的另一个优秀作品，让我们可以用 mutable 的写法处理 state，但是最后还是 immutable 的更新<br>集成了redux、redux-thunk、immer、reselect等工具</p>
+<p>rtk 并不会改变redux的工作原理，我们仍创建一个Redux store，触发action的方式来描述“发生了什么”，并且通过reducer函数返回新的更新后的state</p>
+<p>rtk 有利于所有 Redux 用户。无论您是设置第一个项目的 Redux 用户，还是希望简化现有应用程序的有经验的用户，Redux toolkit都可以帮助您更好的写 Redux 代码。</p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>Redux toolkit旨在成为编写redux逻辑的标准方式，它起初是为了解决redux常见的3个问题</p>
+<ul>
+<li>配置一个redux store太复杂了</li>
+<li>我必须添加很多packages才能配置好一整套redux</li>
+<li>Redux需要太多的样板代码</li>
+</ul>
+<p>我们不能解决所有的case，像create-react-app一样，我们可以提供一些工具，解决一些常见的问题，简化用户代码<br>因此，toolkit小心的限制了这个范围，它并不涉及数据缓存、文件夹或文件结构、可重用封装的Redux module</p>
+<h2 id="暴露的api"><a href="#暴露的api" class="headerlink" title="暴露的api"></a>暴露的api</h2><p>下面我们看下rtk具体为我们带来了哪些方便：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install @reduxjs/toolkit</span><br><span class="line">yarn add @reduxjs/toolkit</span><br></pre></td></tr></table></figure>
+
+<h2 id="configureStore"><a href="#configureStore" class="headerlink" title="configureStore()"></a>configureStore()</h2><p>包装了 createStore 以提供简化的配置选项和良好的默认值，返回一个Redux store实例。它可以自动combine所有的slice reducers, 添加任何你需要的 Redux middleware , 默认包含了redux-thunk, 并启用 Redux DevTools 扩展.</p>
+<p>传统redux:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">store = createStore(reducers)</span><br></pre></td></tr></table></figure>
+
+<p>redux-toolkit:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Store = configureStore(&#123;</span><br><span class="line">	reducer: reducers</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这可能看起来没什么不同，但在内部，store已经配置了Redux DevTools扩展以查看dispatched actions历史和store state变更，并且默认引入了一些redux中间件</p>
+<p>下面举一个稍微全面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; applyMiddleware, createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> &#123; composeWithDevTools &#125; <span class="keyword">from</span> <span class="string">'redux-devtools-extension'</span></span><br><span class="line"><span class="keyword">import</span> thunkMiddleware <span class="keyword">from</span> <span class="string">'redux-thunk'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> monitorReducersEnhancer <span class="keyword">from</span> <span class="string">'./enhancers/monitorReducers'</span></span><br><span class="line"><span class="keyword">import</span> loggerMiddleware <span class="keyword">from</span> <span class="string">'./middleware/logger'</span></span><br><span class="line"><span class="keyword">import</span> rootReducer <span class="keyword">from</span> <span class="string">'./reducers'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">configureStore</span>(<span class="params">preloadedState</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> middlewares = [loggerMiddleware, thunkMiddleware]</span><br><span class="line">  <span class="keyword">const</span> middlewareEnhancer = applyMiddleware(...middlewares)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> enhancers = [middlewareEnhancer, monitorReducersEnhancer]</span><br><span class="line">  <span class="keyword">const</span> composedEnhancers = composeWithDevTools(...enhancers)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> store = createStore(rootReducer, preloadedState, composedEnhancers)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> store</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面传统的redux中</p>
+<ul>
+<li>传参方式是(rootReducer, preloadedState, enhancer)，很容易就忘了哪个传参传的是什么</li>
+<li>中间件和增强器的配置有些繁琐</li>
+<li>Redux DevTools Extension文档需要配置一些东西，许多用户会直接从官方文档拷贝下来，代码不易读</li>
+</ul>
+<p>下面用rtk的方式来改写，有以下优点：</p>
+<ul>
+<li>传参为一个object，name可以方便的看出每个参数的含义</li>
+<li>直接添加middleware和enhancers，自动帮用户调用applyMiddleware和compose</li>
+<li>自动添加Redux DevTools Extension<br>除此之外，configureStore默认配置来一些中间件：</li>
+<li>redux-thunk来帮我们解决把异步逻辑放在component外面的问题</li>
+<li>开发模式下，中间件帮我们检查是不是有使用mutate的方式改变state</li>
+</ul>
+<p>这就意味着更简洁的store代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; configureStore, getDefaultMiddleware &#125; <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> monitorReducersEnhancer <span class="keyword">from</span> <span class="string">'./enhancers/monitorReducers'</span></span><br><span class="line"><span class="keyword">import</span> loggerMiddleware <span class="keyword">from</span> <span class="string">'./middleware/logger'</span></span><br><span class="line"><span class="keyword">import</span> rootReducer <span class="keyword">from</span> <span class="string">'./reducers'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">configureAppStore</span>(<span class="params">preloadedState</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> store = configureStore(&#123;</span><br><span class="line">    reducer: rootReducer,</span><br><span class="line">    middleware: [loggerMiddleware, ...getDefaultMiddleware()],</span><br><span class="line">    preloadedState,</span><br><span class="line">    enhancers: [monitorReducersEnhancer]</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> store</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>reducer: rootReducer也可以写成reducer: {<br>  users: usersReducer,<br>  posts: postsReducer<br>}的形式，configureStore会自动调用combineReducers，此外，如果提供了middleware参数，configureStore就会只使用用户自己的赋值，如需添加rtk默认的，需要使用getDefaultMiddleware</p>
+<h2 id="createAction"><a href="#createAction" class="headerlink" title="createAction()"></a>createAction()</h2><p>接收一个action type字符串，返回一个action creator函数. 函数本身已定义 toString, 因此它用来代替type constant （能把Constants和Actions文件合成一个）</p>
+<p>传统redux:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Constants文件</span></span><br><span class="line"><span class="keyword">const</span> INCREMENT = <span class="string">'INCREMENT'</span></span><br><span class="line"><span class="comment">// actions文件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">incrementOriginal</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    type: INCREMENT,</span><br><span class="line">    payload: &#123; text &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(incrementOriginal(<span class="number">111</span>))</span><br><span class="line"><span class="comment">// &#123;type: "INCREMENT", payload: &#123;text: 111&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>redux-toolkit:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// actions文件</span></span><br><span class="line"><span class="keyword">const</span> increment = createAction(<span class="string">'INCREMENT'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(increment(&#123; <span class="attr">text</span>: <span class="number">111</span> &#125;))</span><br><span class="line"><span class="comment">// &#123;type: "INCREMENT", payload: &#123;text: 111&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果我们还需要在reducers使用action type字符串要怎么办？<br>createAction的返回的action creator函数，有一个toString方法（被重写的）可以返回action type，也可以直接调用.type</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(increment.toString())</span><br><span class="line"><span class="comment">// "INCREMENT"</span></span><br><span class="line"><span class="built_in">console</span>.log(increment.type)</span><br><span class="line"><span class="comment">// "INCREMENT"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="createReducer"><a href="#createReducer" class="headerlink" title="createReducer()"></a>createReducer()</h2><p>接收一个initial state对象，和一个lookup table对象，返回reducer。这个lookup table对象的key是action type（因此我们可以利用es6的计算属性来创建key，自动调用toString()，省去了手动调用.type），value是函数。<br>此外, 它自动使用immer库使用户通过mutable的写法达到 immutable 更新的效果, 比如 state.todos[3].completed = true</p>
+<p>传统redux:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">counter</span>(<span class="params">state = <span class="number">0</span>, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> INCREMENT:</span><br><span class="line">      <span class="keyword">return</span> state + <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> DECREMENT:</span><br><span class="line">      <span class="keyword">return</span> state - <span class="number">1</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>reducer会通过action type来判断触发一些逻辑，通常会使用switch语句。但是使用lookup table的方式来表现，可读性会更好</p>
+<p>redux-toolkit:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> counterReducer = createReducer(<span class="number">0</span>, &#123;</span><br><span class="line">  [increment]: <span class="function"><span class="params">state</span> =&gt;</span> state + <span class="number">1</span>,</span><br><span class="line">  [decrement]: <span class="function"><span class="params">state</span> =&gt;</span> state - <span class="number">1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>直接使用[increment]作为key，是因为它会默认调用increment.toString()，也就是会返回action type。需要注意的是 如果使用swicth语句不会自动执行toString，也就是直接使用 case increment: 是不行的，需要case increment.toString() 或 case increment.type<br>也可以用传统的逻辑来写reducer，比如一些for循环、switch语句。最常规的写法就是判断action.type，然后做一些逻辑处理，返回一个新state。此外，一个reducer也会提供一个默认state</p>
+<p>此外，combineReducers里的Reducer引入方式稍有不同<br>// 传统redux的reducer<br>直接引用每个reducer文件的导出的reducer就行<br>// rtk<br>需要引用Slice导出的reducer</p>
+<p>然后就是触发action时，action type的不同了</p>
+<p>此外，最好不要使用connect传递的props. dispatch直接触发action，而是把action creators当做connect的第二个参数，直接通过props.actionCreator的方式触发</p>
+<p>We can also try completely switching from the “folder-by-type” structure to a “feature folder” structure, by moving all of the component files into the matching feature folders.</p>
+<ul>
+<li>Remove unused action and reducer files</li>
+<li>Consolidate components into feature folders</li>
+</ul>
+<p>Everyone has different preferences on what makes a “maintainable” folder structure, but overall that result looks pretty consistent and easy to follow.</p>
+<h2 id="createSlice"><a href="#createSlice" class="headerlink" title="createSlice()"></a>createSlice()</h2><p>目前我们的代码长成这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> increment = createAction(<span class="string">'INCREMENT'</span>)</span><br><span class="line"><span class="keyword">const</span> decrement = createAction(<span class="string">'DECREMENT'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = createReducer(<span class="number">0</span>, &#123;</span><br><span class="line">  [increment]: <span class="function"><span class="params">state</span> =&gt;</span> state + <span class="number">1</span>,</span><br><span class="line">  [decrement]: <span class="function"><span class="params">state</span> =&gt;</span> state - <span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = configureStore(&#123;</span><br><span class="line">  reducer: counter</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'increment'</span>).addEventListener(<span class="string">'click'</span>, () =&gt; &#123;</span><br><span class="line">  store.dispatch(increment())</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>现在已经优化了一些了，但是我们还能再做一个重大改变。我们想避免单独创建这些action creators，而只想要突出重点部分—reducer函数</p>
+<p>这也是createSlice的主要作用，它接收一个value为reducer function的object , slice name,和initial state value, 它会根据object的key自动生成slice reducer相关的 action creators和 action types</p>
+<p>createSlice返回一个slice对象，包含了reducer函数和一个叫actions的对象包含了action creators函数</p>
+<p>使用createSlice改进之后的代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> counterSlice = createSlice(&#123;</span><br><span class="line">  name: <span class="string">'counter'</span>,</span><br><span class="line">  initialState: <span class="number">0</span>,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    increment: <span class="function"><span class="params">state</span> =&gt;</span> state + <span class="number">1</span>,</span><br><span class="line">    decrement: <span class="function"><span class="params">state</span> =&gt;</span> state - <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = configureStore(&#123;</span><br><span class="line">  reducer: counterSlice.reducer</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'increment'</span>).addEventListener(<span class="string">'click'</span>, () =&gt; &#123;</span><br><span class="line">  store.dispatch(counterSlice.actions.increment())</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>推荐使用ES6语法解析出action creator函数和reducer：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; actions, reducer &#125; = counterSlice</span><br><span class="line"><span class="keyword">const</span> &#123; increment, decrement &#125; = actions</span><br></pre></td></tr></table></figure>
+
+<p>总的来说，counterSlice在内部把createAction和createReducer结合起来又封装了一层</p>
+<p>此外，slice到底什么？<br>一个普通的redux app在其状态树的顶层是一个js对象，该对象是一个调用Redux combineReducers函数将多个reducer函数组合到一个“ root reducer”中的结果。我们把这个对象的一个key value部分称为一个slice，我们通过slice reducer来表述reducer function的职责</p>
+<p>比如在普通reducer的顶部，代码大概是这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> todos <span class="keyword">from</span> <span class="string">'./todos'</span></span><br><span class="line"><span class="keyword">import</span> visibilityFilter <span class="keyword">from</span> <span class="string">'./visibilityFilter'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> combineReducers(&#123;</span><br><span class="line">  todos,</span><br><span class="line">  visibilityFilter</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>combined之后的state大概是{todos: [], visibilityFilter: “SHOW_ALL”}这种结构，state.todos就是一个slice，todos的reducer函数就是一个slice reducer</p>
+<p>下面我们再举一个稍微复杂的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统redux的reducer</span></span><br><span class="line"><span class="keyword">const</span> todos = <span class="function">(<span class="params">state = [], action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'ADD_TODO'</span>:</span><br><span class="line">      <span class="keyword">return</span> [</span><br><span class="line">        ...state,</span><br><span class="line">        &#123;</span><br><span class="line">          id: action.id,</span><br><span class="line">          text: action.text,</span><br><span class="line">          completed: <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'TOGGLE_TODO'</span>:</span><br><span class="line">      <span class="keyword">return</span> state.map(<span class="function"><span class="params">todo</span> =&gt;</span></span><br><span class="line">        todo.id === action.id ? &#123; ...todo, <span class="attr">completed</span>: !todo.completed &#125; : todo</span><br><span class="line">      )</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> todos</span><br></pre></td></tr></table></figure>
+
+<p>解析：<br>有个默认值[]<br>ADD_TODO时，通过复制了一遍state来实现新todo的<br>TOGGLE_TODO时，通过state.map的方式来实现状态更新<br>需要定义default来响应未命中的action type，来返回当前的state<br>导出todos reducer<br>（其实还有两个隐藏的步骤，从constant里倒入action type，因为action里也会用到action type；和声明action creator）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用rtk的方式写</span></span><br><span class="line"><span class="keyword">const</span> todosSlice = createSlice(&#123;</span><br><span class="line">	name: <span class="string">'todos'</span>,</span><br><span class="line">	initialState: [],</span><br><span class="line">	reducer: &#123;</span><br><span class="line">		addTodo(state, action) &#123; </span><br><span class="line">			<span class="keyword">const</span> &#123; id, text &#125; = action.payload</span><br><span class="line">			state.push(&#123; id, text, <span class="attr">completed</span>: <span class="literal">false</span> &#125;) </span><br><span class="line">		&#125;,</span><br><span class="line">		toggleTodo(state, action) &#123; </span><br><span class="line">			<span class="keyword">const</span> todo = state.find(<span class="function"><span class="params">todo</span> =&gt;</span> todo.id === action.payload)</span><br><span class="line">			<span class="keyword">if</span> (todo) &#123;</span><br><span class="line">        todo.completed = !todo.completed</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> &#123; addTodo, toggleTodo &#125; = todosSlice.actions</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> todosSlice.reducer</span><br></pre></td></tr></table></figure>
+
+<p>找不同：<br>不再需要单独的constant和actions文件，直接导出actions<br>不需要再定义default，自动处理所有的action type<br>用Mutable数据操作的方式更新state，比如state.push，这是因为createSlice和createReducer用Immer库封装了一层，使我们能用Mutable的方式来达到immutably更新的效果（这样不仅简化了操作，还让我们的意图变得更加清晰：往数组里push一项、更改某一项的completed状态）<br>最终todosSlice返回的是一个类似下面的object，把actions reducers写在一个文件里，需要什么导出什么，也就是“duck”模式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  name: <span class="string">"todos"</span>,</span><br><span class="line">  reducer: <span class="function">(<span class="params">state, action</span>) =&gt;</span> newState,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    addTodo: <span class="function">(<span class="params">payload</span>) =&gt;</span> (&#123;<span class="attr">type</span>: <span class="string">"todos/addTodo"</span>, payload&#125;),</span><br><span class="line">    toggleTodo: <span class="function">(<span class="params">payload</span>) =&gt;</span> (&#123;<span class="attr">type</span>: <span class="string">"todos/toggleTodo"</span>, payload&#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  caseReducers: &#123;</span><br><span class="line">    addTodo: <span class="function">(<span class="params">state, action</span>) =&gt;</span> newState,</span><br><span class="line">    toggleTodo: <span class="function">(<span class="params">state, action</span>) =&gt;</span> newState,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用ts来表示的话，也就是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  name : string,</span><br><span class="line">  reducer : ReducerFunction,</span><br><span class="line">  actions : Record&lt;string, ActionCreator&gt;,</span><br><span class="line">  caseReducers: Record&lt;string, CaseReducer&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是：<br>action type并不是一个单独的slice的独占值，每一个slice reducer拥有其自己的Redux state，但是，也能监听任意action type并适当更新其状态，例如 响应用户注销操作以回初始状态值<br>如果两个模块尝试相互导入，JS 模块可能会出现”循环引用”问题。这可能导致导入未定义，可能会破坏需要该导入的代码。特别是在”duck”或slice的情况下，如果在两个不同的文件中定义的slice都希望响应另一个文件中定义的action，则可能会发生这种情况。</p>
+<p>下面，我们看一下createSlice的完整传参：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createSlice</span>(<span class="params">&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="regexp">//</span> A name, used in action types</span></span></span><br><span class="line"><span class="function"><span class="params">    name: string,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="regexp">//</span> The initial state for the reducer</span></span></span><br><span class="line"><span class="function"><span class="params">    initialState: any,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="regexp">//</span> An object of <span class="string">"case reducers"</span>. Key names will be used to generate actions.</span></span></span><br><span class="line"><span class="function"><span class="params">    reducers: Object&lt;string, ReducerFunction | ReducerAndPrepareObject&gt;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="regexp">//</span> A <span class="string">"builder callback"</span> function used to add more reducers, or</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="regexp">//</span> an additional object of <span class="string">"case reducers"</span>, where the keys should be other</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="regexp">//</span> action types</span></span></span><br><span class="line"><span class="function"><span class="params">    extraReducers?:</span></span></span><br><span class="line"><span class="function"><span class="params">    | Object&lt;string, ReducerFunction&gt;</span></span></span><br><span class="line"><span class="function"><span class="params">    | ((builder: ActionReducerMapBuilder&lt;State&gt;</span>) =&gt; <span class="title">void</span>)</span></span><br><span class="line"><span class="function">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>可以发现reducers object还可以接收ReducerAndPrepareObject作为value，我们通过代码就可以快速了解这是做什么的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createSlice, PayloadAction &#125; <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span></span><br><span class="line"><span class="keyword">import</span> nanoid <span class="keyword">from</span> <span class="string">'nanoid'</span></span><br><span class="line"></span><br><span class="line">interface Item &#123;</span><br><span class="line">  id: string</span><br><span class="line">  text: string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> todosSlice = createSlice(&#123;</span><br><span class="line">  name: <span class="string">'todos'</span>,</span><br><span class="line">  initialState: [] <span class="keyword">as</span> Item[],</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    addTodo: &#123;</span><br><span class="line">      reducer: <span class="function">(<span class="params">state, action: PayloadAction&lt;Item&gt;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// reducer 就是普通的 ReducerFunction</span></span><br><span class="line">        state.push(action.payload)</span><br><span class="line">      &#125;,</span><br><span class="line">      prepare: <span class="function">(<span class="params">text: string</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// prepare 可以帮我们准备 action的payload</span></span><br><span class="line">        <span class="keyword">const</span> id = nanoid()</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">payload</span>: &#123; id, text &#125; &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们还发现，createSlice还有一个参数是<code>extraReducers</code>。如上面所说，每个slice reducer都拥有其slice里的state，但有时，slice需要依赖其他slice的状态，并作出一些响应。这时extraReducers就派上用场了<br>extraReducers里的action type，不会被当做slice.actions导出，也就是createSlice不会对extraReducers里的action type 调用 createAction 来自动创建action creators，它只会被当做一个slice reducer传到combineReducers里<br>当一个action type既在reducers里也在extraReducers出现，会由reducers处理</p>
+<p>extraReducers的推荐使用方式是传入一个ActionReducerMapBuilder实例，<code>builder callback notation</code>也是唯一的方式来实现添加matcher reducer 和 default case reducer，并且它具有更好的TypeScript写法兼容</p>
+<p>extraReducers的另外的常见用处还在于，处理createAction和createAsyncThunk（下面会讲）产生的action</p>
+<p>具体使用方法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createAction, createSlice, Action, AnyAction &#125; <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span></span><br><span class="line"><span class="keyword">const</span> incrementBy = createAction&lt;number&gt;(<span class="string">'incrementBy'</span>)</span><br><span class="line"><span class="keyword">const</span> decrement = createAction(<span class="string">'decrement'</span>)</span><br><span class="line"></span><br><span class="line">interface RejectedAction extends Action &#123;</span><br><span class="line">  error: <span class="built_in">Error</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isRejectedAction</span>(<span class="params">action: AnyAction</span>): <span class="title">action</span> <span class="title">is</span> <span class="title">RejectedAction</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> action.type.endsWith(<span class="string">'rejected'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createSlice(&#123;</span><br><span class="line">  name: <span class="string">'counter'</span>,</span><br><span class="line">  initialState: <span class="number">0</span>,</span><br><span class="line">  reducers: &#123;&#125;,</span><br><span class="line">  extraReducers: <span class="function">(<span class="params">builder</span>) =&gt;</span> &#123;</span><br><span class="line">    builder</span><br><span class="line">      <span class="comment">// addCase 用来处理 一个确切的action type</span></span><br><span class="line">      .addCase(incrementBy, (state, action) =&gt; &#123;</span><br><span class="line">        <span class="comment">// action is inferred correctly here if using TS</span></span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="comment">// 直接链式调用即可</span></span><br><span class="line">      .addCase(decrement, (state, action) =&gt; &#123;&#125;)</span><br><span class="line">      <span class="comment">// addMatcher 用来处理 match匹配一系列action type</span></span><br><span class="line">      .addMatcher(</span><br><span class="line">        isRejectedAction,</span><br><span class="line">        <span class="comment">// `action` will be inferred as a RejectedAction due to isRejectedAction being defined as a type guard</span></span><br><span class="line">        (state, action) =&gt; &#123;&#125;</span><br><span class="line">      )</span><br><span class="line">      <span class="comment">// 可以声明一个defaultcase来处理没有匹配到的action</span></span><br><span class="line">      .addDefaultCase(<span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;&#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>除了builder callback notation的方式，还可以使用map object notation的方式来写extraReducers，也就是最常见的写reducers的方式。这时你需要使用actionCreator.type 或者 actionCreator.toString()来写ts<br>代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> incrementBy = createAction(<span class="string">'incrementBy'</span>)</span><br><span class="line"></span><br><span class="line">createSlice(&#123;</span><br><span class="line">  name: <span class="string">'counter'</span>,</span><br><span class="line">  initialState: <span class="number">0</span>,</span><br><span class="line">  reducers: &#123;&#125;,</span><br><span class="line">  extraReducers: &#123;</span><br><span class="line">    [incrementBy]: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state + action.payload</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'some/other/action'</span>: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此外，actions有时需要传递一些data，此时应遵循Flux Standard Action-FSA标准，使action更规范、易读，即 把data放在payload里。<br>FSA标准：一个action是一个对象，必须有一个type（字符串）属性，可能有payload（任何类型） error（如果 action 的 error 属性是 true，则该 action 实际上表示对 Promise 进行 rejected，并且 payload 属性的值应当是一个错误对象） meta（任何类型，它旨在用于不属于 payload 的额外信息）属性，不能有其他属性</p>
+<p>那么如何在rtk中添加带payload的action呢？createAction和createSlice都支持：</p>
+<p>// createAction需要使用第二个参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nextTodoId = <span class="number">0</span></span><br><span class="line"><span class="keyword">const</span> addTodo = createAction(<span class="string">'ADD_TODO'</span>, text =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    payload: &#123; <span class="attr">id</span>: nextTodoId++, text &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>注意：必须返回一个有payload属性的对象</p>
+<p>// createSlice需要把reducers里之前action type对应的value，从reducer function变为一个对象，这个对象的reducer是之前的reducer function，prepare相当于payload</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nextTodoId = <span class="number">0</span></span><br><span class="line"><span class="keyword">const</span> todosSlice = createSlice(&#123;</span><br><span class="line">  name: <span class="string">'todos'</span>,</span><br><span class="line">  initialState: [],</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    addTodo: &#123;</span><br><span class="line">      reducer(state, action) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; id, text &#125; = action.payload</span><br><span class="line">        state.push(&#123; id, text, <span class="attr">completed</span>: <span class="literal">false</span> &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      prepare(text) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">payload</span>: &#123; text, <span class="attr">id</span>: nextTodoId++ &#125; &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>// 如使用typescript，需要给initialState和action声明类型<br>// action类型需要使用@reduxjs/toolkit里的PayloadAction<payloadtype></payloadtype></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface IAddToDo &#123;</span><br><span class="line">	id?: number,</span><br><span class="line">	text: string</span><br><span class="line">&#125;</span><br><span class="line">setAState(state, <span class="attr">action</span>: PayloadAction&lt;IAddToDo&gt;)</span><br></pre></td></tr></table></figure>
+
+<p>// 不需要再给上面代码的state赋类型，因为createSlice已经知道它和initialState的类型一样</p>
+<p>// 单元测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">'addTodo'</span>, () =&gt; &#123;</span><br><span class="line">  it(<span class="string">'should generate incrementing todo IDs'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> action1 = addTodo(<span class="string">'a'</span>)</span><br><span class="line">    <span class="keyword">const</span> action2 = addTodo(<span class="string">'b'</span>)</span><br><span class="line"></span><br><span class="line">    expect(action1.payload).toEqual(&#123; <span class="attr">id</span>: <span class="number">0</span>, <span class="attr">text</span>: <span class="string">'a'</span> &#125;)</span><br><span class="line">    expect(action2.payload).toEqual(&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'b'</span> &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="createAsyncThunk"><a href="#createAsyncThunk" class="headerlink" title="createAsyncThunk"></a>createAsyncThunk</h2><p>接收一个action type字符和一个返回promise的函数, 生成一个基于这个promise触发pending/fulfilled/rejected action types 的 thunk </p>
+<p>当我们想要把异步请求的逻辑和UI组件分开时，或者额外的逻辑进行多次dispatch或getState时，我们就需要用到thunk</p>
+<p>使用普通redux时，经常按照类型来划分文件，比如actions文件夹下发那个所有的action，constants文件夹放所有的constant，但现在，我们只有slice文件，这样，我们可以把thunk直接放在slice文件里，这样也利于直接访问action</p>
+<p>比如下面的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// First, define the reducer and action creators via `createSlice`</span></span><br><span class="line"><span class="keyword">const</span> usersSlice = createSlice(&#123;</span><br><span class="line">  name: <span class="string">'users'</span>,</span><br><span class="line">  initialState: &#123;</span><br><span class="line">    loading: <span class="string">'idle'</span>,</span><br><span class="line">    users: []</span><br><span class="line">  &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    usersLoading(state, action) &#123;</span><br><span class="line">      <span class="comment">// Use a "state machine" approach for loading state instead of booleans</span></span><br><span class="line">      <span class="keyword">if</span> (state.loading === <span class="string">'idle'</span>) &#123;</span><br><span class="line">        state.loading = <span class="string">'pending'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    usersReceived(state, action) &#123;</span><br><span class="line">      <span class="keyword">if</span> (state.loading === <span class="string">'pending'</span>) &#123;</span><br><span class="line">        state.loading = <span class="string">'idle'</span></span><br><span class="line">        state.users = action.payload</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Destructure and export the plain action creators</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> &#123; usersLoading, usersReceived &#125; = usersSlice.actions</span><br><span class="line"></span><br><span class="line"><span class="comment">// Define a thunk that dispatches those action creators</span></span><br><span class="line"><span class="keyword">const</span> fetchUsers = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">async</span> dispatch =&gt; &#123;</span><br><span class="line">  dispatch(usersLoading())</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> usersAPI.fetchAll()</span><br><span class="line">  dispatch(usersReceived(response.data))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样在请求数据的时候直接dispatch(fetchUsers())就可以了</p>
+<p>如果用到了typescript，我们还需要声明thunk action的类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; configureStore, Action &#125; <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ThunkAction &#125; <span class="keyword">from</span> <span class="string">'redux-thunk'</span></span><br><span class="line"><span class="keyword">import</span> rootReducer, &#123; RootState &#125; <span class="keyword">from</span> <span class="string">'./rootReducer'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> type AppDispatch = <span class="keyword">typeof</span> store.dispatch</span><br><span class="line"><span class="keyword">export</span> type AppThunk = ThunkAction&lt;<span class="keyword">void</span>, RootState, unknown, Action&lt;string&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fetchUsers = (): <span class="function"><span class="params">AppThunk</span>  =&gt;</span> <span class="keyword">async</span> dispatch =&gt; &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>thunk被进行了一些改造：</p>
+<ul>
+<li>thunk没有return任何东西</li>
+<li>getState的state类型，是RootState的类型</li>
+<li>可以自定义 thunk 中间件以传递额外的值</li>
+<li>dispatch能接收任何type是字符串的action</li>
+</ul>
+<p>除此之外，redux官方建议在请求异步数据时，做到以下步骤：</p>
+<ul>
+<li>请求数据前，触发start action，以实现一些loading效果</li>
+<li>请求数据</li>
+<li>数据返回后，包含成功操作或者错误数据，并且结束loading，进行正常展示或错误提示</li>
+</ul>
+<p>这就意味着每个请求都有三个额外的action type，用普通redux触发一个异步请求差不多是这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getRepoDetailsStarted = <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">  type: <span class="string">"repoDetails/fetchStarted"</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> getRepoDetailsSuccess = <span class="function">(<span class="params">repoDetails</span>) =&gt;</span> &#123;</span><br><span class="line">  type: <span class="string">"repoDetails/fetchSucceeded"</span>,</span><br><span class="line">  payload: repoDetails</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> getRepoDetailsFailed = <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">  type: <span class="string">"repoDetails/fetchFailed"</span>,</span><br><span class="line">  error</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> fetchIssuesCount = <span class="function">(<span class="params">org, repo</span>) =&gt;</span> <span class="keyword">async</span> dispatch =&gt; &#123;</span><br><span class="line">  dispatch(getRepoDetailsStarted())</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> repoDetails = <span class="keyword">await</span> getRepoDetails(org, repo)</span><br><span class="line">    dispatch(getRepoDetailsSuccess(repoDetails))</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    dispatch(getRepoDetailsFailed(err.toString()))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要关注的是：<br>thunk目前虽然和slice在一个文件里，但其实是相互独立的声明，因为目前RTK没有将thunk定义为slice相关的特殊语法<br>thunk action creator是一个箭头函数，并且是AppThunk的类型<br>我们使用 thunk 函数本身的async/await 语法。这不是必需的，但async/await通常会比嵌套Promise.then() 更简洁<br>在thunk中，我们dispatch slice里创建的plain action creators</p>
+<p>上面的错误处理还有一些问题<br>上面的try/catch能够捕获getRepoDetails时的报错，但也能捕获dispatch getRepoDetailsSuccess时的错误信息，这两种方式引发的错误捕获，都会触发dispatch getRepoDetailsFailed，这显然不太合理</p>
+<p>为了解决上面的问题，我们可以通过promise来解决</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getRepoDetails(org, repo).then(</span><br><span class="line">  <span class="comment">// success callback</span></span><br><span class="line">  repoDetails =&gt; dispatch(getRepoDetailsSuccess(repoDetails)),</span><br><span class="line">  <span class="comment">// error callback</span></span><br><span class="line">  err =&gt; dispatch(getRepoDetailsFailed(err.toString()))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>也可以改进一下try/catch包裹</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">let</span> repoDetails</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    repoDetails = <span class="keyword">await</span> getRepoDetails(org, repo)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    dispatch(getRepoDetailsFailed(err.toString()))</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  dispatch(getRepoDetailsSuccess(repoDetails))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，还有几个有意思的地方：<br>start fetching和fetch failed的逻辑在很多地方都需要，因此我们可以把这个逻辑提炼出来，在需要的地方重用</p>
+<p>createAsyncThunk抽象了这个模式，以自动触发这些操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createAsyncThunk, createSlice &#125; <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span></span><br><span class="line"><span class="keyword">import</span> &#123; userAPI &#125; <span class="keyword">from</span> <span class="string">'./userAPI'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// First, create the thunk</span></span><br><span class="line"><span class="keyword">const</span> fetchUserById = createAsyncThunk(</span><br><span class="line">  <span class="string">'users/fetchById'</span>,</span><br><span class="line">  <span class="keyword">async</span> (userId, thunkAPI) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> userAPI.fetchById(userId)</span><br><span class="line">    <span class="keyword">return</span> response.data</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Then, handle actions in your reducers:</span></span><br><span class="line"><span class="keyword">const</span> usersSlice = createSlice(&#123;</span><br><span class="line">  name: <span class="string">'users'</span>,</span><br><span class="line">  initialState: &#123; <span class="attr">entities</span>: [], <span class="attr">loading</span>: <span class="string">'idle'</span> &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    <span class="comment">// standard reducer logic, with auto-generated action types per reducer</span></span><br><span class="line">  &#125;,</span><br><span class="line">  extraReducers: &#123;</span><br><span class="line">    <span class="comment">// Add reducers for additional action types here, and handle loading state as needed</span></span><br><span class="line">    [fetchUserById.fulfilled]: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// Add user to the state array</span></span><br><span class="line">      state.entities.push(action.payload)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Later, dispatch the thunk as needed in the app</span></span><br><span class="line">dispatch(fetchUserById(<span class="number">123</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="createEntityAdapter"><a href="#createEntityAdapter" class="headerlink" title="createEntityAdapter"></a>createEntityAdapter</h2><p>生成一组可重用的 reducers 和 selectors 以便管理store里的 规范化数据</p>
+<p>参考：<br><a href="https://www.redux.org.cn/docs/recipes/reducers/NormalizingStateShape.html" target="_blank" rel="noopener">https://www.redux.org.cn/docs/recipes/reducers/NormalizingStateShape.html</a><br><a href="https://redux-toolkit.js.org/usage/usage-guide#managing-normalized-data" target="_blank" rel="noopener">https://redux-toolkit.js.org/usage/usage-guide#managing-normalized-data</a></p>
+<h2 id="createSelector"><a href="#createSelector" class="headerlink" title="createSelector"></a>createSelector</h2><p>直接从Reselect 库中导出的</p>
+<p>除以上api，rtk还导出了一些它内部使用到的工具函数，比如：</p>
+<p>nanoid：生成非加密安全的随机 ID 字符串。用于 createAsyncThunk 请求 ID时自动调用，但也可能适用于其他情况。<br>createNextState：从immer库中导出<br>current：从immer库中导出，生成当前状态的一份快照，在调试时经常用到，比如在reducer中console.log(current(state))<br>combineReducers：从redux中导出<br>compose：从redux中导出<br>bindActionCreators：从redux中导出<br>createStore：从redux中导出<br>applyMiddleware：从redux中导出</p>
+<h2 id="总的来说"><a href="#总的来说" class="headerlink" title="总的来说"></a>总的来说</h2><p>传统redux:<br>代码通过 “folder-by-type” structure的方式书写, 比如actions 和 reducers都是独立的文件<br>React组件可能使用“container / presentational”模式的严格版本编写，其中“ presentational”组件位于一个文件夹中，而Redux“ container”连接定义位于另一个文件夹中<br>有些代码未遵循某些推荐的Redux“最佳实践”模式</p>
+<h2 id="一些注意点"><a href="#一些注意点" class="headerlink" title="一些注意点"></a>一些注意点</h2><p>Rtk使用Mutable的方式来处理数据，其内部自动使用了immer，但在普通redux时这么使用是不可的<br>slice导出的action type、reducer最好约束好明明规范，让大家一眼就能看出这是个action、这是个reducer。同理还有type interface声明。这点reselect可以直接规范为selectX<br>也可以借助react hooks — useDispatch useSelector来辅助redux使用，以代替connect 和 mapDispatch的用法<br>Redux-toolkit只是结合了一些“最佳实践”，而不是一个redux中间件（当然了，从api能看出来，没有中间件是可以直接涉及store创建的；此外，从它能干这么多事也能看出来，理论上一个中间件应该只做一件事）</p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 432px;
+        }
+        .nav.fullscreen {
+            margin-left: -432px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

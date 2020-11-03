@@ -6,22 +6,14 @@
   <meta name="keywords" content>
   <meta name="description" content="闭包 | 小马的后花园">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="闭包">
-<meta property="og:url" content="http://littlehorsexie.github.io/JS基础/closure/index.html">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://littlehorsexie.github.io/函数式编程/index/index.html">
 <meta property="og:site_name" content="小马的后花园">
-<meta property="og:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context2.png">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context3.png">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context4.png">
-<meta property="og:updated_time" content="2020-09-01T13:44:34.181Z">
+<meta property="og:updated_time" content="2020-11-03T13:06:40.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="闭包">
-<meta name="twitter:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
-<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
+<meta name="twitter:title" content="函数式编程">
 
 
 <link rel="icon" href="/img/logo.png">
@@ -82,7 +74,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    <li><div class="all active">全部文章<small>(58)</small></div></li>
     
         
             
@@ -94,7 +86,7 @@
     
         
             
-            <li><div data-rel="Redux">Redux<small>(4)</small></div>
+            <li><div data-rel="Redux">Redux<small>(20)</small></div>
                 
             </li>
             
@@ -102,7 +94,23 @@
     
         
             
-            <li><div data-rel="后端">后端<small>(1)</small></div>
+            <li><div data-rel="杂谈">杂谈<small>(11)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="CSS">CSS<small>(1)</small></div>
                 
             </li>
             
@@ -133,7 +141,7 @@
     
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_posts_number" value="58">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -143,7 +151,7 @@
     </div>
     <div class="nav-right">
         <div class="title-list">
-    <form onkeydown="if(event.keyCode==13){return false;}">
+    <!-- <form onkeydown="if(event.keyCode==13){return false;}">
         <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
         <i class="cross"></i>
         <span>
@@ -157,23 +165,63 @@
     <div class="clearfix"></div>
 </div>
 
-    
+     -->
     <nav id="title-list-nav">
+        
+        <a  class="Redux "
+           href="/Redux/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简介">简介</span>
+            <!-- <span class="post-date" title="2020-09-16 14:29:00">2020/09/16</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="函数式编程">函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/work/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="做业务没提升没思考，不知何去何从？">做业务没提升没思考，不知何去何从？</span>
+            <!-- <span class="post-date" title="2020-09-04 11:17:00">2020/09/04</span> -->
+        </a>
         
         <a  class="JS基础 "
            href="/JS基础/scope/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
-            <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span>
+            <!-- <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span> -->
         </a>
         
         <a  class="Redux "
-           href="/Redux/redux/"
+           href="/Redux/why/redux/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Redux相关的一些中间件和工具">Redux相关的一些中间件和工具</span>
-            <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span>
+            <span class="post-title" title="【为什么】要用Redux">【为什么】要用Redux</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/theory/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="什么是函数式编程">什么是函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/pay/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="h5对接微信支付">h5对接微信支付</span>
+            <!-- <span class="post-date" title="2020-09-11 14:28:00">2020/09/11</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -181,7 +229,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="执行上下文">执行上下文</span>
-            <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span>
+            <!-- <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux thunk">【为什么】要用Redux thunk</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -189,7 +245,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="介绍">介绍</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/fdesign/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Future-design">Future-design</span>
+            <!-- <span class="post-date" title="2020-09-14 18:00:00">2020/09/14</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -197,7 +261,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
-            <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span>
+            <!-- <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux saga">【为什么】要用Redux saga</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -205,7 +277,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="参考文献整理">参考文献整理</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/transTradition/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简体中文和繁体中文的转换">简体中文和繁体中文的转换</span>
+            <!-- <span class="post-date" title="2020-09-15 17:08:00">2020/09/15</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -213,7 +293,23 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="闭包">闭包</span>
-            <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="CSS "
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="CSS">CSS</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux toolkit">【为什么】要用Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -221,7 +317,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/style/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="样式方案">样式方案</span>
+            <!-- <span class="post-date" title="2020-07-17 14:28:00">2020/07/17</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -229,7 +333,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="this">this</span>
-            <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span>
+            <!-- <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -237,15 +341,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
-        </a>
-        
-        <a  class="Redux "
-           href="/Redux/codeRedux/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="Redux/React-redux/redux中间件设计实现剖析">Redux/React-redux/redux中间件设计实现剖析</span>
-            <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -253,7 +349,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -261,7 +357,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -269,7 +365,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/http2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="http2 VS http">http2 VS http</span>
+            <!-- <span class="post-date" title="2020-10-16 16:31:00">2020/10/16</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -277,7 +381,47 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="在实际用户的设备上衡量这些指标">在实际用户的设备上衡量这些指标</span>
-            <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span>
+            <!-- <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/typescript/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="typescript使用">typescript使用</span>
+            <!-- <span class="post-date" title="2020-10-28 00:00:00">2020/10/28</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/gitCommit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git cz">git cz</span>
+            <!-- <span class="post-date" title="2020-10-19 19:00:00">2020/10/19</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/proxy/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="切分支时自动切换rd环境">切分支时自动切换rd环境</span>
+            <!-- <span class="post-date" title="2020-10-16 15:33:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Reselect">【为什么】要用Reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 00:00:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immutable/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immutable">【为什么】要用Immutable</span>
+            <!-- <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -285,7 +429,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="检测之FP篇">检测之FP篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immer">【为什么】要用Immer</span>
+            <!-- <span class="post-date" title="2020-10-27 00:00:00">2020/10/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -293,7 +445,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -301,23 +453,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="Redux "
-           href="/Redux/reselect/"
+           href="/Redux/how/redux/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Reselect">Reselect</span>
-            <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span>
-        </a>
-        
-        <a  class="Redux "
-           href="/Redux/immutable/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="Immutable">Immutable</span>
-            <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span>
+            <span class="post-title" title="【怎么用】Redux是如何工作的：一个计数器的栗子">【怎么用】Redux是如何工作的：一个计数器的栗子</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -325,7 +469,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之网络篇">优化之网络篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux thunk">【怎么用】Redux thunk</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -333,7 +485,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux saga">【怎么用】Redux saga</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -341,7 +501,23 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux toolkit">【怎么用】Redux toolkit</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】reselect">【怎么用】reselect</span>
+            <!-- <span class="post-date" title="2020-09-18 20:29:00">2020/09/18</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -349,7 +525,23 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之图像篇">优化之图像篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux设计实现剖析">【代码分析】Redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reactRedux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】React-redux设计实现剖析">【代码分析】React-redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -357,7 +549,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器缓存">浏览器缓存</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxMiddleware/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux中间件设计实现剖析">【代码分析】Redux中间件设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -365,23 +565,47 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="编译解析原理">编译解析原理</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
-        <a  class=""
-           href="/Redux/test/"
+        <a  class="Redux "
+           href="/Redux/code/reduxSaga/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2020-08-26 17:08:03">2020/08/26</span>
+            <span class="post-title" title="【代码分析】Redux saga">【代码分析】Redux saga</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
         </a>
         
-        <a  class=""
-           href="/CSS/word-/"
+        <a  class="Redux "
+           href="/Redux/code/reduxThunk/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2020-08-17 21:40:16">2020/08/17</span>
+            <span class="post-title" title="【代码分析】Redux thunk">【代码分析】Redux thunk</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux toolkit">【代码分析】Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】reselect">【代码分析】reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/sdsApi/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="sds对外api的稳定性保证">sds对外api的稳定性保证</span>
+            <!-- <span class="post-date" title="2020-09-09 14:20:29">2020/09/09</span> -->
         </a>
         
         <a  class="后端 "
@@ -389,7 +613,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -397,7 +621,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
-            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+            <!-- <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span> -->
         </a>
         
         <a  class="设计模式 "
@@ -405,7 +629,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
-            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+            <!-- <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span> -->
         </a>
         
     </nav>
@@ -429,18 +653,18 @@
         <span class="top"><a href="javascript:">置顶</a></span>
          -->
         
-        
+        <!-- 
         <span class="book">
             
                 <a href="javascript:" data-rel="JS基础">JS基础</a>
             
         </span>
-        
+         -->
         
     </div>
     <div class="article-meta">
         
-        创建时间: <time class="date" title='更新时间: 2020-09-01 21:44:34'>2020-09-02 10:40</time>
+        创建时间: <time class="date" title='更新时间: 2020-09-08'>2020-09-02</time>
         
     </div>
     <div class="article-meta">
@@ -462,7 +686,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、闭包的定义"><span class="toc-text">一、闭包的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、为什么要使用闭包"><span class="toc-text">二、为什么要使用闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、闭包的表现形式"><span class="toc-text">三、闭包的表现形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、闭包和执行上下文"><span class="toc-text">四、闭包和执行上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、闭包形成的原因"><span class="toc-text">五、闭包形成的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、闭包的应用"><span class="toc-text">六、闭包的应用</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、闭包的定义"><span class="toc-text">一、闭包的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、为什么要使用闭包"><span class="toc-text">二、为什么要使用闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、闭包的表现形式"><span class="toc-text">三、闭包的表现形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-函数作为返回值"><span class="toc-text">1. 函数作为返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-函数作为参数传值"><span class="toc-text">2. 函数作为参数传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-回调函数"><span class="toc-text">3. 回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-IIFE"><span class="toc-text">4. IIFE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、经典的6个6-for循环代码题"><span class="toc-text">四、经典的6个6 for循环代码题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、闭包和执行上下文"><span class="toc-text">五、闭包和执行上下文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、闭包形成的原因"><span class="toc-text">六、闭包形成的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一阶段"><span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二阶段"><span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三阶段"><span class="toc-text">第三阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四阶段"><span class="toc-text">第四阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五阶段"><span class="toc-text">第五阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、闭包的另一个例子"><span class="toc-text">七、闭包的另一个例子</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -479,7 +703,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一、闭包的定义"><a href="#一、闭包的定义" class="headerlink" title="一、闭包的定义"></a>一、闭包的定义</h2><blockquote>
-<p>官方定义：</p>
+<p>官方定义：闭包是一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。</p>
 </blockquote>
 <blockquote>
 <p>闭包就是能够读取其他函数内部变量的函数。<br>例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。<br>在本质上，闭包是将函数内部和函数外部连接起来的桥梁。</p>
@@ -490,30 +714,90 @@
 <h2 id="二、为什么要使用闭包"><a href="#二、为什么要使用闭包" class="headerlink" title="二、为什么要使用闭包"></a>二、为什么要使用闭包</h2><blockquote>
 <p><strong>先介绍一下全局变量和局部变量的优缺点</strong><br><strong>全局变量：</strong> 可以重用、但是会造成全局污染而且容易被篡改。<br><strong>局部变量：</strong> 仅函数内使用不会造成全局污染也不会被篡改、不可以重用。<br>所以，全局变量和局部变量的优缺点刚好相对。闭包的出现正好结合了全局变量和局部变量的优点。</p>
 </blockquote>
-<p>总之，希望重用一个对象，但是又保护对象不被污染篡改时，就需要使用闭包了。</p>
-<h2 id="三、闭包的表现形式"><a href="#三、闭包的表现形式" class="headerlink" title="三、闭包的表现形式"></a>三、闭包的表现形式</h2><p>一般有两种情况</p>
+<p>闭包最大用处有两个：一个是可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。<br>总之，<code>希望重用一个对象，但是又保护对象不被污染篡改时</code>，就需要使用闭包了。</p>
+<p>理解JavaScript的闭包是迈向高级JS程序员的必经之路，理解了其解释和运行机制才能写出更为安全和优雅的代码。</p>
+<h2 id="三、闭包的表现形式"><a href="#三、闭包的表现形式" class="headerlink" title="三、闭包的表现形式"></a>三、闭包的表现形式</h2><p>可以理解为，能够引用外部函数的成员变量，那它就一定是闭包</p>
 <ul>
 <li>函数作为返回值</li>
 <li>函数作为参数传递</li>
+<li>回调函数</li>
+<li>非典型闭包IIFE(立即执行函数表达式)</li>
 </ul>
-<p><strong>1. 函数作为返回值</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> max = <span class="number">10</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; max) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(x)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f1 = fn()</span><br><span class="line">f1(<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="1-函数作为返回值"><a href="#1-函数作为返回值" class="headerlink" title="1. 函数作为返回值"></a>1. 函数作为返回值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> max = <span class="number">10</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; max) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(x)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f1 = fn()</span><br><span class="line">f1(<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
 
-<p><strong>2. 函数作为参数传值</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> max = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (x &gt; max) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">f</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> max = <span class="number">100</span></span><br><span class="line">  f(<span class="number">15</span>)</span><br><span class="line">&#125;)(bar)</span><br></pre></td></tr></table></figure>
+<h3 id="2-函数作为参数传值"><a href="#2-函数作为参数传值" class="headerlink" title="2. 函数作为参数传值"></a>2. 函数作为参数传值</h3><p>无论通过何种手段将内部函数传递到它所在词法作用域之外，它都会持有对原始作用域的引用，无论在何处执行这个函数，都会产生闭包。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">2</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">  &#125;</span><br><span class="line">  bar(baz)</span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
 <p>自由变量跨作用域取值时，曾经强调过：要去创建这个函数的作用域取值，而不是“父作用域”。理解了这一点，以上两端代码中，自由变量如何取值应该比较简单。</p>
-<h2 id="四、闭包和执行上下文"><a href="#四、闭包和执行上下文" class="headerlink" title="四、闭包和执行上下文"></a>四、闭包和执行上下文</h2><p><strong>1. 代码执行前生成全局上下文环境，并在执行时对其中的变量进行赋值。此时全局上下文环境是活动状态。</strong><br><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context1.png" alt></p>
-<p><strong>2. 执行第17行代码时，调用fn()，产生fn()执行上下文环境，压栈，并设置为活动状态，执行fn，给max赋值</strong><br><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context2.png" alt></p>
+<p>另：如果想要访问全局作用域的a，需要改为下面的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn(a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">2</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x)</span><br><span class="line">  &#125;</span><br><span class="line">  bar(baz)</span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-回调函数"><a href="#3-回调函数" class="headerlink" title="3. 回调函数"></a>3. 回调函数</h3><p>在定时器、事件监听、Ajax请求、跨窗口通信、Web Workers或者任何异步中，只要使用了回调函数，实际上就是在使用闭包</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定时器</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timeHandler</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timer'</span>);</span><br><span class="line">&#125;,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//事件监听</span></span><br><span class="line">$(<span class="string">'#container'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'DOM Listener'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-IIFE"><a href="#4-IIFE" class="headerlink" title="4. IIFE"></a>4. IIFE</h3><p>IIFE(立即执行函数表达式)并不是一个典型的闭包，但它确实创建了一个闭包。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 输出2</span></span><br><span class="line">  <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、经典的6个6-for循环代码题"><a href="#四、经典的6个6-for循环代码题" class="headerlink" title="四、经典的6个6 for循环代码题"></a>四、经典的6个6 for循环代码题</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i ++)&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么会全部输出6？如何改进，让它输出1，2，3，4，5？(方法越多越好)</p>
+<p><strong>方法1</strong>：利用<code>IIFE（立即执行函数表达式）</code>当每次for循环时，把此时的i变量传递到定时器中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;=<span class="number">5</span>;i++)&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(j)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">  &#125;)(i) <span class="comment">// 闭包必须存在对上一级词法作用域的引用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果像下面这样不把i传进去，是没用的（闭包必须存在对上一级词法作用域的引用）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;=<span class="number">5</span>;i++)&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">0</span>)</span><br><span class="line">  &#125;)()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法2</strong>：<code>setTimeout函数的第三个参数</code>，可以作为定时器执行时的变量进行使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;=<span class="number">5</span>;i++)&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params">j</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(j)</span><br><span class="line">  &#125;, <span class="number">0</span>, i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法3</strong>：在循环中使用<code>let i</code>代替var i</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;=<span class="number">5</span>;i++)&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、闭包和执行上下文"><a href="#五、闭包和执行上下文" class="headerlink" title="五、闭包和执行上下文"></a>五、闭包和执行上下文</h2><p><strong>1. 代码执行前生成全局上下文环境，并在执行时对其中的变量进行赋值。此时全局上下文环境是活动状态。</strong><br><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure1.png" alt></p>
+<p><strong>2. 执行第17行代码时，调用fn()，产生fn()执行上下文环境，压栈，并设置为活动状态，执行fn，给max赋值</strong><br><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure2.png" alt></p>
 <p><strong>3. 执行完第17行，fn()调用完成。按理说应该销毁掉fn()的执行上下文环境，但是这里不能这么做。注意，重点来了：因为执行fn()时，<code>返回的是一个函数。函数的特别之处在于可以创建一个独立的作用域</code>。而正巧合的是，返回的这个函数体中，还有一个自由变量max要引用fn作用域下的fn()上下文环境中的max。因此，这个max不能被销毁</strong></p>
 <p>因此，这里的fn()上下文环境不能被销毁，还依然存在与执行上下文栈中。</p>
 <p><strong>4. 执行到第18行，全局上下文环境将变为活动状态，但是fn()上下文环境依然会在执行上下文栈中</strong></p>
-<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context3.png" alt></p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure3.png" alt></p>
 <p><strong>5. 执行到第20行，执行f1(15)，即执行bar(15)，创建bar(15)上下文环境，并将其设置为活动状态</strong></p>
-<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/context4.png" alt></p>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure4.png" alt></p>
 <p>这里的重点就在于，创建bar函数是在执行fn()时创建的。fn()早就执行结束了，但是fn()执行上下文环境还存在与栈中，因此bar(15)时，max可以查找到。如果fn()上下文环境销毁了，那么max就找不到了。</p>
-<p><code>使用闭包会增加内容开销</code>，现在很明显了吧！</p>
-<h2 id="五、闭包形成的原因"><a href="#五、闭包形成的原因" class="headerlink" title="五、闭包形成的原因"></a>五、闭包形成的原因</h2><h2 id="六、闭包的应用"><a href="#六、闭包的应用" class="headerlink" title="六、闭包的应用"></a>六、闭包的应用</h2>
+<p><code>使用闭包会增加内容开销，消耗内存</code>，现在很明显了吧！</p>
+<h2 id="六、闭包形成的原因"><a href="#六、闭包形成的原因" class="headerlink" title="六、闭包形成的原因"></a>六、闭包形成的原因</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> count = <span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count++</span><br><span class="line">    <span class="built_in">console</span>.log(count)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> closure = add()</span><br><span class="line">closure() <span class="comment">// 1</span></span><br><span class="line">closure() <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h3><ol>
+<li>在内存中创建执行环境栈</li>
+<li>在执行环境栈中首先加载浏览器主函数的调用，主函数引用着全局作用域对象window</li>
+<li>定义变量</li>
+</ol>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure-reason1.png" alt></p>
+<h3 id="第二阶段"><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h3><ol>
+<li>执行到var closure = add()这一行，add函数调用</li>
+<li>为add函数创建活动对象AO</li>
+<li>window中的closure变量add函数返回的匿名函数的地址</li>
+</ol>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure-reason2.png" alt></p>
+<h3 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h3><ol>
+<li>add()调用完之后出栈，本应该其对应的活动对象AO也随之消失。但是，closure指向匿名函数的地址，匿名函数的作用域还引用着活动对象AO。因此，add()上下文虽然出栈了，对其活动对象AO的引用也消失了，但因为其AO被匿名函数的scope拽着，所以无法释放，也无法回收</li>
+</ol>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure-reason3.png" alt></p>
+<ol start="2">
+<li>所以形成了闭包-红色环</li>
+</ol>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure-reason4.png" alt></p>
+<h3 id="第四阶段"><a href="#第四阶段" class="headerlink" title="第四阶段"></a>第四阶段</h3><ol>
+<li>closure()进栈，产生对应的活动对象AO，它的_parent_指向add()产生的活动对象</li>
+<li>closure()执行count++，向它的上一级作用域查找到count，count变成1，执行console</li>
+</ol>
+<p><img src="../../assets/JS%E5%9F%BA%E7%A1%80/closure-reason5.png" alt></p>
+<h3 id="第五阶段"><a href="#第五阶段" class="headerlink" title="第五阶段"></a>第五阶段</h3><ol>
+<li>closure()出栈，对应的AO对象释放</li>
+<li>后两个closure()执行时和上一步一样一样的</li>
+</ol>
+<h2 id="七、闭包的另一个例子"><a href="#七、闭包的另一个例子" class="headerlink" title="七、闭包的另一个例子"></a>七、闭包的另一个例子</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="number">999</span>;</span><br><span class="line">  nAdd = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(n)</span><br><span class="line">    n+=<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(n);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = f1();</span><br><span class="line">result(); <span class="comment">// 999</span></span><br><span class="line">nAdd(); <span class="comment">// 999</span></span><br><span class="line">result(); <span class="comment">// 1000</span></span><br><span class="line">nAdd(); <span class="comment">// 1000</span></span><br><span class="line">result(); <span class="comment">// 1001</span></span><br><span class="line">result(); <span class="comment">// 1001</span></span><br><span class="line"><span class="keyword">var</span> result2 = f1()</span><br><span class="line">result2() <span class="comment">// 999</span></span><br><span class="line">result2() <span class="comment">// 999</span></span><br><span class="line">nAdd(); <span class="comment">// 999</span></span><br><span class="line">result(); <span class="comment">// 1001</span></span><br></pre></td></tr></table></figure>
+
+<p>result实际上就是闭包f2函数，它一共运行了两次，第一次的值是999，第二次的值是1000<br>这段代码中另一个值得注意的地方，就是“nAdd=function(){n+=1}”这一行，首先在nAdd前面没有使用var关键字，因此 nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数，它本身也是一个闭包，所以nAdd里的n还是999</p>
+
       
        
     </div>
@@ -655,10 +939,10 @@
     
     @media screen and (max-width: 1468px) {
         .nav {
-            width: 502px;
+            width: 432px;
         }
         .nav.fullscreen {
-            margin-left: -502px;
+            margin-left: -432px;
         }
         .nav-left {
             width: 130px;

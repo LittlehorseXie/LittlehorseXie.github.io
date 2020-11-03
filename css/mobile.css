@@ -16,7 +16,7 @@
     font-size: 16px;
   }
   .nav-right {
-    width: 370px;
+    width: 300px;
   }
   .nav-right .title-list form span #tagswitch:checked +#tagsWitchIcon:after {
     top: 9px;
@@ -32,7 +32,7 @@
     padding-right: 10px;
   }
   .nav .hide-list {
-    left: 500px;
+    left: 430px;
   }
   .nav .hide-list.fullscreen {
     left: 0;

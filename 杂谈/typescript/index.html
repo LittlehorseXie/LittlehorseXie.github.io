@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>typescript使用 | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="typescript使用 | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://littlehorsexie.github.io/函数式编程/index/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-11-03T13:06:40.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数式编程">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(58)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Redux">Redux<small>(20)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="杂谈">杂谈<small>(11)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="CSS">CSS<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(17)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="58">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <!-- <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+     -->
+    <nav id="title-list-nav">
+        
+        <a  class="Redux "
+           href="/Redux/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简介">简介</span>
+            <!-- <span class="post-date" title="2020-09-16 14:29:00">2020/09/16</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="函数式编程">函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/work/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="做业务没提升没思考，不知何去何从？">做业务没提升没思考，不知何去何从？</span>
+            <!-- <span class="post-date" title="2020-09-04 11:17:00">2020/09/04</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
+            <!-- <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux">【为什么】要用Redux</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/theory/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="什么是函数式编程">什么是函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/pay/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="h5对接微信支付">h5对接微信支付</span>
+            <!-- <span class="post-date" title="2020-09-11 14:28:00">2020/09/11</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文">执行上下文</span>
+            <!-- <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux thunk">【为什么】要用Redux thunk</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/fdesign/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Future-design">Future-design</span>
+            <!-- <span class="post-date" title="2020-09-14 18:00:00">2020/09/14</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context-scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
+            <!-- <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux saga">【为什么】要用Redux saga</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/transTradition/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简体中文和繁体中文的转换">简体中文和繁体中文的转换</span>
+            <!-- <span class="post-date" title="2020-09-15 17:08:00">2020/09/15</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/closure/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="闭包">闭包</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="CSS "
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="CSS">CSS</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux toolkit">【为什么】要用Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/style/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="样式方案">样式方案</span>
+            <!-- <span class="post-date" title="2020-07-17 14:28:00">2020/07/17</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <!-- <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/http2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="http2 VS http">http2 VS http</span>
+            <!-- <span class="post-date" title="2020-10-16 16:31:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/target/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="在实际用户的设备上衡量这些指标">在实际用户的设备上衡量这些指标</span>
+            <!-- <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/typescript/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="typescript使用">typescript使用</span>
+            <!-- <span class="post-date" title="2020-10-28 00:00:00">2020/10/28</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/gitCommit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git cz">git cz</span>
+            <!-- <span class="post-date" title="2020-10-19 19:00:00">2020/10/19</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/proxy/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="切分支时自动切换rd环境">切分支时自动切换rd环境</span>
+            <!-- <span class="post-date" title="2020-10-16 15:33:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Reselect">【为什么】要用Reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 00:00:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immutable/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immutable">【为什么】要用Immutable</span>
+            <!-- <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immer">【为什么】要用Immer</span>
+            <!-- <span class="post-date" title="2020-10-27 00:00:00">2020/10/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux是如何工作的：一个计数器的栗子">【怎么用】Redux是如何工作的：一个计数器的栗子</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux thunk">【怎么用】Redux thunk</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux saga">【怎么用】Redux saga</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux toolkit">【怎么用】Redux toolkit</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】reselect">【怎么用】reselect</span>
+            <!-- <span class="post-date" title="2020-09-18 20:29:00">2020/09/18</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux设计实现剖析">【代码分析】Redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reactRedux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】React-redux设计实现剖析">【代码分析】React-redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxMiddleware/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux中间件设计实现剖析">【代码分析】Redux中间件设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux saga">【代码分析】Redux saga</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux thunk">【代码分析】Redux thunk</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux toolkit">【代码分析】Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】reselect">【代码分析】reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/sdsApi/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="sds对外api的稳定性保证">sds对外api的稳定性保证</span>
+            <!-- <span class="post-date" title="2020-09-09 14:20:29">2020/09/09</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <!-- <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span> -->
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <!-- <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span> -->
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-杂谈/typescript" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">typescript使用</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        <!-- 
+        <span class="book">
+            
+                <a href="javascript:" data-rel="杂谈">杂谈</a>
+            
+        </span>
+         -->
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2020-10-28'>2020-10-28</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#typescript定位"><span class="toc-text">typescript定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typescript内置类型"><span class="toc-text">typescript内置类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Partial"><span class="toc-text">Partial</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Required"><span class="toc-text">Required</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Readonly"><span class="toc-text">Readonly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pick-lt-T-K-gt"><span class="toc-text">Pick&lt;T, K&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Record-lt-K-T-gt"><span class="toc-text">Record&lt;K, T&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exclude-lt-T-U-gt-，Omit-lt-T-K-gt"><span class="toc-text">Exclude&lt;T, U&gt;，Omit&lt;T, K&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extract-lt-T-U-gt"><span class="toc-text">Extract&lt;T, U&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NonNullable"><span class="toc-text">NonNullable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parameters"><span class="toc-text">Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ConstructorParameters"><span class="toc-text">ConstructorParameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReturnType"><span class="toc-text">ReturnType</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InstanceType"><span class="toc-text">InstanceType</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些关键字"><span class="toc-text">一些关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#never"><span class="toc-text">never</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#infer"><span class="toc-text">infer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof"><span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extends"><span class="toc-text">extends</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型是什么"><span class="toc-text">泛型是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#declare"><span class="toc-text">declare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interface-和-type"><span class="toc-text">interface 和 type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-提取一个object的function-key"><span class="toc-text">1. 提取一个object的function key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-tuple-转-union"><span class="toc-text">2. tuple 转 union</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-从输入输出推断函数类型"><span class="toc-text">3. 从输入输出推断函数类型</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="typescript定位"><a href="#typescript定位" class="headerlink" title="typescript定位"></a>typescript定位</h2><ul>
+<li>JavaScript 的超集</li>
+<li>编译期行为</li>
+<li>不改变运行时行为</li>
+<li>始终与 ESMAScript 语言标准一致 (stage 3 语法)</li>
+<li>提供约束</li>
+</ul>
+<blockquote>
+<p>TypeScript中的Decorator较为特殊，为Angular团队和TypeScript团队交易的结果，有兴趣可自行搜索相关资料。。而且近期 EcmaScript 规范中的 decorator 提案内容发生了剧烈变动，建议等此语法标准完全稳定后再在生产项目中使用。</p>
+</blockquote>
+<h2 id="typescript内置类型"><a href="#typescript内置类型" class="headerlink" title="typescript内置类型"></a>typescript内置类型</h2><h3 id="Partial"><a href="#Partial" class="headerlink" title="Partial"></a>Partial</h3><p>将类型 T 的所有属性标记为可选属性</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Partial&lt;T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof T]?: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用场景：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 账号属性</span></span><br><span class="line"><span class="keyword">interface</span> AccountInfo &#123;</span><br><span class="line">    name: <span class="built_in">string</span> </span><br><span class="line">    email: <span class="built_in">string</span> </span><br><span class="line">    age: <span class="built_in">number</span> </span><br><span class="line">    vip: <span class="number">0</span>|<span class="number">1</span> <span class="comment">// 1 是vip ，0 是非vip</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当我们需要渲染一个账号表格时，我们需要定义</span></span><br><span class="line"><span class="keyword">const</span> accountList: AccountInfo[] = []</span><br><span class="line"></span><br><span class="line"><span class="comment">// 但当我们需要查询过滤账号信息，需要通过表单，</span></span><br><span class="line"><span class="comment">// 但明显我们可能并不一定需要用到所有属性进行搜索，此时可以定义</span></span><br><span class="line"><span class="keyword">const</span> model: Partial&lt;AccountInfo&gt; = &#123;</span><br><span class="line">  name: <span class="string">''</span>,</span><br><span class="line">  vip: undefind</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Required"><a href="#Required" class="headerlink" title="Required"></a>Required</h3><p>与 Partial 相反，Required 将类型 T 的所有属性标记为必选属性。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Required&lt;T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof T]: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Readonly"><a href="#Readonly" class="headerlink" title="Readonly"></a>Readonly</h3><p>将所有属性标记为 readonly, 即不能修改。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Readonly&lt;T&gt; = &#123;</span><br><span class="line">    readonly [P <span class="keyword">in</span> keyof T]-?: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Pick-lt-T-K-gt"><a href="#Pick-lt-T-K-gt" class="headerlink" title="Pick&lt;T, K&gt;"></a>Pick&lt;T, K&gt;</h3><p>从 T 中过滤出属性 K</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Pick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> K]: T[P];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用场景:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> AccountInfo &#123;</span><br><span class="line">  name: <span class="built_in">string</span> </span><br><span class="line">  email: <span class="built_in">string</span> </span><br><span class="line">  age: <span class="built_in">number</span> </span><br><span class="line">  vip?: <span class="number">0</span>|<span class="number">1</span> <span class="comment">// 1 是vip ，0 是非vip</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> CoreInfo = Pick&lt;AccountInfo, <span class="string">'name'</span> | <span class="string">'email'</span>&gt;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">&#123; </span></span><br><span class="line"><span class="comment">  name: string</span></span><br><span class="line"><span class="comment">  email: stirng</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Record-lt-K-T-gt"><a href="#Record-lt-K-T-gt" class="headerlink" title="Record&lt;K, T&gt;"></a>Record&lt;K, T&gt;</h3><p>标记对象的 key value类型</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Record&lt;K <span class="keyword">extends</span> keyof <span class="built_in">any</span>, T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> K]: T;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用场景:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义 学号(key)-账号信息(value) 的对象</span></span><br><span class="line"><span class="keyword">const</span> accountMap: Record&lt;<span class="built_in">number</span>, AccountInfo&gt; = &#123;</span><br><span class="line">  <span class="number">10001</span>: &#123;</span><br><span class="line">    name: <span class="string">'xx'</span>,</span><br><span class="line">    email: <span class="string">'xxxxx'</span>,</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> user: Record&lt;<span class="string">'name'</span>|<span class="string">'email'</span>, <span class="built_in">string</span>&gt; = &#123;</span><br><span class="line">    name: <span class="string">''</span>, </span><br><span class="line">    email: <span class="string">''</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 复杂点的类型推断</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapObject</span>&lt;<span class="title">K</span> <span class="title">extends</span> <span class="title">string</span> | <span class="title">number</span>, <span class="title">T</span>, <span class="title">U</span>&gt;(<span class="params">obj: Record&lt;K, T&gt;, f: (x: T) =&gt; U</span>): <span class="title">Record</span>&lt;<span class="title">K</span>, <span class="title">U</span>&gt;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">const</span> <span class="title">names</span> = </span>&#123; foo: <span class="string">"hello"</span>, bar: <span class="string">"world"</span>, baz: <span class="string">"bye"</span> &#125;;</span><br><span class="line"><span class="comment">// 此处推断 K, T 值为 string , U 为 number</span></span><br><span class="line"><span class="keyword">const</span> lengths = mapObject(names, <span class="function"><span class="params">s</span> =&gt;</span> s.length);  <span class="comment">// &#123; foo: number, bar: number, baz: number &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Exclude-lt-T-U-gt-，Omit-lt-T-K-gt"><a href="#Exclude-lt-T-U-gt-，Omit-lt-T-K-gt" class="headerlink" title="Exclude&lt;T, U&gt;，Omit&lt;T, K&gt;"></a>Exclude&lt;T, U&gt;，Omit&lt;T, K&gt;</h3><p>移除 T 中的 U 属性</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Exclude&lt;T, U&gt; = T <span class="keyword">extends</span> U ? never : T;</span><br></pre></td></tr></table></figure>
+
+<p>使用场景：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'a' | 'd'</span></span><br><span class="line"><span class="keyword">type</span> A = Exclude&lt;<span class="string">'a'</span>|<span class="string">'b'</span>|<span class="string">'c'</span>|<span class="string">'d'</span> ,<span class="string">'b'</span>|<span class="string">'c'</span>|<span class="string">'e'</span> &gt;  </span><br><span class="line"><span class="comment">// 乍一看好像这个没啥卵用，但是，我们通过一番操作，之后就可以得到 Pick 的反操作：</span></span><br><span class="line"><span class="keyword">type</span> Omit&lt;T, K <span class="keyword">extends</span> keyof T&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NonCoreInfo = Omit&lt;AccountInfo, <span class="string">'name'</span> | <span class="string">'email'</span>&gt;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  age: number </span></span><br><span class="line"><span class="comment">  vip: 0|1,</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Extract-lt-T-U-gt"><a href="#Extract-lt-T-U-gt" class="headerlink" title="Extract&lt;T, U&gt;"></a>Extract&lt;T, U&gt;</h3><p>Exclude 的反操作，取 T，U两者的交集属性。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Extract&lt;T, U&gt; = T <span class="keyword">extends</span> U ? T : never;</span><br></pre></td></tr></table></figure>
+
+<p>使用 demo：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'b'|'c'</span></span><br><span class="line"><span class="keyword">type</span> A = Extract&lt;<span class="string">'a'</span>|<span class="string">'b'</span>|<span class="string">'c'</span>|<span class="string">'d'</span> ,<span class="string">'b'</span>|<span class="string">'c'</span>|<span class="string">'e'</span> &gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="NonNullable"><a href="#NonNullable" class="headerlink" title="NonNullable"></a>NonNullable</h3><p>排除类型 T 的 null | undefined 属性</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> NonNullable&lt;T&gt; = T <span class="keyword">extends</span> <span class="literal">null</span> | <span class="literal">undefined</span> ? never : T;</span><br></pre></td></tr></table></figure>
+
+<p>使用 demo</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> A = <span class="built_in">string</span> | <span class="built_in">number</span> | <span class="literal">undefined</span> </span><br><span class="line"><span class="keyword">type</span> B = NonNullable&lt;A&gt; <span class="comment">// string | number</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">string</span> | <span class="title">undefined</span>&gt;(<span class="params">x: T, y: NonNullable&lt;T&gt;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> s1: <span class="built_in">string</span> = x;  <span class="comment">// Error, x 可能为 undefined</span></span><br><span class="line">    <span class="keyword">let</span> s2: <span class="built_in">string</span> = y;  <span class="comment">// Ok</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><p>获取一个函数的所有参数类型</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此处使用 infer P 将函数参数定为待推断类型</span></span><br><span class="line"><span class="comment">// T 符合函数特征时，返回参数类型，否则返回 never</span></span><br><span class="line"><span class="keyword">type</span> Parameters&lt;T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> (...args: infer P) =&gt; <span class="built_in">any</span> ? P : never;</span><br></pre></td></tr></table></figure>
+
+<p>使用demo:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> IFunc &#123;</span><br><span class="line">  (person: IPerson, count: <span class="built_in">number</span>): <span class="built_in">boolean</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> P = Parameters&lt;IFunc&gt; <span class="comment">// [IPerson, number]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person01: P[<span class="number">0</span>] = &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一种使用场景是，快速获取未知函数的参数类型：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;somefun&#125; <span class="keyword">from</span> <span class="string">'somelib'</span></span><br><span class="line"><span class="comment">// 从其他库导入的一个函数，获取其参数类型</span></span><br><span class="line"><span class="keyword">type</span> SomeFuncParams = Parameters&lt;<span class="keyword">typeof</span> somefun&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 内置函数</span></span><br><span class="line"><span class="comment">// [any, number?, number?]</span></span><br><span class="line"><span class="keyword">type</span> FillParams = Parameters&lt;<span class="keyword">typeof</span> <span class="built_in">Array</span>.prototype.fill&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ConstructorParameters"><a href="#ConstructorParameters" class="headerlink" title="ConstructorParameters"></a>ConstructorParameters</h3><p>类似于 Parameters<t>, ConstructorParameters 获取一个类的构造函数参数</t></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ConstructorParameters&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: infer P) =&gt; <span class="built_in">any</span> ? P : never;</span><br></pre></td></tr></table></figure>
+
+<p>使用 demo:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// string | number | Date </span></span><br><span class="line"><span class="keyword">type</span> DateConstrParams = ConstructorParameters&lt;<span class="keyword">typeof</span> <span class="built_in">Date</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ReturnType"><a href="#ReturnType" class="headerlink" title="ReturnType"></a>ReturnType</h3><p>获取函数类型的返回类型</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ReturnType&lt;T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; infer R ? R : <span class="built_in">any</span>;</span><br></pre></td></tr></table></figure>
+
+<p>使用方式和 Parameters<t> 类似，不再赘述</t></p>
+<h3 id="InstanceType"><a href="#InstanceType" class="headerlink" title="InstanceType"></a>InstanceType</h3><p>获取一个类的返回类型</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> InstanceType&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>) =&gt; infer R ? R : <span class="built_in">any</span>;</span><br></pre></td></tr></table></figure>
+
+<p>使用方式和 ConstructorParameters<t> 类似，不再赘述</t></p>
+<h2 id="一些关键字"><a href="#一些关键字" class="headerlink" title="一些关键字"></a>一些关键字</h2><h3 id="never"><a href="#never" class="headerlink" title="never"></a>never</h3><p>never 是 | 运算的幺元，即 x | never = x。例如之前的 Exclude&lt;Result, string&gt; 运算过程如下：</p>
+<p><img src="../../assets/%E6%9D%82%E8%B0%88/typescript1.png" alt></p>
+<h3 id="infer"><a href="#infer" class="headerlink" title="infer"></a>infer</h3><p>infer的作用是让TypeScript自己推断，并将推断的结果存储到一个临时名字中，并且只能用于extends语句中。它与泛型的区别在于，泛型是声明一个“参数”，而infer是声明一个“中间变量”</p>
+<p>具体应用可以见 Parameters 或 练习2</p>
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>用于获取一个“常量”的类型，这里的“常量”是指任何可以在编译期确定的东西，例如const、function、class等。它是从 实际运行代码  通向 类型系统 的单行道。理论上，任何运行时的符号名想要为类型系统所用，都要加上 typeof。但是class 比较特殊不需要加，因为 ts 的 class 出现得比 js 早，现有的为兼容性解决方案。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123; width: <span class="number">2</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLen</span>(<span class="params">str: <span class="built_in">string</span></span>) </span>&#123; <span class="keyword">return</span> str.length &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TConfig = <span class="keyword">typeof</span> config <span class="comment">// &#123;width: number&#125;</span></span><br><span class="line"><span class="keyword">type</span> TGetLen = <span class="keyword">typeof</span> getLen <span class="comment">// (str: string) =&gt; number</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h3><p>extends 本意为 “拓展”，也有人称其为 “继承”。在 TypeScript 中，extends 既可当作一个动词来扩展已有类型；也可当作一个形容词来对类型进行条件限定（例如用在泛型中）。在扩展已有类型时，不可以进行类型冲突的覆盖操作。例如，基类型中键 a 为 string，在扩展出的类型中无法将其改为 number。</p>
+<h2 id="泛型是什么"><a href="#泛型是什么" class="headerlink" title="泛型是什么"></a>泛型是什么</h2><p>类型实际上可以进行一定的运算，要想写出的类型适用范围更广，不妨让它像函数一样可以接受参数。TS 的泛型便是起到这样的作用，你可以把它当作类型的参数。它和函数参数一样，可以有默认值。除此之外，还可以用 extends 对参数本身需要满足的条件进行限制。</p>
+<p>在定义一个函数、type、interface、class 时，在名称后面加上&lt;&gt; 表示即接受类型参数。而在实际调用时，不一定需要手动传入类型参数，TS 往往能自行推断出来。在 TS 推断不准时，再手动传入参数来纠正。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="keyword">class</span> React.Component&lt;P = &#123;&#125;, S = &#123;&#125;, SS = <span class="built_in">any</span>&gt; &#123; ... &#125;</span><br><span class="line"><span class="keyword">interface</span> IShowConfig&lt;P <span class="keyword">extends</span> IShowProps&gt; &#123; ... &#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="keyword">class</span> Modal <span class="keyword">extends</span> React.Component&lt;IModalProps, IModalState&gt; &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在定义泛型后，有两种方式使用，一种是传入泛型类型，另一种使用类型推断，即编译器根据其他参数类型来推断泛型类型。简单示例如下：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg: T</span>): <span class="title">T</span></span>; <span class="comment">// 定义一个泛型函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn1 = fn&lt;<span class="built_in">string</span>&gt;(<span class="string">'hello'</span>);  <span class="comment">// 第一种方式，传入泛型类型 string</span></span><br><span class="line"><span class="keyword">const</span> fn2 = fn(<span class="number">1</span>); <span class="comment">// 第二种方式，从参数 arg 传入的类型 number，来推断出泛型 T 的类型是 number</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="declare"><a href="#declare" class="headerlink" title="declare"></a>declare</h2><p>在实际应用开发时有一种场景，当前作用域下可以访问某个变量，但这个变量并不由开发者控制。例如通过 Script 标签直接引入的第三方库 CDN、一些宿主环境的 API 等。这个时候可以利用 TS 的环境声明功能，来告诉 TS 当前作用域可以访问这些变量，以获得类型提醒。</p>
+<p>具体有两种方式，declare 和三斜线指令。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> <span class="keyword">const</span> IS_MOBILE = <span class="literal">true</span>;    <span class="comment">// 编译后此行消失</span></span><br><span class="line"><span class="keyword">const</span> wording = IS_MOBILE ? <span class="string">'移动端'</span> : <span class="string">'PC端'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>用三斜线指令可以一次性引入整个类型声明文件。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path="../typings/monaco.d.ts" /&gt;</span></span><br><span class="line"><span class="keyword">const</span> range = <span class="keyword">new</span> monaco.Range(<span class="number">2</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="interface-和-type"><a href="#interface-和-type" class="headerlink" title="interface 和 type"></a>interface 和 type</h2><p>interface 和 type 两个关键字因为其功能比较接近，常常引起新手的疑问：应该在什么时候用 type，什么时候用 interface？<br>interface 的特点如下：</p>
+<ul>
+<li>同名 interface 自动聚合，也可以和已有的同名 class 聚合，适合做 polyfill</li>
+<li>自身只能表示 object/class/function 的类型</li>
+</ul>
+<p>建议库的开发者所提供的公共 api 应该尽量用 interface/class，方便使用者自行扩展。</p>
+<p>与 interface 相比，type 的特点如下：</p>
+<ul>
+<li>表达功能更强大，不局限于 object/class/function</li>
+<li>要扩展已有 type 需要创建新 type，不可以重名</li>
+<li>支持更复杂的类型操作</li>
+</ul>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="1-提取一个object的function-key"><a href="#1-提取一个object的function-key" class="headerlink" title="1. 提取一个object的function key"></a>1. 提取一个object的function key</h3><p>如何得到 ‘c’ | ‘d’ ？ </p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> SomeProps &#123;</span><br><span class="line">    a: <span class="built_in">string</span></span><br><span class="line">    b: <span class="built_in">number</span></span><br><span class="line">    c: <span class="function">(<span class="params">e: MouseEvent</span>) =&gt;</span> <span class="built_in">void</span></span><br><span class="line">    d: <span class="function">(<span class="params">e: TouchEvent</span>) =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解答：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> TGetFuncKeys&lt;T&gt; = &#123;</span><br><span class="line">  [K <span class="keyword">in</span> keyof T]: T[K] <span class="keyword">extends</span> <span class="built_in">Function</span> ? K : never</span><br><span class="line">&#125;[keyof T]</span><br><span class="line"><span class="keyword">type</span> FuncKeys = TGetFuncKeys&lt;SomeProps&gt; <span class="comment">// 'c' | 'd'</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的运算过程如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开始</span></span><br><span class="line">&#123;</span><br><span class="line">  a: string,</span><br><span class="line">  b: number,</span><br><span class="line">  c: <span class="function">(<span class="params">e: MouseEvent</span>) =&gt;</span> <span class="keyword">void</span>,</span><br><span class="line">  d: <span class="function">(<span class="params">e: TouchEvent</span>) =&gt;</span> <span class="keyword">void</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第一步，条件映射</span></span><br><span class="line">&#123;</span><br><span class="line">  a: never,</span><br><span class="line">  b: never,</span><br><span class="line">  c: <span class="string">'c'</span>,</span><br><span class="line">  d: <span class="string">'d'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第二步，索引取值</span></span><br><span class="line">never | never | <span class="string">'c'</span> | <span class="string">'d'</span></span><br><span class="line"><span class="comment">// never的性质</span></span><br><span class="line"><span class="string">'c'</span> | <span class="string">'d'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-tuple-转-union"><a href="#2-tuple-转-union" class="headerlink" title="2. tuple 转 union"></a>2. tuple 转 union</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> TTuple = [<span class="built_in">string</span>, <span class="built_in">number</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> ElementOf&lt;T&gt; = T <span class="keyword">extends</span> <span class="built_in">Array</span>&lt;infer P&gt; ? P : never</span><br><span class="line"><span class="keyword">typeof</span> TUnion = ElementOf&lt;TTuple&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-从输入输出推断函数类型"><a href="#3-从输入输出推断函数类型" class="headerlink" title="3. 从输入输出推断函数类型"></a>3. 从输入输出推断函数类型</h3><p>假设现在有一个这样的类型：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Module &#123;</span><br><span class="line">  count: <span class="built_in">number</span>;</span><br><span class="line">  message: <span class="built_in">string</span>;</span><br><span class="line">  asyncMethod&lt;T, U&gt;(input: <span class="built_in">Promise</span>&lt;T&gt;): <span class="built_in">Promise</span>&lt;Action&lt;U&gt;&gt;;</span><br><span class="line">  syncMethod&lt;T, U&gt;(action: Action&lt;T&gt;): Action&lt;U&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过connect之后，返回的值类型为：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Result &#123;</span><br><span class="line">  asyncMethod&lt;T, U&gt;(input: T): Action&lt;U&gt;;</span><br><span class="line">  syncMethod&lt;T, U&gt;(action: T): Action&lt;U&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中Action<t>的定义为</t></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Action&lt;T&gt; &#123;</span><br><span class="line">  payload?: T,</span><br><span class="line">  <span class="keyword">type</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>推测connect的类型</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FuncName&lt;T&gt; = &#123;</span><br><span class="line">  [K <span class="keyword">in</span> <span class="keyword">typeof</span> T]: T[K] <span class="keyword">extends</span> <span class="built_in">Function</span> ? K : never</span><br><span class="line">&#125;[keyof T]</span><br><span class="line"><span class="keyword">type</span> Connect = <span class="function">(<span class="params"><span class="built_in">module</span>: Module</span>) =&gt;</span> &#123; [T <span class="keyword">in</span> keyof FuncName]: Module&lt;T&gt; &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 432px;
+        }
+        .nav.fullscreen {
+            margin-left: -432px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>【为什么】要用Redux | 小马的后花园</title>
+  <meta name="keywords" content>
+  <meta name="description" content="【为什么】要用Redux | 小马的后花园">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://littlehorsexie.github.io/函数式编程/index/index.html">
+<meta property="og:site_name" content="小马的后花园">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-11-03T13:06:40.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数式编程">
+
+
+<link rel="icon" href="/img/logo.png">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/logo.png" />
+</a>
+<div class="author">
+    <span>LittlehorseX</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/littlehorsexie" target="_blank">
+            
+                <i class="iconfont icon-github"></i>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(58)</small></div></li>
+    
+        
+            
+            <li><div data-rel="JS基础">JS基础<small>(6)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Redux">Redux<small>(20)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="杂谈">杂谈<small>(11)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="CSS">CSS<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="性能优化">性能优化<small>(17)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="设计模式">设计模式<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="58">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="title-list">
+    <!-- <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label id="tagspan" for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <div class="clearfix"></div>
+</div>
+
+     -->
+    <nav id="title-list-nav">
+        
+        <a  class="Redux "
+           href="/Redux/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简介">简介</span>
+            <!-- <span class="post-date" title="2020-09-16 14:29:00">2020/09/16</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="函数式编程">函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/work/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="做业务没提升没思考，不知何去何从？">做业务没提升没思考，不知何去何从？</span>
+            <!-- <span class="post-date" title="2020-09-04 11:17:00">2020/09/04</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
+            <!-- <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux">【为什么】要用Redux</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/theory/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="什么是函数式编程">什么是函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/pay/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="h5对接微信支付">h5对接微信支付</span>
+            <!-- <span class="post-date" title="2020-09-11 14:28:00">2020/09/11</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文">执行上下文</span>
+            <!-- <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux thunk">【为什么】要用Redux thunk</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/README/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="介绍">介绍</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/fdesign/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Future-design">Future-design</span>
+            <!-- <span class="post-date" title="2020-09-14 18:00:00">2020/09/14</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/context-scope/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
+            <!-- <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux saga">【为什么】要用Redux saga</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/reference/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="参考文献整理">参考文献整理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/transTradition/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简体中文和繁体中文的转换">简体中文和繁体中文的转换</span>
+            <!-- <span class="post-date" title="2020-09-15 17:08:00">2020/09/15</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/closure/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="闭包">闭包</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="CSS "
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="CSS">CSS</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux toolkit">【为什么】要用Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/before/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/style/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="样式方案">样式方案</span>
+            <!-- <span class="post-date" title="2020-07-17 14:28:00">2020/07/17</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/this/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="this">this</span>
+            <!-- <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/get/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/back/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/render/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/http2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="http2 VS http">http2 VS http</span>
+            <!-- <span class="post-date" title="2020-10-16 16:31:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/target/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="在实际用户的设备上衡量这些指标">在实际用户的设备上衡量这些指标</span>
+            <!-- <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/typescript/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="typescript使用">typescript使用</span>
+            <!-- <span class="post-date" title="2020-10-28 00:00:00">2020/10/28</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/gitCommit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git cz">git cz</span>
+            <!-- <span class="post-date" title="2020-10-19 19:00:00">2020/10/19</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/proxy/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="切分支时自动切换rd环境">切分支时自动切换rd环境</span>
+            <!-- <span class="post-date" title="2020-10-16 15:33:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Reselect">【为什么】要用Reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 00:00:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immutable/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immutable">【为什么】要用Immutable</span>
+            <!-- <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fp/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FP篇">检测之FP篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immer">【为什么】要用Immer</span>
+            <!-- <span class="post-date" title="2020-10-27 00:00:00">2020/10/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/fps/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/measure/devtools/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux是如何工作的：一个计数器的栗子">【怎么用】Redux是如何工作的：一个计数器的栗子</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/net/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之网络篇">优化之网络篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux thunk">【怎么用】Redux thunk</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/repaint/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux saga">【怎么用】Redux saga</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/scroll/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux toolkit">【怎么用】Redux toolkit</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】reselect">【怎么用】reselect</span>
+            <!-- <span class="post-date" title="2020-09-18 20:29:00">2020/09/18</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/how/image/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="优化之图像篇">优化之图像篇</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux设计实现剖析">【代码分析】Redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reactRedux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】React-redux设计实现剖析">【代码分析】React-redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/cache/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="浏览器缓存">浏览器缓存</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxMiddleware/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux中间件设计实现剖析">【代码分析】Redux中间件设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="性能优化 "
+           href="/性能优化/extra/compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="编译解析原理">编译解析原理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux saga">【代码分析】Redux saga</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux thunk">【代码分析】Redux thunk</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux toolkit">【代码分析】Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】reselect">【代码分析】reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/sdsApi/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="sds对外api的稳定性保证">sds对外api的稳定性保证</span>
+            <!-- <span class="post-date" title="2020-09-09 14:20:29">2020/09/09</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/first/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="JS基础 "
+           href="/JS基础/eventloop/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
+            <!-- <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span> -->
+        </a>
+        
+        <a  class="设计模式 "
+           href="/设计模式/observer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
+            <!-- <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span> -->
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Redux/why/redux" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">【为什么】要用Redux</h1>
+    
+    <div class="article-meta">
+        <!-- 
+        <span class="top"><a href="javascript:">置顶</a></span>
+         -->
+        
+        <!-- 
+        <span class="book">
+            
+                <a href="javascript:" data-rel="Redux">Redux</a>
+            
+        </span>
+         -->
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间: <time class="date" title='更新时间: 2020-11-03'>2020-07-30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <!-- <span id="busuanzi_container_page_pv">
+            阅读: <span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span> -->
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要用Redux"><span class="toc-text">为什么要用Redux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#场景一"><span class="toc-text">场景一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#场景二"><span class="toc-text">场景二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Context解决场景一"><span class="toc-text">使用Context解决场景一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个异步的例子-–-本部分完全摘自redux官方中文文档"><span class="toc-text">一个异步的例子 – 本部分完全摘自redux官方中文文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设计-state-结构"><span class="toc-text">设计 state 结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同步-Action-创建函数"><span class="toc-text">同步 Action 创建函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建reducer"><span class="toc-text">创建reducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步-Action-创建函数"><span class="toc-text">异步 Action 创建函数</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文介绍</p>
+<ul>
+<li>为什么要用redux和这些中间件、工具，他们用来解决什么问题</li>
+<li>简单介绍除redux之外的这些中间件、工具如何使用</li>
+</ul>
+<p>本文不介绍</p>
+<ul>
+<li>Redux怎么使用</li>
+<li>源码解析</li>
+</ul>
+<h2 id="为什么要用Redux"><a href="#为什么要用Redux" class="headerlink" title="为什么要用Redux"></a>为什么要用Redux</h2><p>一些小型项目，只使用 React 完全够用了，数据管理使用<code>props、state</code>即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;Toolbar theme="dark" /&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Toolbar(props) &#123;</span><br><span class="line">  // Toolbar 组件接受一个额外的“theme”属性，然后传递给 ThemedButton 组件。</span><br><span class="line">  // 如果应用中每一个单独的按钮都需要知道 theme 的值，这会是件很麻烦的事，</span><br><span class="line">  // 因为必须将这个值层层传递所有组件。</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;ThemedButton theme=&#123;props.theme&#125; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ThemedButton extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;Button theme=&#123;this.props.theme&#125; /&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但随着项目复杂度的增加，数据传递会越来越复杂（父组件向子组件通信、子组件向父组件通信、兄弟组件通信 — 各种向不同层级的组件传递相同的数据（比如用户信息、UI主题等）），你会遇到类似下面的这些场景：</p>
+<h3 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h3><p>数据传递：<code>A --&gt; B --&gt; C --&gt; D --&gt; E</code>，E需要的数据需要从A那里通过props传递过来，以及对应的 E –&gt; A逆向传递callback。<br>但是，组件BCD是不需要这些数据的，而又必须经由它们来进行传递数据，而且传递的props以及callback对BCD组件的复用也会造成影响。</p>
+<h3 id="场景二"><a href="#场景二" class="headerlink" title="场景二"></a>场景二</h3><p>数据传递：<code>A --&gt; B、A --&gt; C 、A —&gt; D、A —&gt; E</code>，或者兄弟组件之间想要共享某些数据，也不是很方便传递、获取等。</p>
+<h3 id="使用Context解决场景一"><a href="#使用Context解决场景一" class="headerlink" title="使用Context解决场景一"></a>使用Context解决场景一</h3><p>对于场景一，使用<code>Context</code>就可以避免通过中间元素传递 props。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * Context 可以让我们无须显示的通过组件树逐层传递 props，就能将值深入传递进组件树。</span></span><br><span class="line"><span class="comment"> * 为当前的 theme 创建一个 context（“light”为默认值）。 </span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">const</span> ThemeContext = React.createContext(<span class="string">'light'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">// 使用一个 Provider 来将当前的 theme 传递给以下的组件树。</span></span><br><span class="line">    <span class="comment">// 无论多深，任何组件都能读取这个值。</span></span><br><span class="line">    <span class="comment">// 在这个例子中，我们将 “dark” 作为当前的值传递下去。</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;ThemeContext.Provider value=<span class="string">"dark"</span>&gt;</span><br><span class="line">        &lt;Toolbar /&gt;</span><br><span class="line">      &lt;<span class="regexp">/ThemeContext.Provider&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 中间的组件再也不必指明往下传递 theme 了。</span></span><br><span class="line"><span class="regexp">function Toolbar() &#123;</span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;ThemedButton /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">class ThemedButton extends React.Component &#123;</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ 指定 contextType 读取当前的 theme context。</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ React 会往上找到最近的 theme Provider，然后使用它的值。</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ 在这个例子中，当前的 theme 值为 “dark”。</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ 挂载在 class 上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ 这能让你使用 this.context 来消费最近 Context 上的那个值</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ 消费多个 Context时，需要使用Context.Consumer</span></span><br><span class="line"><span class="regexp">  static contextType = ThemeContext;</span></span><br><span class="line"><span class="regexp">  render() &#123;</span></span><br><span class="line"><span class="regexp">    return &lt;Button theme=&#123;this.context&#125; /</span>&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>React作为一个组件化开发框架，组件之间存在大量通信，有时这些通信跨越多个组件，或者多个组件之间共享一套数据，简单的父子组件间传值不能满足我们的需求，自然而然地，我们需要有一个地方存取和操作这些公共状态。而redux就为我们提供了一种管理公共状态的方案。</p>
+<p><a href="../codeRedux/">Redux源码解析</a></p>
+<h2 id="一个异步的例子-–-本部分完全摘自redux官方中文文档"><a href="#一个异步的例子-–-本部分完全摘自redux官方中文文档" class="headerlink" title="一个异步的例子 – 本部分完全摘自redux官方中文文档"></a>一个异步的例子 – 本部分完全摘自redux官方中文文档</h2><p>redux只能同步操作，即dispatch action 时，state 会被立即更新。那么 Redux 究竟是如何处理异步数据流的呢？</p>
+<p>当调用异步 API 时，有两个非常关键的时刻：发起请求的时刻，和接收到响应的时刻（也可能是超时）。</p>
+<p>这两个时刻都可能会更改应用的 state；为此，你需要 dispatch 普通的同步 action。一般情况下，每个 API 请求都需要 dispatch 至少三种 action：</p>
+<blockquote>
+<ol>
+<li><strong>一种通知 reducer 请求开始的 action。</strong><br>对于这种 action，reducer 可能会切换一下 state 中的 isFetching 标记。以此来告诉 UI 来显示加载界面。</li>
+<li><strong>一种通知 reducer 请求成功的 action。</strong><br>对于这种 action，reducer 可能会把接收到的新数据合并到 state 中，并重置 isFetching。UI 则会隐藏加载界面，并显示接收到的数据。</li>
+<li><strong>一种通知 reducer 请求失败的 action。</strong><br>对于这种 action，reducer 可能会重置 isFetching。另外，有些 reducer 会保存这些失败信息，并在 UI 里显示出来。</li>
+</ol>
+</blockquote>
+<p>为了区分这三种 action，可能在 action 里添加一个专门的 status 字段作为标记位：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; type: <span class="string">'FETCH_POSTS'</span> &#125;</span><br><span class="line">&#123; type: <span class="string">'FETCH_POSTS'</span>, status: <span class="string">'error'</span>, error: <span class="string">'Oops'</span> &#125;</span><br><span class="line">&#123; type: <span class="string">'FETCH_POSTS'</span>, status: <span class="string">'success'</span>, response: &#123; ... &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>又或者为它们定义不同的 type：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; type: <span class="string">'FETCH_POSTS_REQUEST'</span> &#125;</span><br><span class="line">&#123; type: <span class="string">'FETCH_POSTS_FAILURE'</span>, error: <span class="string">'Oops'</span> &#125;</span><br><span class="line">&#123; type: <span class="string">'FETCH_POSTS_SUCCESS'</span>, response: &#123; ... &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>究竟使用带有标记位的同一个 action，还是多个 action type 呢，完全取决于你。这应该是你的团队共同达成的约定。使用多个 type 会降低犯错误的机率，但是如果你使用像 redux-actions 这类的辅助库来生成 action 创建函数和 reducer 的话，这就完全不是问题了。</p>
+<p>无论使用哪种约定，一定要在整个应用中保持统一。<br>在本教程中，我们将使用不同的 type 来做。下面我们举个例子：<br>Web 应用经常需要展示一些内容的列表，比如，帖子的列表，朋友的列表</p>
+<h3 id="设计-state-结构"><a href="#设计-state-结构" class="headerlink" title="设计 state 结构"></a>设计 state 结构</h3><p>首先要明确应用要显示哪些列表。然后把它们分开储存在 state 中，这样你才能对它们分别做缓存并且在需要的时候再次请求更新数据。<br>“Reddit 头条” 应用会长这个样子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  selectedsubreddit: <span class="string">'frontend'</span>,</span><br><span class="line">  postsBySubreddit: &#123;</span><br><span class="line">    frontend: &#123;</span><br><span class="line">      isFetching: <span class="literal">true</span>, <span class="comment">// 显示进度条</span></span><br><span class="line">      didInvalidate: <span class="literal">false</span>, <span class="comment">// 数据是否过期</span></span><br><span class="line">      items: []</span><br><span class="line">    &#125;,</span><br><span class="line">    reactjs: &#123;</span><br><span class="line">      isFetching: <span class="literal">false</span>,</span><br><span class="line">      didInvalidate: <span class="literal">false</span>,</span><br><span class="line">      lastUpdated: <span class="number">1439478405547</span>, <span class="comment">// 存放数据最后更新时间</span></span><br><span class="line">      items: [ <span class="comment">// 列表信息</span></span><br><span class="line">        &#123;</span><br><span class="line">          id: <span class="number">42</span>,</span><br><span class="line">          title: <span class="string">'Confusion about Flux and Relay'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          id: <span class="number">500</span>,</span><br><span class="line">          title: <span class="string">'Creating a Simple Application Using React JS and Flux Architecture'</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="同步-Action-创建函数"><a href="#同步-Action-创建函数" class="headerlink" title="同步 Action 创建函数"></a>同步 Action 创建函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">selectSubreddit</span>(<span class="params">subreddit</span>) </span>&#123; <span class="comment">// 更改目前选中的tab-selectedsubreddit</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    type: SELECT_SUBREDDIT,</span><br><span class="line">    subreddit</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">invalidatesubreddit</span>(<span class="params">subreddit</span>) </span>&#123; <span class="comment">// 刷新</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    type: INVALIDATE_SUBREDDIT,</span><br><span class="line">    subreddit</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">requestPosts</span>(<span class="params">subreddit</span>) </span>&#123; <span class="comment">// 触发请求数据动作</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    type: REQUEST_POSTS,</span><br><span class="line">    subreddit</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">receivePosts</span>(<span class="params">subreddit, json</span>) </span>&#123; <span class="comment">// 接受后端返回的数据</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    type: RECEIVE_POSTS,</span><br><span class="line">    subreddit,</span><br><span class="line">    posts: json.data.children.map(<span class="function"><span class="params">child</span> =&gt;</span> child.data),</span><br><span class="line">    receivedAt: <span class="built_in">Date</span>.now()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建reducer"><a href="#创建reducer" class="headerlink" title="创建reducer"></a>创建reducer</h3><p>为了方便管理，通过<code>combineReducers(reducers)</code>来拆分reducer，拆分后的每个reducer函数负责独立管理 state 的一部分。</p>
+<blockquote>
+<p>combineReducers 辅助函数的作用是，把一个由多个不同 reducer 函数作为 value 的 object，合并成一个最终的 reducer 函数。<br>合并后的 reducer 可以调用各个子 reducer，并把它们返回的结果合并成一个 state 对象。<br>combineReducers() 返回的 state 对象，会将传入的每个 reducer 返回的 state 按其传递给 combineReducers() 时对应的 key 进行命名。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectedsubreddit</span>(<span class="params">state = <span class="string">'frontend'</span>, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> SELECT_SUBREDDIT:</span><br><span class="line">      <span class="keyword">return</span> action.subreddit</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">posts</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  state = &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    isFetching: false,</span></span></span><br><span class="line"><span class="function"><span class="params">    didInvalidate: false,</span></span></span><br><span class="line"><span class="function"><span class="params">    items: []</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;,</span></span></span><br><span class="line"><span class="function"><span class="params">  action</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> INVALIDATE_SUBREDDIT:</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        didInvalidate: <span class="literal">true</span></span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">case</span> REQUEST_POSTS:</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        isFetching: <span class="literal">true</span>,</span><br><span class="line">        didInvalidate: <span class="literal">false</span></span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">case</span> RECEIVE_POSTS:</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        isFetching: <span class="literal">false</span>,</span><br><span class="line">        didInvalidate: <span class="literal">false</span>,</span><br><span class="line">        items: action.posts,</span><br><span class="line">        lastUpdated: action.receivedAt</span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postsBySubreddit</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> INVALIDATE_SUBREDDIT:</span><br><span class="line">    <span class="keyword">case</span> RECEIVE_POSTS:</span><br><span class="line">    <span class="keyword">case</span> REQUEST_POSTS:</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        [action.subreddit]: posts(state[action.subreddit], action)</span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rootReducer = combineReducers(&#123;</span><br><span class="line">  selectedsubreddit,</span><br><span class="line">  postsBySubreddit,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> rootReducer</span><br></pre></td></tr></table></figure>
+
+<h3 id="异步-Action-创建函数"><a href="#异步-Action-创建函数" class="headerlink" title="异步 Action 创建函数"></a>异步 Action 创建函数</h3><p>最后，如何把 之前定义 的同步 action 创建函数和网络请求结合起来呢？标准的做法是使用 Redux Thunk 中间件。</p>
+
+      
+       
+    </div>
+</article>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 LittlehorseX</p>
+
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">CONTENT</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': [],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+
+        /*高亮代码块*/
+        
+        $('.code').each(function(i, block) {
+            hljs.highlightBlock(block)
+        })
+        $('.gutter pre').each(function(i, block){
+            var lines = block.innerText.split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(block).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    .highlight {
+        font-size: 14px;
+    }
+    pre{
+        position: relative;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 27px;
+        padding: 0.5em 3px 0.7em 5px;
+        text-align: right;
+        list-style: none;
+        margin: 10px 0px;
+        color: #AAA;
+        background-color: #FFF;
+    }
+    .pre-numbering li{
+        
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 130px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 432px;
+        }
+        .nav.fullscreen {
+            margin-left: -432px;
+        }
+        .nav-left {
+            width: 130px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 502px;
+            margin-left: -502px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 502px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        // border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

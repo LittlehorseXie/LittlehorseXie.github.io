@@ -372,8 +372,8 @@ div.ac > ul > li:before,
   height: 30px;
   padding: 0;
   background: transparent;
-  border: none;
-  border-radius: 2px;
+  border: 1px solid #ed6f6d;
+  border-radius: 4px;
   outline: none;
   overflow: hidden;
   cursor: pointer;
@@ -389,17 +389,18 @@ div.ac > ul > li:before,
   font-size: 16px;
   line-height: 30px;
   color: #fff;
-  background: #ed6f6d;
   overflow: hidden;
 }
 .full-toc .full .min:before {
   float: left;
   width: 50%;
+  color: #ed6f6d;
   content: "\e98b";
 }
 .full-toc .full .max:before {
   float: left;
   width: 50%;
+  color: #ed6f6d;
   content: "\e98c";
 }
 .full-toc .post-toc-menu {
@@ -412,8 +413,8 @@ div.ac > ul > li:before,
   height: 30px;
   padding: 0;
   background: transparent;
-  border: none;
-  border-radius: 2px;
+  border: 1px solid #ed6f6d;
+  border-radius: 4px;
   outline: none;
   overflow: hidden;
   cursor: pointer;
@@ -426,12 +427,13 @@ div.ac > ul > li:before,
   font-size: 16px;
   line-height: 30px;
   color: #fff;
-  background: #ed6f6d;
+  border-radius: 4px;
   overflow: hidden;
 }
 .full-toc .post-toc-menu-icons:before {
   float: left;
   width: 50%;
+  color: #ed6f6d;
   content: "\e9ba";
 }
 .full-toc .post-toc {
@@ -531,6 +533,7 @@ div.ac > ul > li:before,
   box-shadow: inset -15px 0 15px -15px #222;
   float: left;
   position: relative;
+  -webkit-font-smoothing: antialiased;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -689,10 +692,9 @@ div.ac > ul > li:before,
   display: block;
 }
 .nav-right {
-  width: 370px;
+  width: 300px;
   height: 100%;
   background: rgba(250,250,250,0.95);
-  border-right: 1px solid #e5e8ec;
   overflow: hidden;
   float: left;
   position: relative;
@@ -701,6 +703,7 @@ div.ac > ul > li:before,
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+  -webkit-font-smoothing: antialiased;
   font-family: "Open Sans", "Hiragino Sans GB", sans-serif;
 }
 .nav-right .title-list {
@@ -907,7 +910,7 @@ div.ac > ul > li:before,
   overflow-y: auto;
   overflow-x: hidden;
   position: absolute;
-  top: 66px;
+  top: 0;
   bottom: 0;
   -webkit-overflow-scrolling: touch;
 }
@@ -966,9 +969,9 @@ div.ac > ul > li:before,
 }
 .nav-right .title-list nav a .post-title,
 .nav-right .title-list #local-search-result a .post-title {
-  width: -webkit-calc(100% - 155px);
-  width: -moz-calc(100% - 155px);
-  width: calc(100% - 155px);
+  width: -webkit-calc(100% - 50px);
+  width: -moz-calc(100% - 50px);
+  width: calc(100% - 50px);
   float: left;
   clear: both;
   margin: 5px 0;
@@ -1163,19 +1166,22 @@ div.ac > ul > li:before,
   }
 }
 .post {
+  -webkit-font-smoothing: antialiased;
   position: relative;
   height: 100%;
-  letter-spacing: 0.2px;
   font-size: 16px;
   line-height: 1.7;
   background: #fff;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  color: #2f2f2f;
+  color: #333;
   font-weight: normal;
   margin-left: 1px;
-  font-family: "Open Sans", "Hiragino Sans GB", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.post pre {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 .post ::selection {
   color: #fff;
@@ -1369,6 +1375,7 @@ div.ac > ul > li:before,
 }
 .post .pjax article .gutter {
   width: 26px;
+  display: none;
 }
 .post .pjax article .img_alt {
   text-align: center;
@@ -1378,6 +1385,12 @@ div.ac > ul > li:before,
   padding: 10px 30px;
   color: #969696;
   display: inline-block;
+}
+.post .pjax article ol {
+  margin-bottom: 0;
+}
+.post .pjax article ul {
+  margin: 0;
 }
 .post .pjax article blockquote {
   padding: 0 20px;
@@ -1392,8 +1405,8 @@ div.ac > ul > li:before,
 .post .pjax article blockquote p {
   margin-bottom: 0px;
 }
-.post .pjax article p {
-  margin: 0 0 16px;
+.post .pjax article li:has(+ input) {
+  list-style: none;
 }
 .post .pjax article .inner-toc {
   border: #e2dede solid 1px;
@@ -1420,7 +1433,6 @@ div.ac > ul > li:before,
   border-collapse: collapse;
 }
 .post .pjax article table tr {
-  border-top: 1px solid #ccc;
   background-color: #fff;
   margin: 0;
   padding: 0;
@@ -1680,7 +1692,7 @@ img.pswp__img {
     font-size: 16px;
   }
   .nav-right {
-    width: 370px;
+    width: 300px;
   }
   .nav-right .title-list form span #tagswitch:checked +#tagsWitchIcon:after {
     top: 9px;
@@ -1696,7 +1708,7 @@ img.pswp__img {
     padding-right: 10px;
   }
   .nav .hide-list {
-    left: 500px;
+    left: 430px;
   }
   .nav .hide-list.fullscreen {
     left: 0;

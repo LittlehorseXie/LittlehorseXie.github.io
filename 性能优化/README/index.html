@@ -6,22 +6,14 @@
   <meta name="keywords" content>
   <meta name="description" content="介绍 | 小马的后花园">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="闭包">
-<meta property="og:url" content="http://littlehorsexie.github.io/JS基础/closure/index.html">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://littlehorsexie.github.io/函数式编程/index/index.html">
 <meta property="og:site_name" content="小马的后花园">
-<meta property="og:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context2.png">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context3.png">
-<meta property="og:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context4.png">
-<meta property="og:updated_time" content="2020-09-01T13:44:34.181Z">
+<meta property="og:updated_time" content="2020-11-03T13:06:40.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="闭包">
-<meta name="twitter:description" content="一、闭包的定义 官方定义：   闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。   闭包是JS语言的一种特性，闭包通常是一个函数函数是一个独立的作用域，独利的作用域外部环境无法访问，就是闭封闭自己的词法作用域，函数有许多特殊形式的函数，这">
-<meta name="twitter:image" content="http://littlehorsexie.github.io/assets/JS%E5%9F%BA%E7%A1%80/context1.png">
+<meta name="twitter:title" content="函数式编程">
 
 
 <link rel="icon" href="/img/logo.png">
@@ -82,7 +74,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(31)</small></div></li>
+    <li><div class="all active">全部文章<small>(58)</small></div></li>
     
         
             
@@ -94,7 +86,7 @@
     
         
             
-            <li><div data-rel="Redux">Redux<small>(4)</small></div>
+            <li><div data-rel="Redux">Redux<small>(20)</small></div>
                 
             </li>
             
@@ -102,7 +94,23 @@
     
         
             
-            <li><div data-rel="后端">后端<small>(1)</small></div>
+            <li><div data-rel="杂谈">杂谈<small>(11)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="后端">后端<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="CSS">CSS<small>(1)</small></div>
                 
             </li>
             
@@ -133,7 +141,7 @@
     
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_posts_number" value="58">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -143,7 +151,7 @@
     </div>
     <div class="nav-right">
         <div class="title-list">
-    <form onkeydown="if(event.keyCode==13){return false;}">
+    <!-- <form onkeydown="if(event.keyCode==13){return false;}">
         <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
         <i class="cross"></i>
         <span>
@@ -157,23 +165,63 @@
     <div class="clearfix"></div>
 </div>
 
-    
+     -->
     <nav id="title-list-nav">
+        
+        <a  class="Redux "
+           href="/Redux/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简介">简介</span>
+            <!-- <span class="post-date" title="2020-09-16 14:29:00">2020/09/16</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/index/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="函数式编程">函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/work/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="做业务没提升没思考，不知何去何从？">做业务没提升没思考，不知何去何从？</span>
+            <!-- <span class="post-date" title="2020-09-04 11:17:00">2020/09/04</span> -->
+        </a>
         
         <a  class="JS基础 "
            href="/JS基础/scope/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="作用域和作用域链">作用域和作用域链</span>
-            <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span>
+            <!-- <span class="post-date" title="2020-08-28 11:40:00">2020/08/28</span> -->
         </a>
         
         <a  class="Redux "
-           href="/Redux/redux/"
+           href="/Redux/why/redux/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Redux相关的一些中间件和工具">Redux相关的一些中间件和工具</span>
-            <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span>
+            <span class="post-title" title="【为什么】要用Redux">【为什么】要用Redux</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/函数式编程/theory/what/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="什么是函数式编程">什么是函数式编程</span>
+            <!-- <span class="post-date" title="2020-11-03 00:00:00">2020/11/03</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/pay/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="h5对接微信支付">h5对接微信支付</span>
+            <!-- <span class="post-date" title="2020-09-11 14:28:00">2020/09/11</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -181,7 +229,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="执行上下文">执行上下文</span>
-            <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span>
+            <!-- <span class="post-date" title="2020-08-31 18:40:00">2020/08/31</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux thunk">【为什么】要用Redux thunk</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -189,7 +245,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="介绍">介绍</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/fdesign/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Future-design">Future-design</span>
+            <!-- <span class="post-date" title="2020-09-14 18:00:00">2020/09/14</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -197,7 +261,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="执行上下文和作用域的区别">执行上下文和作用域的区别</span>
-            <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span>
+            <!-- <span class="post-date" title="2020-09-01 18:40:00">2020/09/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux saga">【为什么】要用Redux saga</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -205,7 +277,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="参考文献整理">参考文献整理</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/transTradition/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="简体中文和繁体中文的转换">简体中文和繁体中文的转换</span>
+            <!-- <span class="post-date" title="2020-09-15 17:08:00">2020/09/15</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -213,7 +293,23 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="闭包">闭包</span>
-            <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="CSS "
+           href="/CSS/word-/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="CSS">CSS</span>
+            <!-- <span class="post-date" title="2020-09-02 10:40:00">2020/09/02</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Redux toolkit">【为什么】要用Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-07-30 14:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -221,7 +317,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器向服务端发送请求之前做了什么？">浏览器向服务端发送请求之前做了什么？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/style/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="样式方案">样式方案</span>
+            <!-- <span class="post-date" title="2020-07-17 14:28:00">2020/07/17</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -229,7 +333,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="this">this</span>
-            <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span>
+            <!-- <span class="post-date" title="2020-03-25 14:29:00">2020/03/25</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -237,15 +341,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器如何向服务器请求数据的？">浏览器如何向服务器请求数据的？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
-        </a>
-        
-        <a  class="Redux "
-           href="/Redux/codeRedux/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="Redux/React-redux/redux中间件设计实现剖析">Redux/React-redux/redux中间件设计实现剖析</span>
-            <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -253,7 +349,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="服务器是如何返回数据？">服务器是如何返回数据？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -261,7 +357,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -269,7 +365,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="以用户为中心的性能优化指标有哪些？">以用户为中心的性能优化指标有哪些？</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/http2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="http2 VS http">http2 VS http</span>
+            <!-- <span class="post-date" title="2020-10-16 16:31:00">2020/10/16</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -277,7 +381,47 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="在实际用户的设备上衡量这些指标">在实际用户的设备上衡量这些指标</span>
-            <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span>
+            <!-- <span class="post-date" title="2020-04-26 14:02:02">2020/04/26</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/typescript/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="typescript使用">typescript使用</span>
+            <!-- <span class="post-date" title="2020-10-28 00:00:00">2020/10/28</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/gitCommit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git cz">git cz</span>
+            <!-- <span class="post-date" title="2020-10-19 19:00:00">2020/10/19</span> -->
+        </a>
+        
+        <a  class="杂谈 "
+           href="/杂谈/proxy/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="切分支时自动切换rd环境">切分支时自动切换rd环境</span>
+            <!-- <span class="post-date" title="2020-10-16 15:33:00">2020/10/16</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Reselect">【为什么】要用Reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 00:00:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immutable/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immutable">【为什么】要用Immutable</span>
+            <!-- <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -285,7 +429,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="检测之FP篇">检测之FP篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/why/immer/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【为什么】要用Immer">【为什么】要用Immer</span>
+            <!-- <span class="post-date" title="2020-10-27 00:00:00">2020/10/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -293,7 +445,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="检测之FPS篇">检测之FPS篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -301,23 +453,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="检测之开发者工具">检测之开发者工具</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="Redux "
-           href="/Redux/reselect/"
+           href="/Redux/how/redux/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title="Reselect">Reselect</span>
-            <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span>
-        </a>
-        
-        <a  class="Redux "
-           href="/Redux/immutable/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="Immutable">Immutable</span>
-            <span class="post-date" title="2020-08-17 17:26:00">2020/08/17</span>
+            <span class="post-title" title="【怎么用】Redux是如何工作的：一个计数器的栗子">【怎么用】Redux是如何工作的：一个计数器的栗子</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -325,7 +469,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之网络篇">优化之网络篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxThunk/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux thunk">【怎么用】Redux thunk</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -333,7 +485,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之回流和重绘篇">优化之回流和重绘篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxSaga/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux saga">【怎么用】Redux saga</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -341,7 +501,23 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之滚动篇">优化之滚动篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】Redux toolkit">【怎么用】Redux toolkit</span>
+            <!-- <span class="post-date" title="2018-08-27 20:29:00">2018/08/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/how/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【怎么用】reselect">【怎么用】reselect</span>
+            <!-- <span class="post-date" title="2020-09-18 20:29:00">2020/09/18</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -349,7 +525,23 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="优化之图像篇">优化之图像篇</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/redux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux设计实现剖析">【代码分析】Redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reactRedux/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】React-redux设计实现剖析">【代码分析】React-redux设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -357,7 +549,15 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="浏览器缓存">浏览器缓存</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxMiddleware/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux中间件设计实现剖析">【代码分析】Redux中间件设计实现剖析</span>
+            <!-- <span class="post-date" title="2020-07-30 20:29:00">2020/07/30</span> -->
         </a>
         
         <a  class="性能优化 "
@@ -365,23 +565,47 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="编译解析原理">编译解析原理</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
-        <a  class=""
-           href="/Redux/test/"
+        <a  class="Redux "
+           href="/Redux/code/reduxSaga/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2020-08-26 17:08:03">2020/08/26</span>
+            <span class="post-title" title="【代码分析】Redux saga">【代码分析】Redux saga</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
         </a>
         
-        <a  class=""
-           href="/CSS/word-/"
+        <a  class="Redux "
+           href="/Redux/code/reduxThunk/"
            data-tag=""
            data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2020-08-17 21:40:16">2020/08/17</span>
+            <span class="post-title" title="【代码分析】Redux thunk">【代码分析】Redux thunk</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reduxToolkit/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】Redux toolkit">【代码分析】Redux toolkit</span>
+            <!-- <span class="post-date" title="2020-10-01 20:29:00">2020/10/01</span> -->
+        </a>
+        
+        <a  class="Redux "
+           href="/Redux/code/reselect/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="【代码分析】reselect">【代码分析】reselect</span>
+            <!-- <span class="post-date" title="2020-08-24 15:37:00">2020/08/24</span> -->
+        </a>
+        
+        <a  class="后端 "
+           href="/后端/sdsApi/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="sds对外api的稳定性保证">sds对外api的稳定性保证</span>
+            <!-- <span class="post-date" title="2020-09-09 14:20:29">2020/09/09</span> -->
         </a>
         
         <a  class="后端 "
@@ -389,7 +613,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="第一个接口--司机管理">第一个接口--司机管理</span>
-            <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span>
+            <!-- <span class="post-date" title="2019-11-27 10:42:33">2019/11/27</span> -->
         </a>
         
         <a  class="JS基础 "
@@ -397,7 +621,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="JavaScript 执行机制">JavaScript 执行机制</span>
-            <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span>
+            <!-- <span class="post-date" title="2019-10-17 21:17:00">2019/10/17</span> -->
         </a>
         
         <a  class="设计模式 "
@@ -405,7 +629,7 @@
            data-tag=""
            data-author="" >
             <span class="post-title" title="观察者模式和发布订阅模式">观察者模式和发布订阅模式</span>
-            <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span>
+            <!-- <span class="post-date" title="2019-10-16 20:17:00">2019/10/16</span> -->
         </a>
         
     </nav>
@@ -429,18 +653,18 @@
         <span class="top"><a href="javascript:">置顶</a></span>
          -->
         
-        
+        <!-- 
         <span class="book">
             
                 <a href="javascript:" data-rel="性能优化">性能优化</a>
             
         </span>
-        
+         -->
         
     </div>
     <div class="article-meta">
         
-        创建时间: <time class="date" title='更新时间: 2019-11-27 10:42:33'>2019-11-27 10:42</time>
+        创建时间: <time class="date" title='更新时间: 2019-11-27'>2019-11-27</time>
         
     </div>
     <div class="article-meta">
@@ -646,10 +870,10 @@
     
     @media screen and (max-width: 1468px) {
         .nav {
-            width: 502px;
+            width: 432px;
         }
         .nav.fullscreen {
-            margin-left: -502px;
+            margin-left: -432px;
         }
         .nav-left {
             width: 130px;
